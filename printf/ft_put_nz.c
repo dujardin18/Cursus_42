@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilities.c                                        :+:      :+:    :+:   */
+/*   ft_put_nz.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/29 17:19:35 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/29 17:19:37 by fherbine         ###   ########.fr       */
+/*   Created: 2017/12/29 14:03:18 by fherbine          #+#    #+#             */
+/*   Updated: 2017/12/29 14:26:05 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_put_n_chars(int n, char c)
+int	ft_put_nz(int n)
 {
 	int i;
 
 	i = 0;
 	while (i < n)
 	{
-		ft_putchar(c);
+		ft_putchar('0');
 		i++;
 	}
-	return (n);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:19:17 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/27 15:19:20 by fherbine         ###   ########.fr       */
+/*   Updated: 2017/12/29 16:29:55 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ uintmax_t	ft_ucast_length(uintmax_t n, t_flags flags)
 		return (n);
 	else if (flags.length == z)
 		return ((size_t)n);
-	return (n);
+	return ((unsigned int)n);
 }

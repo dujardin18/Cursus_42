@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_p_o.c                                           :+:      :+:    :+:   */
+/*   ft_p_d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/26 20:26:14 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/29 16:25:24 by fherbine         ###   ########.fr       */
+/*   Created: 2017/12/29 13:49:41 by fherbine          #+#    #+#             */
+/*   Updated: 2017/12/29 17:09:49 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_printing_oct(t_flags flags, uintmax_t n, int *a)
+void	ft_printing_dec(t_flags flags, intmax_t n, int *a)
 {
 	int zeros;
 	int tmp;
@@ -21,25 +21,25 @@ void	ft_printing_oct(t_flags flags, uintmax_t n, int *a)
 	i = 0;
 	zeros = 0;
 	tmp = 0;
-	if (flags.precision > ft_nlen_base(n, 8))
-		zeros = flags.precision - ft_nlen_base(n, 8);
+	if (flags.precision > ft_nlen_base(n, 10))
+		zeros = flags.precision - ft_nlen_base(n, 10);
 	else
 	{
 		if (flags.precision == -1 && ft_strchr(flags.flag, '0'))
 		{
-			zeros = flags.width - ft_nlen_base(n, 8);
+			zeros = flags.width - ft_nlen_base(n, 10);
 			flags.width = 0;
 		}
 		else if (flags.precision == -1)
-			flags.precision = ft_nlen_base(n, 8);
+			flags.precision = ft_nlen_base(n, 10);
 	}
-	if (flags.width > ft_nlen_base(n, 8))
+	if (flags.width > ft_nlen_base(n, 10))
 		tmp = (flags.precision > flags.width) ? 0 : flags.width - flags.precision;
 	else
-		flags.width = ft_nlen_base(n, 8);
-	if (zeros + ft_nlen_base(n, 8) < flags.width)
+		flags.width = ft_nlen_base(n, 10);
+	if (zeros + ft_nlen_base(n, 10) < flags.width)
 		flags.width -= zeros;
-	if (ft_strchr(flags.flag, '#') && tmp != 0)
+	if ((ft_strchr(flags.flag, ' ') || ft_strchr(flags.flag, '+')) && tmp != 0)
 		tmp--;
 	while (i < flags.width)
 	{
@@ -47,15 +47,18 @@ void	ft_printing_oct(t_flags flags, uintmax_t n, int *a)
 		{
 			(*a) += ft_put_nz(zeros);
 			zeros = 0;
-			if (n > 0 && ft_strchr(flags.flag, '#'))
+			if (n >= 0 && (ft_strchr(flags.flag, '+') || ft_strchr(flags.flag, ' ')))
 			{
-				ft_putchar('0');
+				if (ft_strchr(flags.flag, '+'))
+					ft_putchar('+');
+				else if (ft_strchr(flags.flag, ' '))
+					ft_putchar(' ');
 				i++;
 				(*a)++;
 			}
-			ft_putnbr_base(n, "01234567");
-			(*a) += ft_nlen_base(n, 8) - 1;
-			i += ft_nlen_base(n, 8) - 1;
+			ft_putnbr(n);
+			(*a) += ft_nlen_base(n, 10) - 1;
+			i += ft_nlen_base(n, 10) - 1;
 		}
 		else
 			ft_putchar(flags.to_put);

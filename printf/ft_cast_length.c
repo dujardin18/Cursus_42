@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 15:27:45 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/27 15:34:33 by fherbine         ###   ########.fr       */
+/*   Updated: 2017/12/29 16:29:44 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ intmax_t	ft_cast_length(intmax_t n, t_flags flags)
 		return (n);
 	else if (flags.length == z)
 		return ((size_t)n);
-	return (n);
+	return ((int)n);
 }

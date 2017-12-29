@@ -42,11 +42,15 @@ static void ft_printing_spe(t_flags flags, va_list ap, int *n)
 	else if (flags.specifier == 's')
 		ft_printing_string(flags, va_arg(ap, char *), n);
 	else if (flags.specifier == 'x' || flags.specifier == 'X')
-		ft_printing_hex(flags, va_arg(ap, uintmax_t), n);
+		ft_printing_hex(flags, ft_ucast_length(va_arg(ap, uintmax_t), flags), n);
 	else if (flags.specifier == 'o')
-		ft_printing_oct(flags, va_arg(ap, uintmax_t), n);
+		ft_printing_oct(flags, ft_ucast_length(va_arg(ap, uintmax_t), flags), n);
 	else if (flags.specifier == 'p')
 		ft_printing_ptr(flags, va_arg(ap, void *), n);
+	else if (flags.specifier == 'd' || flags.specifier == 'i')
+		ft_printing_dec(flags, ft_cast_length(va_arg(ap, intmax_t), flags), n);
+	else if (flags.specifier == 'u')
+		ft_printing_udec(flags, ft_ucast_length(va_arg(ap, uintmax_t), flags), n);
 	else if (flags.specifier == '%')
 		ft_printing_prct(flags, n);
 }
@@ -56,13 +60,13 @@ static int ft_reading_spe(char *format, int *n, va_list ap)
 	int i;
 	t_flags flags;
 
-	flags.precision = 0;
+	flags.precision = -1;
 	flags.width = 0;
 	flags.to_put = ' ';
 	i = 0;
-	if (ft_strchr("-+#0", format[i]) != NULL)
+	if (ft_strchr("-+#0 ", format[i]) != NULL)
 	{
-		while (format[i] && ft_strchr("-+#0", format[i]) != NULL && i < 5)
+		while (format[i] && ft_strchr("-+#0 ", format[i]) != NULL && i < 5)
 		{
 			flags.flag[i] = format[i];
 			i++;

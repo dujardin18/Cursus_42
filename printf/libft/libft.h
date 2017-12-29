@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/25 19:00:06 by fherbine         ###   ########.fr       */
+/*   Updated: 2017/12/29 17:12:04 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/types.h>
+# include <inttypes.h>
 # include <sys/uio.h>
 # include <fcntl.h>
 
@@ -137,7 +138,7 @@ void				ft_putendl(char const *s);
 
 void				ft_putendl_fd(char const *s, int fd);
 
-void				ft_putnbr(int n);
+void				ft_putnbr(intmax_t n);
 
 void				ft_putnbr_fd(int n, int fd);
 
