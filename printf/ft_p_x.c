@@ -25,7 +25,7 @@ void	ft_printing_hex(t_flags flags, uintmax_t n, int *a)
 		zeros = flags.precision - ft_nlen_base(n, 16);
 	else
 	{
-		if (flags.precision == -1 && ft_strchr(flags.flag, '0'))
+		if (flags.precision == -1 && ft_strchr(flags.flag, '0') && ft_strchr(flags.flag, '-') == NULL)
 		{
 			zeros = flags.width - ft_nlen_base(n, 16);
 			flags.width = 0;
@@ -39,20 +39,25 @@ void	ft_printing_hex(t_flags flags, uintmax_t n, int *a)
 		flags.width = ft_nlen_base(n, 16);
 	if (zeros + ft_nlen_base(n, 16) < flags.width)
 		flags.width -= zeros;
-	if (ft_strchr(flags.flag, '#') && tmp != 0)
-		tmp -= 2;
+	if (ft_strchr(flags.flag, '-'))
+		tmp = 0;
+	if (ft_strchr(flags.flag, '#'))
+	{
+		zeros -= 2;
+		tmp = (tmp != 0) ? tmp - 2 : tmp;
+	}
 	while (i < flags.width)
 	{
 		if (i == tmp)
 		{
-			(*a) += ft_put_nz(zeros);
-			zeros = 0;
 			if (n > 0 && ft_strchr(flags.flag, '#'))
 			{
 				(flags.specifier == 'x') ? ft_putstr("0x") : ft_putstr("0X");
 				i += 2;
 				(*a) += 2;
 			}
+			(*a) += ft_put_nz(zeros);
+			zeros = 0;
 			(flags.specifier == 'x') ? ft_putnbr_base(n, "0123456789abcdef") : ft_putnbr_base(n, "0123456789ABCDEF");
 			(*a) += ft_nlen_base(n, 16) - 1;
 			i += ft_nlen_base(n, 16) - 1;

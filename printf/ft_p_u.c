@@ -39,23 +39,14 @@ void	ft_printing_udec(t_flags flags, uintmax_t n, int *a)
 		flags.width = ft_nlen_base(n, 10);
 	if (zeros + ft_nlen_base(n, 10) < flags.width)
 		flags.width -= zeros;
-	if ((ft_strchr(flags.flag, ' ') || ft_strchr(flags.flag, '+')) && tmp != 0)
-		tmp--;
+	if (ft_strchr(flags.flag, '-'))
+		tmp = 0;
 	while (i < flags.width)
 	{
 		if (i == tmp)
 		{
 			(*a) += ft_put_nz(zeros);
 			zeros = 0;
-			if (ft_strchr(flags.flag, '+') || ft_strchr(flags.flag, ' '))
-			{
-				if (ft_strchr(flags.flag, '+'))
-					ft_putchar('+');
-				else if (ft_strchr(flags.flag, ' '))
-					ft_putchar(' ');
-				i++;
-				(*a)++;
-			}
 			ft_putnbr_base(n, "0123456789");
 			(*a) += ft_nlen_base(n, 10) - 1;
 			i += ft_nlen_base(n, 10) - 1;

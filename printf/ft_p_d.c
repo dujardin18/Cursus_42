@@ -39,14 +39,14 @@ void	ft_printing_dec(t_flags flags, intmax_t n, int *a)
 		flags.width = ft_nlen_base(n, 10);
 	if (zeros + ft_nlen_base(n, 10) < flags.width)
 		flags.width -= zeros;
+	if (ft_strchr(flags.flag, '-'))
+		tmp = 0;
 	if ((ft_strchr(flags.flag, ' ') || ft_strchr(flags.flag, '+')) && tmp != 0)
 		tmp--;
 	while (i < flags.width)
 	{
 		if (i == tmp)
 		{
-			(*a) += ft_put_nz(zeros);
-			zeros = 0;
 			if (n >= 0 && (ft_strchr(flags.flag, '+') || ft_strchr(flags.flag, ' ')))
 			{
 				if (ft_strchr(flags.flag, '+'))
@@ -56,6 +56,8 @@ void	ft_printing_dec(t_flags flags, intmax_t n, int *a)
 				i++;
 				(*a)++;
 			}
+			(*a) += ft_put_nz(zeros);
+			zeros = 0;
 			ft_putnbr(n);
 			(*a) += ft_nlen_base(n, 10) - 1;
 			i += ft_nlen_base(n, 10) - 1;
