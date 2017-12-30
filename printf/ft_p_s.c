@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 15:30:29 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/29 13:42:23 by fherbine         ###   ########.fr       */
+/*   Updated: 2017/12/30 18:19:37 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,14 @@ void ft_printing_string(t_flags flags, char *str, int *n)
 	if (ft_strchr(flags.flag, '0'))
 		flags.to_put = '0';
 	if (ft_strchr(flags.flag, '-'))
+	{
 		tmp = 0;
+		if (!(str[0]))
+		{
+			flags.width++;
+			(*n)--;
+		}
+	}
 	while (i < flags.width)
 	{
 		if (tmp == i)

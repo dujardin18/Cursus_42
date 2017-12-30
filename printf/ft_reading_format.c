@@ -45,12 +45,18 @@ static void ft_printing_spe(t_flags flags, va_list ap, int *n)
 		ft_printing_hex(flags, ft_ucast_length(va_arg(ap, uintmax_t), flags), n);
 	else if (flags.specifier == 'o')
 		ft_printing_oct(flags, ft_ucast_length(va_arg(ap, uintmax_t), flags), n);
+	else if (flags.specifier == 'O')
+		ft_printing_oct(flags, va_arg(ap, uintmax_t), n);
 	else if (flags.specifier == 'p')
 		ft_printing_ptr(flags, va_arg(ap, void *), n);
 	else if (flags.specifier == 'd' || flags.specifier == 'i')
 		ft_printing_dec(flags, ft_cast_length(va_arg(ap, intmax_t), flags), n);
+	else if (flags.specifier == 'D')
+		ft_printing_dec(flags, va_arg(ap, intmax_t), n);
 	else if (flags.specifier == 'u')
 		ft_printing_udec(flags, ft_ucast_length(va_arg(ap, uintmax_t), flags), n);
+	else if (flags.specifier == 'U')
+		ft_printing_udec(flags, va_arg(ap, uintmax_t), n);
 	else if (flags.specifier == '%')
 		ft_printing_prct(flags, n);
 }
@@ -87,7 +93,7 @@ static int ft_reading_spe(char *format, int *n, va_list ap)
 			i++;
 	}
 	flags.length = ft_length(&(format[i]));
-	while (format[i] && ft_strchr("diuUoOxXfFeEgGcCsSpn%", format[i]) == NULL)
+	while (format[i] && ft_strchr("diuUoOxXcCsSp%", format[i]) == NULL)
 		i++;
 	flags.specifier = format[i];
 	ft_printing_spe(flags, ap, n);

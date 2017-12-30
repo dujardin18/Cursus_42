@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/29 17:12:04 by fherbine         ###   ########.fr       */
+/*   Updated: 2017/12/30 15:51:10 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,4 +169,8 @@ int					ft_read(char **line, char *str, t_gnl *gnl);
 int					ft_absol(int n);
 
 int					ft_nlen_base(uintmax_t n, int base);
+
+int					ft_nlen_10(intmax_t n);
+
+void				ft_putnbr_z(intmax_t n, int *zeros, int *a);
 #endif

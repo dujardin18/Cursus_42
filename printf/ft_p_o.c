@@ -6,13 +6,13 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 20:26:14 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/29 16:25:24 by fherbine         ###   ########.fr       */
+/*   Updated: 2017/12/30 18:47:34 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_printing_oct(t_flags flags, uintmax_t n, int *a)
+void	ft_printing_octm(t_flags flags, uintmax_t n, int *a)
 {
 	int zeros;
 	int tmp;
@@ -33,8 +33,10 @@ void	ft_printing_oct(t_flags flags, uintmax_t n, int *a)
 		else if (flags.precision == -1)
 			flags.precision = ft_nlen_base(n, 8);
 	}
-	if (flags.width > ft_nlen_base(n, 8))
-		tmp = (flags.precision > flags.width) ? 0 : flags.width - flags.precision;
+	//if (flags.width > ft_nlen_base(n, 8))
+	//	tmp = (flags.precision > flags.width) ? 0 : flags.width - flags.precision;
+	if (flags.width > ft_nlen_base(n, 8) && flags.width > flags.precision)
+		tmp = (flags.precision <= 0 && n == 0) ? flags.width - flags.precision : flags.width - ft_nlen_base(n, 8);
 	else
 		flags.width = ft_nlen_base(n, 8);
 	if (zeros + ft_nlen_base(n, 8) < flags.width)
@@ -46,6 +48,7 @@ void	ft_printing_oct(t_flags flags, uintmax_t n, int *a)
 		tmp = (tmp != 0) ? tmp - 1: tmp;
 		zeros--;
 	}
+	//printf("f.w : %d, t: %d", flags.width, tmp);
 	while (i < flags.width)
 	{
 		if (i == tmp)
@@ -56,10 +59,15 @@ void	ft_printing_oct(t_flags flags, uintmax_t n, int *a)
 				i++;
 				(*a)++;
 			}
-			(*a) += ft_put_nz(zeros);
-			zeros = 0;
-			ft_putnbr_base(n, "01234567");
-			(*a) += ft_nlen_base(n, 8) - 1;
+			if (!(flags.precision <= 0 && n == 0) || ft_strchr(flags.flag, '#'))
+			{
+				(*a) += ft_put_nz(zeros);
+				zeros = 0;
+				ft_putnbr_base(n, "01234567");
+				(*a) += ft_nlen_base(n, 8) - 1;
+			}
+			else
+				(*a)--;
 			i += ft_nlen_base(n, 8) - 1;
 		}
 		else
@@ -67,4 +75,12 @@ void	ft_printing_oct(t_flags flags, uintmax_t n, int *a)
 		(*a)++;
 		i++;
 	}
+}
+
+void	ft_printing_oct(t_flags flags, uintmax_t n, int *a)
+{
+	if (flags.specifier == 'o')
+		ft_printing_octm(flags, n, a);
+	else
+		ft_printing_octm(flags, (long)n, a);
 }

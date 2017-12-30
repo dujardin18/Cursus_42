@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:37:52 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/29 16:18:55 by fherbine         ###   ########.fr       */
+/*   Updated: 2017/12/30 17:51:10 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	ft_printing_hex(t_flags flags, uintmax_t n, int *a)
 		else if (flags.precision == -1)
 			flags.precision = ft_nlen_base(n, 16);
 	}
-	if (flags.width > ft_nlen_base(n, 16))
-		tmp = (flags.precision > flags.width) ? 0 : flags.width - flags.precision;
+	if (flags.width > ft_nlen_base(n, 16) && flags.width > flags.precision)
+		tmp = (flags.precision <= 0 && n == 0) ? flags.width - flags.precision : flags.width - ft_nlen_base(n, 16);
 	else
 		flags.width = ft_nlen_base(n, 16);
 	if (zeros + ft_nlen_base(n, 16) < flags.width)
@@ -46,6 +46,7 @@ void	ft_printing_hex(t_flags flags, uintmax_t n, int *a)
 		zeros -= 2;
 		tmp = (tmp != 0) ? tmp - 2 : tmp;
 	}
+	//	printf("f.w: %d, t: %d", flags.width, tmp);
 	while (i < flags.width)
 	{
 		if (i == tmp)
@@ -56,10 +57,15 @@ void	ft_printing_hex(t_flags flags, uintmax_t n, int *a)
 				i += 2;
 				(*a) += 2;
 			}
-			(*a) += ft_put_nz(zeros);
-			zeros = 0;
-			(flags.specifier == 'x') ? ft_putnbr_base(n, "0123456789abcdef") : ft_putnbr_base(n, "0123456789ABCDEF");
-			(*a) += ft_nlen_base(n, 16) - 1;
+			if (!(flags.precision <= 0 && n == 0))
+			{
+				(*a) += ft_put_nz(zeros);
+				zeros = 0;
+				(flags.specifier == 'x') ? ft_putnbr_base(n, "0123456789abcdef") : ft_putnbr_base(n, "0123456789ABCDEF");
+				(*a) += ft_nlen_base(n, 16) - 1;
+			}
+			else
+				(*a)--;
 			i += ft_nlen_base(n, 16) - 1;
 		}
 		else

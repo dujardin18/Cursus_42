@@ -6,13 +6,13 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:52:56 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/29 17:20:42 by fherbine         ###   ########.fr       */
+/*   Updated: 2017/12/30 15:49:01 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_printing_udec(t_flags flags, uintmax_t n, int *a)
+static void	ft_printing_udecm(t_flags flags, uintmax_t n, int *a)
 {
 	int zeros;
 	int tmp;
@@ -56,4 +56,12 @@ void	ft_printing_udec(t_flags flags, uintmax_t n, int *a)
 		(*a)++;
 		i++;
 	}
+}
+
+void	ft_printing_udec(t_flags flags, uintmax_t n, int *a)
+{
+	if (flags.specifier == 'u')
+		ft_printing_udecm(flags, n, a);
+	else
+		ft_printing_udecm(flags, (unsigned long)n, a);
 }
