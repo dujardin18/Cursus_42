@@ -23,6 +23,7 @@ uintmax_t	ft_ucast_length(uintmax_t n, t_flags flags);
 intmax_t	ft_cast_length(intmax_t n, t_flags flags);
 int ft_put_n_chars(int n, char c);
 int ft_put_nz(int n);
+void ft_print_nc(int n, char c);
 int ft_reading_format(char *format, va_list ap);
 int ft_printf(const char *format, ... );
 void	ft_printing_char(t_flags flags, int c, int *n);

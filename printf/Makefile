@@ -15,7 +15,8 @@ SOURCES= ./libft/ft_strlen.c ./libft/ft_strchr.c ./libft/ft_atoi.c \
 		 ./libft/ft_nlen_base.c ./libft/ft_strdup.c ./libft/ft_putnbr_z.c \
 		 ft_printf.c ft_reading_format.c utilities.c ft_p_c.c ft_p_s.c \
 		 ft_p_x.c ft_p_o.c ft_p_p.c ft_ucast_length.c ft_cast_length.c \
-		 ft_p_pc.c ft_p_d.c ft_put_nz.c ft_p_u.c ./libft/ft_nlen.c
+		 ft_p_pc.c ft_p_d.c ft_put_nz.c ft_p_u.c ./libft/ft_nlen.c \
+		 ft_print_nc.c
 INCLUDES= ./libft/
 OBJ = $(SOURCES:.c=.o)
 NAME = libftprintf.a

@@ -17,7 +17,7 @@ void	ft_printing_ptr(t_flags flags, void *p, int *n)
 	int i;
 
 	i = 0;
-	flags.specifier = 'x';
+	//flags.specifier = 'x';
 	while (flags.flag[i] != '\0' && flags.flag[i] != '#')
 		i++;
 	if (flags.flag[i] == '\0')

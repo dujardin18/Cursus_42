@@ -6,10 +6,9 @@ int main(void)
 	int b;
 	int *p = &a;
 	//printf("%s", ft_itoa(00000));
-	ft_printf("|tst\n.%10c. test|\n\n", 'c');
-	b = printf(".%-5.10o.", 2500);
-	printf(" <-- %d\n", b);
-	b = ft_printf(".%-5.10o.", 2500);
+	b = printf(".%05.s.", 0);
+	printf(" <-- %d\n\n", b);
+	b = ft_printf(".%05.s.", 0);
 	printf(" <-- %d\n", b);
 	return (0);
 }

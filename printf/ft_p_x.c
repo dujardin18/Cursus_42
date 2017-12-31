@@ -51,9 +51,9 @@ void	ft_printing_hex(t_flags flags, uintmax_t n, int *a)
 	{
 		if (i == tmp)
 		{
-			if (n > 0 && ft_strchr(flags.flag, '#'))
+			if ((n > 0 || flags.specifier == 'p') && ft_strchr(flags.flag, '#'))
 			{
-				(flags.specifier == 'x') ? ft_putstr("0x") : ft_putstr("0X");
+				(flags.specifier == 'x' || flags.specifier == 'p') ? ft_putstr("0x") : ft_putstr("0X");
 				i += 2;
 				(*a) += 2;
 			}
@@ -61,7 +61,7 @@ void	ft_printing_hex(t_flags flags, uintmax_t n, int *a)
 			{
 				(*a) += ft_put_nz(zeros);
 				zeros = 0;
-				(flags.specifier == 'x') ? ft_putnbr_base(n, "0123456789abcdef") : ft_putnbr_base(n, "0123456789ABCDEF");
+				(flags.specifier == 'x' || flags.specifier == 'p') ? ft_putnbr_base(n, "0123456789abcdef") : ft_putnbr_base(n, "0123456789ABCDEF");
 				(*a) += ft_nlen_base(n, 16) - 1;
 			}
 			else

@@ -37,7 +37,7 @@ void ft_printing_string(t_flags flags, char *str, int *n)
 
 	i = 0;
 	str2 = (str == NULL) ? ft_strdup("(null)") : ft_strdup(str);
-	if (flags.precision > 0 && flags.precision < (int)ft_strlen(str))
+	if (flags.precision >= 0 && flags.precision <= (int)ft_strlen(str))
 		str2 = ft_char_new_size(str2, flags.precision);
 	if (flags.width > (int)ft_strlen(str2))
 		tmp = flags.width - ft_strlen(str2);

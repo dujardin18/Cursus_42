@@ -93,9 +93,31 @@ static int ft_reading_spe(char *format, int *n, va_list ap)
 			i++;
 	}
 	flags.length = ft_length(&(format[i]));
-	while (format[i] && ft_strchr("diuUoOxXcCsSp%", format[i]) == NULL)
-		i++;
-	flags.specifier = format[i];
+	if (ft_strchr("lhjz", format[i]))
+	{
+		while(ft_strchr("lhjz", format[i]) && format[i])
+			i++;
+	}
+	//while (format[i] && ft_strchr("dDiuUoOxXcCsSp%", format[i]) == NULL)
+	//	i++;
+	if (format[i] && ft_strchr("dDiuUoOxXcCsSp%", format[i]))
+		flags.specifier = format[i];
+	else
+	{
+		if (ft_strchr(flags.flag, '-'))
+		{
+			ft_putchar(format[i]);
+			ft_print_nc(flags.width - 1, ' ');
+			(*n) += (flags.width == 0 && format[i]) ? 1 : flags.width;
+		}
+		else
+		{
+			ft_print_nc(flags.width - 1, ' ');
+			ft_putchar(format[i]);
+			(*n) += (flags.width == 0 && format[i]) ? 1 : flags.width;
+		}
+		return (i);
+	}
 	ft_printing_spe(flags, ap, n);
 	return (i);
 }

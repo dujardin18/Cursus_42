@@ -44,10 +44,9 @@ void	ft_printing_decm(t_flags flags, intmax_t n, int *a)
 		tmp = 0;
 	if (ft_strchr(flags.flag, ' ') || ft_strchr(flags.flag, '+'))
 	{
-		zeros -= (n > 0 && ft_strchr(flags.flag, '0') && flags.precision <= ft_nlen_10(n)) ? 1 : 0;
+		//zeros -= (n > 0 && ft_strchr(flags.flag, '0') && flags.precision <= ft_nlen_10(n)) ? 1 : 0;
 		tmp -= (tmp > 0) ?  1 : 0;
 	}
-	//printf("f.w : %d", flags.width);
 	while (i < flags.width)
 	{
 		if (i == tmp)
@@ -58,13 +57,14 @@ void	ft_printing_decm(t_flags flags, intmax_t n, int *a)
 					ft_putchar('+');
 				else if (ft_strchr(flags.flag, ' '))
 					ft_putchar(' ');
+				if (flags.precision <= ft_nlen_10(n) && ft_strchr(flags.flag, '0'))
+					zeros--;
 				//i++;
 				(*a)++;
 			}
 			//(*a) += ft_put_nz(zeros);
 			//zeros = 0;
-			//printf(">%d<", zeros);
-			if (!(flags.precision == 0 && n == 0))
+			if (!(flags.precision == 0 && n == 0 && flags.specifier == 'd'))
 			{
 				ft_putnbr_z(n, &zeros, a);
 				i += (flags.precision > ft_nlen_10(n)) ? (flags.precision - ft_nlen_10(n)) : 0;
