@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 16:52:56 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/30 15:49:01 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/01 18:03:55 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ static void	ft_printing_udecm(t_flags flags, uintmax_t n, int *a)
 		else if (flags.precision == -1)
 			flags.precision = ft_nlen_base(n, 10);
 	}
-	if (flags.width > ft_nlen_base(n, 10))
-		tmp = (flags.precision > flags.width) ? 0 : flags.width - flags.precision;
+	//if (flags.width > ft_nlen_base(n, 10))
+	//	tmp = (flags.precision > flags.width) ? 0 : flags.width - flags.precision;
+	if (flags.width > ft_nlen_base(n, 10) && flags.width > flags.precision)
+		tmp = (flags.precision <= 0 && n == 0) ? flags.width - flags.precision : flags.width - ft_nlen_base(n, 10) - zeros;
 	else
 		flags.width = ft_nlen_base(n, 10);
 	if (zeros + ft_nlen_base(n, 10) < flags.width)
@@ -45,10 +47,15 @@ static void	ft_printing_udecm(t_flags flags, uintmax_t n, int *a)
 	{
 		if (i == tmp)
 		{
+			if (!(flags.precision <= 0 && n == 0))
+			{
 			(*a) += ft_put_nz(zeros);
 			zeros = 0;
 			ft_putnbr_base(n, "0123456789");
 			(*a) += ft_nlen_base(n, 10) - 1;
+			}
+			else
+				(*a)--;
 			i += ft_nlen_base(n, 10) - 1;
 		}
 		else

@@ -112,7 +112,7 @@ static int ft_reading_spe(char *format, int *n, va_list ap)
 		}
 		else
 		{
-			ft_print_nc(flags.width - 1, ' ');
+			(ft_strchr(flags.flag, '0')) ? ft_print_nc(flags.width - 1, '0') : ft_print_nc(flags.width - 1, ' ');
 			ft_putchar(format[i]);
 			(*n) += (flags.width == 0 && format[i]) ? 1 : flags.width;
 		}

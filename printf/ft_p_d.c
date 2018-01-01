@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 13:49:41 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/30 19:18:53 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/01 17:58:41 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,13 @@ void	ft_printing_decm(t_flags flags, intmax_t n, int *a)
 		else if (flags.precision == -1)
 			flags.precision = ft_nlen_10(n);
 	}
-	if (flags.width > ft_nlen_10(n))
-		tmp = (flags.precision > flags.width) ? 0 : flags.width - flags.precision;
+	//if (flags.width > ft_nlen_10(n))
+	//	tmp = (flags.precision > flags.width) ? 0 : flags.width - flags.precision;
+	if (flags.width > ft_nlen_10(n) && flags.width > flags.precision)
+		tmp = (flags.precision <= 0 && n == 0) ? flags.width - flags.precision : flags.width - ft_nlen_10(n) - zeros;
 	else
 		flags.width = ft_nlen_10(n);
+	//tmp = (ft_nlen_10(n) > flags.precision && flags.width > ft_nlen_10(n)) ? flags.width - ft_nlen_10(n) : tmp;
 	if (zeros + ft_nlen_10(n) < flags.width && zeros > 0)
 		flags.width -= (ft_strchr(flags.flag, '+') || ft_strchr(flags.flag, ' ')) ?  zeros : zeros - 1;
 	if (ft_strchr(flags.flag, '-'))
@@ -64,7 +67,7 @@ void	ft_printing_decm(t_flags flags, intmax_t n, int *a)
 			}
 			//(*a) += ft_put_nz(zeros);
 			//zeros = 0;
-			if (!(flags.precision == 0 && n == 0 && flags.specifier == 'd'))
+			if (!(flags.precision == 0 && n == 0) || flags.specifier == 'D')
 			{
 				ft_putnbr_z(n, &zeros, a);
 				i += (flags.precision > ft_nlen_10(n)) ? (flags.precision - ft_nlen_10(n)) : 0;

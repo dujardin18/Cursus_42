@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 20:26:14 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/30 18:47:34 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/01 17:22:32 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ void	ft_printing_octm(t_flags flags, uintmax_t n, int *a)
 	//if (flags.width > ft_nlen_base(n, 8))
 	//	tmp = (flags.precision > flags.width) ? 0 : flags.width - flags.precision;
 	if (flags.width > ft_nlen_base(n, 8) && flags.width > flags.precision)
-		tmp = (flags.precision <= 0 && n == 0) ? flags.width - flags.precision : flags.width - ft_nlen_base(n, 8);
+		tmp = (flags.precision <= 0 && n == 0) ? flags.width - flags.precision : flags.width - ft_nlen_base(n, 8) - zeros;
 	else
 		flags.width = ft_nlen_base(n, 8);
+//	printf(" f.w : %d, t: %d", flags.width, tmp);
 	if (zeros + ft_nlen_base(n, 8) < flags.width)
 		flags.width -= zeros;
 	if (ft_strchr(flags.flag, '-'))
@@ -48,7 +49,7 @@ void	ft_printing_octm(t_flags flags, uintmax_t n, int *a)
 		tmp = (tmp != 0) ? tmp - 1: tmp;
 		zeros--;
 	}
-	//printf("f.w : %d, t: %d", flags.width, tmp);
+//	printf(" f.w : %d, t: %d", flags.width, tmp);
 	while (i < flags.width)
 	{
 		if (i == tmp)

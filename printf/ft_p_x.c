@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 18:37:52 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/30 17:51:10 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/01 17:32:50 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_printing_hex(t_flags flags, uintmax_t n, int *a)
 			flags.precision = ft_nlen_base(n, 16);
 	}
 	if (flags.width > ft_nlen_base(n, 16) && flags.width > flags.precision)
-		tmp = (flags.precision <= 0 && n == 0) ? flags.width - flags.precision : flags.width - ft_nlen_base(n, 16);
+		tmp = (flags.precision <= 0 && n == 0) ? flags.width - flags.precision : flags.width - ft_nlen_base(n, 16) - zeros;
 	else
 		flags.width = ft_nlen_base(n, 16);
 	if (zeros + ft_nlen_base(n, 16) < flags.width)
@@ -43,10 +43,10 @@ void	ft_printing_hex(t_flags flags, uintmax_t n, int *a)
 		tmp = 0;
 	if (ft_strchr(flags.flag, '#'))
 	{
-		zeros -= 2;
+		zeros -= (flags.precision > ft_nlen_base(n, 16)) ? 0 : 2;
 		tmp = (tmp != 0) ? tmp - 2 : tmp;
 	}
-	//	printf("f.w: %d, t: %d", flags.width, tmp);
+//	printf("  f.w: %d, t: %d, z : %d", flags.width, tmp, zeros);
 	while (i < flags.width)
 	{
 		if (i == tmp)
