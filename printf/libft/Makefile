@@ -6,7 +6,7 @@
 #    By: fherbine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 17:03:11 by fherbine          #+#    #+#              #
-#    Updated: 2017/12/30 13:03:32 by fherbine         ###   ########.fr        #
+#    Updated: 2018/01/02 19:55:51 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,21 +33,15 @@ OBJ = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): rl $(OBJ)
-	@echo "]\033[0m\n\033[3;33;40m\t\t>> Making libft.a\033[0m"
-	@ar rcs $(NAME) $(OBJ)
-
-rl: 
-	@echo "\033[0;33;40m\t\t>> Compiling all functions[\c"
+	ar rcs $(NAME) $(OBJ)
 
 %.o: %.c
-	@echo "=\c"
-	@gcc $(FLAGS) -I $(INCLUDE) -c $? -o $@
+	gcc $(FLAGS) -I $(INCLUDE) -c $? -o $@
 
 clean:
-	@rm -rf $(OBJ)
+	rm -rf $(OBJ)
 
 fclean: clean
-	@echo "\033[3;35;40m\t>> Cleaning libft\033[0m"
-	@rm -rf $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
