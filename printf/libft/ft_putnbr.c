@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 17:39:40 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/29 17:16:20 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/02 10:37:21 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,7 @@ void		ft_putnbr(intmax_t n)
 	if (n < 0)
 	{
 		ft_putchar('-');
-		//if (n == -9223372036854775808)
-		//{
-		//	ft_putnbr(922337203685477580);
-		//	ft_putchar('8');
-		//}
-		//else
-			ft_putnbr_recv(n * -1);
+		ft_putnbr_recv(n * -1);
 	}
 	else
 		ft_putnbr_recv(n);

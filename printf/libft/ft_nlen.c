@@ -6,16 +6,16 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 12:42:58 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/30 16:27:54 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/02 10:35:52 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_nlen_10(intmax_t n)
+int						ft_nlen_10(intmax_t n)
 {
-	size_t	len;
-	unsigned long long t;
+	size_t				len;
+	unsigned long long	t;
 
 	t = 0;
 	len = 0;

@@ -6,15 +6,15 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/30 12:59:15 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/30 16:03:21 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/02 10:36:57 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int ft_pnz(int n)
+static int	ft_pnz(int n)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (i < n)
@@ -25,7 +25,7 @@ static int ft_pnz(int n)
 	return (i);
 }
 
-static void	ft_putnbr_recv(unsigned long long  n)
+static void	ft_putnbr_recv(unsigned long long n)
 {
 	if (n >= 10)
 	{

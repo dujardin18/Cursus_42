@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 19:58:27 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/25 17:52:31 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/02 10:37:51 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static	void	ft_putnbr_base_recv(uintmax_t n, char *base, uintmax_t b)
 
 void			ft_putnbr_base(uintmax_t n, char *base)
 {
-	uintmax_t  b;
+	uintmax_t	b;
 
 	b = (uintmax_t)ft_strlen(base);
 	ft_putnbr_base_recv(n, base, b);

@@ -6,15 +6,15 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 15:30:29 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/30 18:19:37 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:55:42 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static char	*ft_char_new_size(char *str, int end)
+static char		*ft_char_new_size(char *str, int end)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (i < end)
@@ -23,35 +23,23 @@ static char	*ft_char_new_size(char *str, int end)
 	return (str);
 }
 
-static int	ft_putstr_n(char *str)
+static int		ft_putstr_n(char *str)
 {
 	ft_putstr(str);
 	return ((ft_strlen(str) > 0) ? ft_strlen(str) - 1 : ft_strlen(str));
 }
 
-void ft_printing_string(t_flags flags, char *str, int *n)
+void			ft_modif_str(t_flags flags, char *str2, int *n, int tmp)
 {
-	int i;
-	int tmp;
-	char *str2;
+	int			i;
 
 	i = 0;
-	str2 = (str == NULL) ? ft_strdup("(null)") : ft_strdup(str);
-	if (flags.precision >= 0 && flags.precision <= (int)ft_strlen(str))
-		str2 = ft_char_new_size(str2, flags.precision);
-	if (flags.width > (int)ft_strlen(str2))
-		tmp = flags.width - ft_strlen(str2);
-	else
-	{
-		flags.width = (int)ft_strlen(str2);
-		tmp = 0;
-	}
 	if (ft_strchr(flags.flag, '0'))
 		flags.to_put = '0';
 	if (ft_strchr(flags.flag, '-'))
 	{
 		tmp = 0;
-		if (!(str[0]))
+		if (!(str2[0]))
 		{
 			flags.width++;
 			(*n)--;
@@ -67,4 +55,28 @@ void ft_printing_string(t_flags flags, char *str, int *n)
 	}
 	free(str2);
 	(*n) += i;
+}
+
+void			ft_printing_stringnu(t_flags flags, char *str, int *n)
+{
+	int			tmp;
+	char		*str2;
+
+	str2 = (str == NULL) ? ft_strdup("(null)") : ft_strdup(str);
+	if (flags.precision >= 0 && flags.precision <= (int)ft_strlen(str))
+		str2 = ft_char_new_size(str2, flags.precision);
+	if (flags.width > (int)ft_strlen(str2))
+		tmp = flags.width - ft_strlen(str2);
+	else
+	{
+		flags.width = (int)ft_strlen(str2);
+		tmp = 0;
+	}
+	ft_modif_str(flags, str2, n, tmp);
+}
+
+void			ft_printing_string(t_flags flags, char *str, int *n)
+{
+	if (flags.specifier == 's')
+		ft_printing_stringnu(flags, str, n);
 }

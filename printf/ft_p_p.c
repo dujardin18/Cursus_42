@@ -6,22 +6,19 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 21:06:06 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/01 17:03:26 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/02 10:38:55 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_printing_ptr(t_flags flags, void *p, int *n)
+void		ft_printing_ptr(t_flags flags, void *p, int *n)
 {
-	int i;
+	int		i;
 
 	i = 0;
-	//flags.specifier = 'x';
 	while (flags.flag[i] != '\0' && flags.flag[i] != '#')
 		i++;
-//	if (flags.precision > 0)
-//		(flags.precision) += 2;
 	if (flags.flag[i] == '\0')
 	{
 		flags.flag[i] = '#';

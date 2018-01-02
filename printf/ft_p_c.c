@@ -6,15 +6,15 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 14:59:05 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/28 18:36:48 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:53:43 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void  ft_printing_char(t_flags flags, int c, int *n)
+void	ft_printing_charnu(t_flags flags, int c, int *n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (flags.width > 0)
@@ -32,4 +32,10 @@ void  ft_printing_char(t_flags flags, int c, int *n)
 		(flags.width)--;
 		(*n)++;
 	}
+}
+
+void	ft_printing_char(t_flags flags, int c, int *n)
+{
+	if (flags.specifier == 'c')
+		ft_printing_charnu(flags, c, n);
 }

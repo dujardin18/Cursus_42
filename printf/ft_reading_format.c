@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_reading_format.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/02 11:42:30 by fherbine          #+#    #+#             */
+/*   Updated: 2018/01/02 17:52:03 by fherbine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-static int ft_reading_non_spe(char *format, int *n)
+static int		ft_reading_non_spe(char *format, int *n)
 {
-	int i;
+	int			i;
 
 	i = 0;
 	while (format[i] && format[i] != '%')
@@ -14,10 +26,10 @@ static int ft_reading_non_spe(char *format, int *n)
 	return (i);
 }
 
-static t_length ft_length(char *str)
+t_length		ft_length(char *str)
 {
-	int i;
-	t_length ret;
+	int			i;
+	t_length	ret;
 
 	i = 0;
 	if (str[i] == 'h')
@@ -35,97 +47,36 @@ static t_length ft_length(char *str)
 	return (ret);
 }
 
-static void ft_printing_spe(t_flags flags, va_list ap, int *n)
+void			ft_printing_spe(t_flags flags, va_list ap, int *n)
 {
 	if (flags.specifier == 'c')
 		ft_printing_char(flags, va_arg(ap, int), n);
 	else if (flags.specifier == 's')
 		ft_printing_string(flags, va_arg(ap, char *), n);
 	else if (flags.specifier == 'x' || flags.specifier == 'X')
-		ft_printing_hex(flags, ft_ucast_length(va_arg(ap, uintmax_t), flags), n);
-	else if (flags.specifier == 'o')
-		ft_printing_oct(flags, ft_ucast_length(va_arg(ap, uintmax_t), flags), n);
-	else if (flags.specifier == 'O')
+		ft_printing_hex(flags, va_arg(ap, uintmax_t), n);
+	else if (flags.specifier == 'O' || flags.specifier == 'o')
 		ft_printing_oct(flags, va_arg(ap, uintmax_t), n);
 	else if (flags.specifier == 'p')
 		ft_printing_ptr(flags, va_arg(ap, void *), n);
-	else if (flags.specifier == 'd' || flags.specifier == 'i')
-		ft_printing_dec(flags, ft_cast_length(va_arg(ap, intmax_t), flags), n);
-	else if (flags.specifier == 'D')
+	else if (ft_strchr("dDi", flags.specifier))
 		ft_printing_dec(flags, va_arg(ap, intmax_t), n);
-	else if (flags.specifier == 'u')
-		ft_printing_udec(flags, ft_ucast_length(va_arg(ap, uintmax_t), flags), n);
-	else if (flags.specifier == 'U')
+	else if (flags.specifier == 'u' || flags.specifier == 'U')
 		ft_printing_udec(flags, va_arg(ap, uintmax_t), n);
 	else if (flags.specifier == '%')
 		ft_printing_prct(flags, n);
+	else if (flags.specifier == 'C')
+		ft_printing_char(flags, va_arg(ap, wint_t), n);
+	else if (flags.specifier == 'S')
+		ft_printing_string(flags, (char *)va_arg(ap, wchar_t *), n);
+	else if (flags.specifier == 'Q')
+		return ;
 }
 
-static int ft_reading_spe(char *format, int *n, va_list ap)
+int				ft_reading_format(char *format, va_list ap)
 {
-	int i;
-	t_flags flags;
-
-	flags.precision = -1;
-	flags.width = 0;
-	flags.to_put = ' ';
-	i = 0;
-	if (ft_strchr("-+#0 ", format[i]) != NULL)
-	{
-		while (format[i] && ft_strchr("-+#0 ", format[i]) != NULL && i < 5)
-		{
-			flags.flag[i] = format[i];
-			i++;
-		}
-	}
-	flags.flag[i] = '\0';
-	if (format[i] >= 48 && format[i] <= 57)
-	{
-		flags.width = ft_atoi(&(format[i]));
-		while (format[i] >= 48 && format[i] <= 57)
-			i++;
-	}
-	if (format[i] == '.')
-	{
-		i++;
-		flags.precision = ft_atoi(&(format[i]));
-		while (format[i] >= 48 && format[i] <= 57)
-			i++;
-	}
-	flags.length = ft_length(&(format[i]));
-	if (ft_strchr("lhjz", format[i]))
-	{
-		while(ft_strchr("lhjz", format[i]) && format[i])
-			i++;
-	}
-	//while (format[i] && ft_strchr("dDiuUoOxXcCsSp%", format[i]) == NULL)
-	//	i++;
-	if (format[i] && ft_strchr("dDiuUoOxXcCsSp%", format[i]))
-		flags.specifier = format[i];
-	else
-	{
-		if (ft_strchr(flags.flag, '-'))
-		{
-			ft_putchar(format[i]);
-			ft_print_nc(flags.width - 1, ' ');
-			(*n) += (flags.width == 0 && format[i]) ? 1 : flags.width;
-		}
-		else
-		{
-			(ft_strchr(flags.flag, '0')) ? ft_print_nc(flags.width - 1, '0') : ft_print_nc(flags.width - 1, ' ');
-			ft_putchar(format[i]);
-			(*n) += (flags.width == 0 && format[i]) ? 1 : flags.width;
-		}
-		return (i);
-	}
-	ft_printing_spe(flags, ap, n);
-	return (i);
-}
-
-int ft_reading_format(char *format, va_list ap)
-{
-	int i;
-	int n;
+	int			i;
+	int			n;
 
 	i = 0;
 	n = 0;
@@ -133,11 +84,11 @@ int ft_reading_format(char *format, va_list ap)
 	{
 		i += ft_reading_non_spe(&(format[i]), &n);
 		if (format[i] == '\0')
-			break;
+			break ;
 		i++;
 		i += ft_reading_spe(&(format[i]), &n, ap);
 		if (format[i] == '\0')
-			break;
+			break ;
 		i++;
 	}
 	return (n);
