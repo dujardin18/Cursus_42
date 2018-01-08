@@ -6,7 +6,7 @@
 #    By: fherbine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 17:03:11 by fherbine          #+#    #+#              #
-#    Updated: 2018/01/02 19:55:51 by fherbine         ###   ########.fr        #
+#    Updated: 2018/01/08 14:01:11 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ OBJ = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): rl $(OBJ)
+$(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 %.o: %.c
