@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/08 17:11:25 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/08 17:12:39 by fherbine         ###   ########.fr       */
+/*   Created: 2017/11/07 20:40:27 by fherbine          #+#    #+#             */
+/*   Updated: 2017/11/09 16:57:05 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ch_includes/checker.h"
+#include "libft.h"
 
-int		main(void)
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	return (0);
+	size_t i;
+
+	i = 0;
+	while (src[i] != '\0' && i < len)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (i < len)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+	return (dst);
 }

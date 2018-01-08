@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/08 17:11:25 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/08 17:12:39 by fherbine         ###   ########.fr       */
+/*   Created: 2017/11/13 13:29:01 by fherbine          #+#    #+#             */
+/*   Updated: 2017/11/13 15:37:53 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ch_includes/checker.h"
+#include "libft.h"
 
-int		main(void)
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	return (0);
+	t_list	*tmp;
+
+	while (*alst)
+	{
+		del((*alst)->content, (*alst)->content_size);
+		tmp = (*alst)->next;
+		free(*alst);
+		*alst = tmp;
+	}
 }

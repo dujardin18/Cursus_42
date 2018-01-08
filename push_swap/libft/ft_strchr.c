@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/08 17:11:25 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/08 17:12:39 by fherbine         ###   ########.fr       */
+/*   Created: 2017/11/08 13:59:46 by fherbine          #+#    #+#             */
+/*   Updated: 2017/11/09 15:59:03 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ch_includes/checker.h"
+#include "libft.h"
 
-int		main(void)
+char	*ft_strchr(const char *s, int c)
 {
-	return (0);
+	size_t i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (c == s[i])
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (c == '\0')
+		return ((char *)&s[i]);
+	return (NULL);
 }

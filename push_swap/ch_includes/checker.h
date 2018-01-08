@@ -12,4 +12,7 @@
 
 #ifndef CHECKER_H
 #define CHECKER_H
+
+# include "../libft/libft.h"
+
 #endif

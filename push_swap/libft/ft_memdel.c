@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/08 17:11:25 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/08 17:12:39 by fherbine         ###   ########.fr       */
+/*   Created: 2017/11/09 11:08:52 by fherbine          #+#    #+#             */
+/*   Updated: 2017/11/14 11:41:37 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ch_includes/checker.h"
+#include "libft.h"
 
-int		main(void)
+void	ft_memdel(void **ap)
 {
-	return (0);
+	if (!(ap))
+		return ;
+	free(*ap);
+	*ap = NULL;
 }

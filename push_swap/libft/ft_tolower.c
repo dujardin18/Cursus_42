@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/08 17:11:25 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/08 17:12:39 by fherbine         ###   ########.fr       */
+/*   Created: 2017/11/09 10:40:22 by fherbine          #+#    #+#             */
+/*   Updated: 2017/11/09 10:41:25 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ch_includes/checker.h"
+#include "libft.h"
 
-int		main(void)
+int	ft_tolower(int c)
 {
-	return (0);
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	return (c);
 }
