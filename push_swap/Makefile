@@ -6,7 +6,7 @@
 #    By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/08 17:00:23 by fherbine          #+#    #+#              #
-#    Updated: 2018/01/08 17:27:02 by fherbine         ###   ########.fr        #
+#    Updated: 2018/01/09 17:19:41 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ P_S_SRC_PATH = ps_sources
 P_S_HEAD_PATH = ps_includes
 CHK_DEBUG_PATH = $(CHK_SRC_PATH)/debug
 P_S_DEBUG_PATH = $(P_S_SRC_PATH)/debug
-CHK_SRC_NAME = main.c checker.c
+CHK_SRC_NAME = main.c checker.c pile.c utilities.c parser.c instructions.c actions.c
 CHK_OBJ_NAME = $(CHK_SRC_NAME:.c=.o)
 P_S_SRC_NAME = main.c push_swap.c
 P_S_OBJ_NAME = $(P_S_SRC_NAME:.c=.o)
@@ -29,6 +29,7 @@ P_S_OBJ = $(addprefix $(P_S_DEBUG_PATH)/,$(P_S_OBJ_NAME))
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
 LIBFT = ./libft/
+LFLAGS = -L$(LIBFT) -lft
 
 all: begin $(CHECKER) $(PUSH_SWAP)
 
@@ -40,12 +41,12 @@ begin:
 	@echo "> Checker :\t\033[0;33;40m[\c"
 
 $(CHECKER): $(CHK_OBJ)
-	@$(CC) -o $@ $^
+	@$(CC) -o $@ $? $(LFLAGS)
 	@echo "]\033[0m \033[0;32;40m--> Done.\033[0m"
 	@echo "> Push_Swap :\t\033[0;33;40m[\c"
 
 $(PUSH_SWAP): $(P_S_OBJ)
-	@$(CC) -o $@ $?
+	@$(CC) -o $@ $? $(LFLAGS)
 	@echo "]\033[0m \033[0;32;40m--> Done.\033[0m\n"
 	@cat others/usage
 
@@ -58,13 +59,14 @@ $(P_S_DEBUG_PATH)/%.o : $(P_S_SRC_PATH)/%.c
 	@$(CC) $(CFLAGS) -I$(P_S_HEAD_PATH) -c $? -o $@
 
 clean:
+	@echo "\033[0;31;40m>> CLEAN <<\033[0m"
 	@rm -rf $(CHK_OBJ) $(P_S_OBJ)
 	@make -C $(LIBFT) fclean
 
 fclean: clean
 	@rm -rf $(CHECKER) $(PUSH_SWAP)
-	@echo ">> CLEAN <<"
+	@echo "\033[0;32;40mDone.\033[0m"
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+.PHONY: all, clean, fclean, re, begin
