@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 14:15:17 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/09 15:30:03 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/10 13:39:04 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ t_order					*ft_instructions(void)
 	{
 		free(order);
 		n = get_next_line(0, &order);
-		first = ft_add_order(order, first);
+		if (n > 0)
+			first = ft_add_order(order, first);
 	}
 	return (first);
 }

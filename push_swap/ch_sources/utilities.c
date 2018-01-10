@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 11:20:13 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/09 14:42:10 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/10 13:53:25 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,11 @@ void	ft_error(void)
 {
 	ft_putendl_fd("Error", 2);
 	exit(EXIT_FAILURE);
+}
+
+t_pile	*ft_malloc_secure(t_pile *to_alloc)
+{
+	if (!(to_alloc = (t_pile *)malloc(sizeof(t_pile))))
+		ft_kill(EXIT_FAILURE);
+	return (to_alloc);
 }
