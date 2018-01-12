@@ -24,9 +24,9 @@ static void	ft_pp(t_instruction inst, t_pile **pile_a, t_pile **pile_b)
 			ft_kill(EXIT_FAILURE);
 		tmp->next = *pile_a;
 		tmp->nb = (*pile_b)->nb;
-		free(*pile_a);
 		*pile_a = tmp;
 		(*pile_b) = (*pile_b)->next;
+		free(tmp);
 	}
 	else
 	{
@@ -38,7 +38,6 @@ static void	ft_pp(t_instruction inst, t_pile **pile_a, t_pile **pile_b)
 		*pile_b = tmp;
 		(*pile_a) = (*pile_a)->next;
 	}
-//	free(tmp);
 }
 
 static void	ft_ss(t_instruction inst, t_pile **pile_a, t_pile **pile_b)
@@ -94,25 +93,36 @@ static void	ft_rr(t_instruction inst, t_pile **pile_a, t_pile **pile_b)
 static void	ft_rrr(t_instruction inst, t_pile **pile_a, t_pile **pile_b)
 {
 	t_pile	*tmp;
+	t_pile	*new;
+	new = NULL;
 
 	if ((inst == rra || inst == rrr))
 	{
 		if (!(*pile_a) || !((*pile_a)->next))
 			ft_kill(EXIT_FAILURE);
+		new = ft_malloc_secure(new);
+		new->next = *pile_a;
 		tmp = *pile_a;
-		while (tmp->next)
+		while (tmp->next->next)
 			tmp = tmp->next;
-		ft_swap(&(tmp->nb), &((*pile_a)->nb));
+		ft_swap(&(tmp->next->nb), &(new->nb));
+		tmp->next = NULL;
+		*pile_a = new;
 	}
 	if ((inst == rrb || inst == rrr))
 	{
 		if (!(*pile_b) || !((*pile_b)->next))
 			ft_kill(EXIT_FAILURE);
+		new = ft_malloc_secure(new);
+		new->next = *pile_b;
 		tmp = *pile_b;
-		while (tmp->next)
+		while (tmp->next->next)
 			tmp = tmp->next;
-		ft_swap(&(tmp->nb), &((*pile_b)->nb));
+		ft_swap(&(tmp->nb), &(new->nb));
+		tmp->next = NULL;
+		*pile_b = new;
 	}
+	free(new);
 }
 
 void	ft_do_actions(t_order *orders, t_pile **pile_a, t_pile **pile_b)
