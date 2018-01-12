@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:11:25 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/10 14:05:10 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/12 15:49:18 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int		main(int argc, char **argv)
 	t_pile	*pile_b;
 
 	pile_b = NULL;
-	pile_b = ft_malloc_secure(pile_b);
-	pile_b = NULL;
+//	pile_b = ft_malloc_secure(pile_b);
+//	pile_b = NULL;
 	pile_a = ft_parser(argc, argv);
 	//ft_display_list(pile_a);
 	ft_check_piles(pile_a, pile_b);

@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 15:30:57 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/10 16:17:01 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/12 16:04:51 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 static void	ft_pp(t_instruction inst, t_pile **pile_a, t_pile **pile_b)
 {
 	t_pile	*tmp;
+	int nb;
 
+	ft_putendl(">pb strt");
+	ft_putendl("A:");
+	ft_display_list(*pile_a);
+	ft_putendl("B:");
+	ft_display_list(*pile_b);
 	tmp = NULL;
-	tmp = ft_malloc_secure(tmp);
+	//tmp = ft_malloc_secure(tmp);
 	if (inst == pa)
 	{
+		ft_putendl("beware ===================");
 		if (!(*pile_b))
 			ft_kill(EXIT_FAILURE);
 		tmp->next = *pile_a;
@@ -32,12 +39,38 @@ static void	ft_pp(t_instruction inst, t_pile **pile_a, t_pile **pile_b)
 	{
 		if (!(*pile_a))
 			ft_kill(EXIT_FAILURE);
-		tmp->next = *pile_b;
-		tmp->nb = (*pile_a)->nb;
-		free(*pile_b);
+		nb = (*pile_a)->nb;
+		if (*pile_b)
+			tmp->next = *pile_b;
+		else
+		{
+			ft_putendl("ICICICICICI");
+		ft_putendl(">Here");
+		ft_putendl("A:");
+		ft_display_list(*pile_a);
+			*pile_b = ft_malloc_secure(*pile_b);
+		ft_putendl(">Here");
+		ft_putendl("A:");
+		ft_display_list(*pile_a);
+			tmp->next = NULL; ////////////////////// --------------- > ca chie
+		ft_putendl(">Here");
+		ft_putendl("A:");
+		ft_display_list(*pile_a);
+		}
+		ft_putendl(">Here");
+		ft_putendl("A:");
+		ft_display_list(*pile_a);
+		ft_putendl("B:");
+		//ft_display_list(*pile_b);
+		tmp->nb = nb;
 		*pile_b = tmp;
 		(*pile_a) = (*pile_a)->next;
 	}
+	ft_putendl(">pb end");
+	ft_putendl("A:");
+	ft_display_list(*pile_a);
+	ft_putendl("B:");
+	ft_display_list(*pile_b);
 }
 
 static void	ft_ss(t_instruction inst, t_pile **pile_a, t_pile **pile_b)
@@ -96,6 +129,11 @@ static void	ft_rrr(t_instruction inst, t_pile **pile_a, t_pile **pile_b)
 	t_pile	*new;
 	new = NULL;
 
+	ft_putendl(">rra strt");
+	ft_putendl("A:");
+	ft_display_list(*pile_a);
+	ft_putendl("B:");
+	ft_display_list(*pile_b);
 	if ((inst == rra || inst == rrr))
 	{
 		if (!(*pile_a) || !((*pile_a)->next))
@@ -105,7 +143,7 @@ static void	ft_rrr(t_instruction inst, t_pile **pile_a, t_pile **pile_b)
 		tmp = *pile_a;
 		while (tmp->next->next)
 			tmp = tmp->next;
-		ft_swap(&(tmp->next->nb), &(new->nb));
+		new->nb = tmp->next->nb;
 		tmp->next = NULL;
 		*pile_a = new;
 	}
@@ -118,11 +156,16 @@ static void	ft_rrr(t_instruction inst, t_pile **pile_a, t_pile **pile_b)
 		tmp = *pile_b;
 		while (tmp->next->next)
 			tmp = tmp->next;
-		ft_swap(&(tmp->nb), &(new->nb));
+		new->nb = tmp->next->nb;
 		tmp->next = NULL;
 		*pile_b = new;
 	}
 	free(new);
+	ft_putendl(">rra end");
+	ft_putendl("A:");
+	ft_display_list(*pile_a);
+	ft_putendl("B:");
+	ft_display_list(*pile_b);
 }
 
 void	ft_do_actions(t_order *orders, t_pile **pile_a, t_pile **pile_b)
