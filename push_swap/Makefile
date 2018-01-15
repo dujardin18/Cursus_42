@@ -6,7 +6,7 @@
 #    By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/08 17:00:23 by fherbine          #+#    #+#              #
-#    Updated: 2018/01/09 17:19:41 by fherbine         ###   ########.fr        #
+#    Updated: 2018/01/15 15:24:55 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CHK_DEBUG_PATH = $(CHK_SRC_PATH)/debug
 P_S_DEBUG_PATH = $(P_S_SRC_PATH)/debug
 CHK_SRC_NAME = main.c checker.c pile.c utilities.c parser.c instructions.c actions.c
 CHK_OBJ_NAME = $(CHK_SRC_NAME:.c=.o)
-P_S_SRC_NAME = main.c push_swap.c
+P_S_SRC_NAME = main.c push_swap.c pile.c utilities.c parser.c
 P_S_OBJ_NAME = $(P_S_SRC_NAME:.c=.o)
 CHK_SRC = $(addprefix $(CHK_SRC_PATH)/,$(CHK_SRC_NAME))
 P_S_SRC = $(addprefix $(P_S_SRC_PATH)/,$(P_S_SRC_NAME))

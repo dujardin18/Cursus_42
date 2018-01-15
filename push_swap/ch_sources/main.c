@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:11:25 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/12 15:49:18 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/15 17:13:45 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 ///////////////////////////////// DEBUG
 void ft_display_list(t_pile *pile)
 {
-	while (pile)
+	if (!pile && DEBUG)
+		ft_putendl("\033[0;33;40m|X|\033[0m \033[0;31;40mEMPTY\033[0;33;40m |X|\033[0m");
+	while (DEBUG && pile)
 	{
 		ft_putstr("nb: ");
 		ft_putnbr(pile->nb);
@@ -29,18 +31,31 @@ void ft_display_list2(t_order *order)
 	while (order)
 	{
 		ft_putstr("inst: ");
-		if (order->inst == sa) {ft_putendl("sa");}
-		else if (order->inst == sb) {ft_putendl("sb");}
-		else if (order->inst == ss) {ft_putendl("ss");}
-		else if (order->inst == ra) {ft_putendl("ra");}
-		else if (order->inst == rb) {ft_putendl("rb");}
-		else if (order->inst == rr) {ft_putendl("rr");}
-		else if (order->inst == rra) {ft_putendl("rra");}
-		else if (order->inst == rrb) {ft_putendl("rrb");}
-		else if (order->inst == rrr) {ft_putendl("rrr");}
-		else if (order->inst == pa) {ft_putendl("pa");}
-		else if (order->inst == pb) {ft_putendl("pb");}
+		if (DEBUG && order->inst == sa) {ft_putendl("sa");}
+		else if (DEBUG && order->inst == sb) {ft_putendl("sb");}
+		else if (DEBUG && order->inst == ss) {ft_putendl("ss");}
+		else if (DEBUG && order->inst == ra) {ft_putendl("ra");}
+		else if (DEBUG && order->inst == rb) {ft_putendl("rb");}
+		else if (DEBUG && order->inst == rr) {ft_putendl("rr");}
+		else if (DEBUG && order->inst == rra) {ft_putendl("rra");}
+		else if (DEBUG && order->inst == rrb) {ft_putendl("rrb");}
+		else if (DEBUG && order->inst == rrr) {ft_putendl("rrr");}
+		else if (DEBUG && order->inst == pa) {ft_putendl("pa");}
+		else if (DEBUG && order->inst == pb) {ft_putendl("pb");}
 		order = order->next;
+	}
+}
+
+void	ft_debug(t_pile *pile_a, t_pile *pile_b)
+{
+	if (DEBUG)
+	{
+		ft_putendl("pile_A:");
+		ft_display_list(pile_a);
+		ft_putendl("pile_B:");
+		ft_display_list(pile_b);
+		ft_putendl("------------");
+		ft_putendl("");
 	}
 }
 ///////////////////////////////// EOD
@@ -51,10 +66,9 @@ int		main(int argc, char **argv)
 	t_pile	*pile_b;
 
 	pile_b = NULL;
-//	pile_b = ft_malloc_secure(pile_b);
-//	pile_b = NULL;
+	pile_b = ft_malloc_secure(pile_b);
+	pile_b = NULL;
 	pile_a = ft_parser(argc, argv);
-	//ft_display_list(pile_a);
 	ft_check_piles(pile_a, pile_b);
 
 	free(pile_a);

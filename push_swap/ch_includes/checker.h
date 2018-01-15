@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 17:07:08 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/10 13:52:48 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/15 17:06:24 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include <stdlib.h>
+# define DEBUG 1
 
 typedef struct		s_pile
 {
@@ -53,5 +54,6 @@ int					ft_check_piles(t_pile *pile_a, t_pile *pile_b);
 ////////////////////////////////////// DEBUG
 void				ft_display_list(t_pile *pile);
 void 				ft_display_list2(t_order *order);
+void				ft_debug(t_pile *pile_a, t_pile *pile_b);
 ////////////////////////////////////// EOD
 #endif
