@@ -6,16 +6,15 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:27:59 by fherbine          #+#    #+#             */
-/*   Updated: 2017/11/14 11:51:28 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/16 16:39:10 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, const char *s2)
 {
 	char	*joined;
-	size_t	len;
 	size_t	i;
 	size_t	i2;
 
@@ -23,10 +22,10 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	i2 = 0;
 	if (!(s1) || !(s2))
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2) - 1;
-	if ((joined = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
+	if (!(joined = (char *)ft_memalloc(sizeof(char) * (ft_strlen(s1) + \
+						ft_strlen(s2) + 2))))
 		return (NULL);
-	while (i < ft_strlen(s1))
+	while (s1[i])
 	{
 		joined[i] = s1[i];
 		i++;
@@ -38,5 +37,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		i2++;
 	}
 	joined[i] = '\0';
+	free(s1);
 	return (joined);
 }

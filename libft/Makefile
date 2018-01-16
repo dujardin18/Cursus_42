@@ -6,7 +6,7 @@
 #    By: fherbine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 17:03:11 by fherbine          #+#    #+#              #
-#    Updated: 2017/12/11 14:58:17 by fherbine         ###   ########.fr        #
+#    Updated: 2018/01/16 16:53:02 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
 	   ft_putnbr.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
 	   ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c \
 	   ft_lstiter.c ft_lstmap.c ft_swap.c ft_str_is_printable.c \
-	   ft_putnbr_base.c get_next_line.c
+	   ft_putnbr_base.c get_next_line.c ft_absol.c ft_nlen_base.c ft_nlen.c \
+	   ft_itoa_base.c ft_prints.c ft_specifier_prints.c ft_put_n_char.c
 NAME = libft.a
 INCLUDE = libft.h
 FLAGS = -Wall -Wextra -Werror

@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_absol.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/11 17:09:26 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/16 13:33:35 by fherbine         ###   ########.fr       */
+/*   Created: 2017/12/14 17:37:10 by fherbine          #+#    #+#             */
+/*   Updated: 2017/12/14 17:38:05 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_putstr_fd(char const *s, int fd)
+int		ft_absol(int n)
 {
-	size_t i;
-
-	i = 0;
-	if (!(s))
-		return ;
-	write(fd, s, ft_strlen(s));
+	return ((n > 0) ? n : n * -1);
 }

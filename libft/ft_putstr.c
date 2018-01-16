@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 17:08:06 by fherbine          #+#    #+#             */
-/*   Updated: 2017/11/14 12:28:05 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/16 13:33:20 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,5 @@ void	ft_putstr(char const *s)
 	i = 0;
 	if (!(s))
 		return ;
-	while (s[i] != '\0')
-	{
-		ft_putchar(s[i]);
-		i++;
-	}
+	write(1, s, ft_strlen(s));
 }

@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2017/12/11 14:57:14 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/16 16:54:00 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/types.h>
+# include <inttypes.h>
 # include <sys/uio.h>
 # include <fcntl.h>
+# include <stdarg.h>
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE 1024
 
 typedef	struct		s_list
 {
@@ -117,11 +119,11 @@ int					ft_strnequ(char const *s1, char const *s2, size_t n);
 
 char				*ft_strsub(const char *s, unsigned int start, size_t len);
 
-char				*ft_strjoin(const char *s1, const char *s2);
+char				*ft_strjoin(char *s1, const char *s2);
 
 char				*ft_strtrim(const char *s);
 
-char				*ft_itoa(int n);
+char				*ft_itoa(intmax_t n);
 
 char				**ft_strsplit(char const *s, char c);
 
@@ -137,7 +139,7 @@ void				ft_putendl(char const *s);
 
 void				ft_putendl_fd(char const *s, int fd);
 
-void				ft_putnbr(int n);
+void				ft_putnbr(intmax_t n);
 
 void				ft_putnbr_fd(int n, int fd);
 
@@ -157,11 +159,33 @@ void				ft_swap(int *a, int *b);
 
 int					ft_str_is_printable(char *str);
 
-void				ft_putnbr_base(int n, char *base);
+void				ft_putnbr_base(uintmax_t n, char *base);
 
 int					get_next_line(const int fd, char **line);
 
 int					ft_gnl(char **line, t_gnl *gnl);
 
 int					ft_read(char **line, char *str, t_gnl *gnl);
+
+int					ft_absol(int n);
+
+int					ft_nlen_base(uintmax_t n, int base);
+
+int					ft_nlen_10(intmax_t n);
+
+char				*ft_itoa_base(uintmax_t n, uintmax_t base);
+
+int					ft_prints_fd(int fd, char *format, ...);
+
+int					ft_prints(char *format, ...);
+
+char				*ft_di(intmax_t n, char *str);
+
+char				*ft_xo(uintmax_t n, char *str, char param);
+
+char				*ft_s(char *str2, char *str);
+
+char				*ft_c(int c, char *str);
+
+void				ft_put_n_char(int n, int c);
 #endif

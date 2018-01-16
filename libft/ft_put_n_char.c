@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_put_n_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/11 17:09:26 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/16 13:33:35 by fherbine         ###   ########.fr       */
+/*   Created: 2018/01/16 16:47:36 by fherbine          #+#    #+#             */
+/*   Updated: 2018/01/16 16:53:49 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+void		ft_put_n_char(int n, int c)
 {
-	size_t i;
+	char	*str;
+	int		i;
 
 	i = 0;
-	if (!(s))
-		return ;
-	write(fd, s, ft_strlen(s));
+	if (!(str = (char *)malloc(sizeof(char) * (n + 1))))
+		exit(EXIT_FAILURE);
+	while (i < n)
+	{
+		str[i] = (char)c;
+		i++;
+	}
+	str[i] = '\0';
+	ft_putstr(str);
+	free(str);
 }

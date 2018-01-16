@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 17:05:30 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/16 15:54:18 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/16 15:55:37 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,55 +31,47 @@ static char		*ft_strrev(char *str)
 	return (str);
 }
 
-static size_t	ft_nlen(uintmax_t *nb, int *neg, intmax_t n)
+static size_t	ft_nlen(uintmax_t *nb, uintmax_t n, uintmax_t base)
 {
 	size_t		len;
 	uintmax_t	tmp;
 
 	len = 0;
-	if (n < 0)
-	{
-		len++;
-		*nb = (uintmax_t)n * -1;
-		*neg = 1;
-	}
-	else
-		*nb = n;
+	*nb = n;
 	tmp = *nb;
-	while (tmp >= 10)
+	while (tmp >= base)
 	{
-		tmp = tmp / 10;
+		tmp = tmp / base;
 		len++;
 	}
 	len++;
 	return (len);
 }
 
-char			*ft_itoa(intmax_t n)
+char			*ft_itoa_base(uintmax_t n, uintmax_t base)
 {
 	char		*ret;
-	int			neg;
+	char		*b;
 	size_t		len;
 	size_t		i;
 	uintmax_t	nb;
 
 	nb = 0;
-	neg = 0;
+	b = ft_strdup("0123456789abcdef");
 	i = 0;
-	len = ft_nlen(&nb, &neg, n);
+	len = ft_nlen(&nb, n, base);
 	if ((ret = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
 		return (NULL);
-	while (nb >= 10)
+	while (nb >= base)
 	{
-		ret[i] = nb % 10 + 48;
+		ret[i] = b[nb % base];
 		i++;
-		nb = nb / 10;
+		nb = nb / base;
 	}
-	ret[i] = nb + 48;
-	if (neg == 1)
-		ret[i + 1] = '-';
+	ret[i] = b[nb];
 	ret[len] = '\0';
 	if (len > 1)
 		ft_strrev(ret);
+	free(b);
 	return (ret);
 }
