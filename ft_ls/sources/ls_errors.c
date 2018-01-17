@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ls_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 17:08:40 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/17 17:36:33 by fherbine         ###   ########.fr       */
+/*   Created: 2018/01/17 16:33:07 by fherbine          #+#    #+#             */
+/*   Updated: 2018/01/17 17:44:20 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-int				main(int argc, char **argv)
+static void ls_usage(void)
 {
-	t_params	*params;
+	ft_prints_fd(2, "usage: ./ft_ls [-alrRt] [file ...]\n");
+}
 
-	params = ft_parser(argc, argv);
-	return (0);
+void	ft_not_found(char *elem)
+{
+	ft_prints_fd(2, "./ft_ls: %s: No such file or directory\n", elem);
+}
+
+void	ft_illegal_optn(char i_optn)
+{
+	ft_prints_fd(2, "./ft_ls: illegal option -- %c\n", i_optn);
+	ls_usage();
+	exit(EXIT_FAILURE);
 }
