@@ -1,8 +1,19 @@
 #include <sys/stat.h>
+#include <stdio.h>
+#include <time.h>
+#include <pwd.h>
+#include <grp.h>
+#include <sys/types.h>
+#include <uuid/uuid.h>
+#include <sys/xattr.h>
+#include <inttypes.h>
 
 int main(int argc, char **argv)
 {
 	struct stat buf;
+	char c;
+	ssize_t tst;
+	ssize_t tst2;
 
 	if(stat(argv[1],&buf) < 0)    
 		        return 1;
@@ -14,7 +25,11 @@ int main(int argc, char **argv)
 	printf("File inode: \t\t%d\n",buf.st_ino);
 
 	printf("File Permissions: \t");
-	printf( (S_ISDIR(buf.st_mode)) ? "d" : "-");
+	if (buf.st_mode & S_IFDIR)
+		c = 'd';
+	else if (buf.st_mode & S_IFREG)
+		c = '-';
+	printf("%c", c);
 	printf( (buf.st_mode & S_IRUSR) ? "r" : "-");
 	printf( (buf.st_mode & S_IWUSR) ? "w" : "-");
 	printf( (buf.st_mode & S_IXUSR) ? "x" : "-");
@@ -24,6 +39,12 @@ int main(int argc, char **argv)
 	printf( (buf.st_mode & S_IROTH) ? "r" : "-");
 	printf( (buf.st_mode & S_IWOTH) ? "w" : "-");
 	printf( (buf.st_mode & S_IXOTH) ? "x" : "-");
+	printf("\nlast modified = %s", ctime(&(buf.st_mtimespec.tv_sec)));
+	printf("\nUser : %s", getpwuid(buf.st_uid)->pw_name);
+	printf("\ngroup : %s", getgrgid(buf.st_gid)->gr_name);
+	tst = listxattr(argv[1], NULL, 0, XATTR_NOFOLLOW);
+	tst2 = getxattr(argv[1], NULL, NULL, 0, 0, XATTR_NOFOLLOW);
+	printf("\ntst : %lld > %lld", tst, tst2);
 	printf("\n\n");
 
 	printf("The file %s a symbolic link\n", (S_ISLNK(buf.st_mode)) ? "is" : "is not");
