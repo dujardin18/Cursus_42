@@ -6,7 +6,7 @@
 #    By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/16 17:04:06 by fherbine          #+#    #+#              #
-#    Updated: 2018/01/17 19:42:48 by fherbine         ###   ########.fr        #
+#    Updated: 2018/01/19 17:47:30 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,20 +27,29 @@ CC = gcc
 all: begin $(NAME)
 
 begin:
-	make -C $(LPATH)
+	@clear
+	@figlet -c -f roman "ft_ls" | lolcat
+	@echo "\t\t\t>>> \033[1mCOMPILING FT_LS\033[0m <<<\n"
+	@echo ">>> Making Libft : \033[0;33;40m[\c"
+	@make -C $(LPATH)
+	@echo ">>> Making ft_ls : \033[0;33;40m[\c"
 
 $(NAME): $(OBJ)
-	$(CC) -o $@ $? $(LFLAGS)
+	@$(CC) -o $@ $? $(LFLAGS)
+	@echo "]\033[0m --> \033[1;32;40m[Done]\033[0m\n"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	$(CC) $(CFLAGS) $(IFLAGS) -c $? -o $@
+	@echo "=\c"
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $? -o $@
 
 clean:
-	rm -rf $(OBJ)
-	make -C $(LPATH) fclean
+	@rm -rf $(OBJ)
+	@make -C $(LPATH) fclean
 
 fclean: clean
-	rm -rf $(NAME)
+	@echo "\033[0;31;40mCLEANING ALL"
+	@rm -rf $(NAME)
+	@echo "Done.\033[0m"
 
 re: fclean all
 

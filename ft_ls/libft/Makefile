@@ -6,7 +6,7 @@
 #    By: fherbine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 17:03:11 by fherbine          #+#    #+#              #
-#    Updated: 2018/01/16 16:53:02 by fherbine         ###   ########.fr        #
+#    Updated: 2018/01/19 17:39:25 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,15 +33,17 @@ OBJ = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
+	@echo "]\033[0m --> \033[1;32;40m[Done]\033[0m"
 
 %.o: %.c
-	gcc $(FLAGS) -I $(INCLUDE) -c $? -o $@
+	@echo "=\c"
+	@gcc $(FLAGS) -I $(INCLUDE) -c $? -o $@
 
 clean:
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
