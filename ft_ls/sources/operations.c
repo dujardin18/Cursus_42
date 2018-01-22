@@ -49,35 +49,35 @@ void		lf_total(char options[5], char *file, long long ret)
 	ft_prints("total %d\n", (intmax_t)ret);
 }
 
-static char lf_month_day(char *month_day[7], time_t date_to_add)[7]
+static char *lf_month_day(char *ret, time_t date_to_add, char **tmp)
 {
-	char *tmp;
 	int i;
 
 	i = 4;
-	tmp = ctime(&(date_to_add));
+	*tmp = ctime(&(date_to_add));
 	while (i <= 9)
 	{
-		month_day[i - 4] = tmp[i];
+		ret[i - 4] = (*tmp)[i];
 		i++;
 	}
-	month_day[i - 4] = '\0';
-	free(tmp);
-	return (month_day);
+	ret[6] = ' ';
+	ret[7] = '\0';
+	return (ret);
 }
 
-char	date_aux(long long tmp, time_t time_to_add, long long current)[6]
+char	*date_aux(long long tmp, time_t time_to_add, long long current, char *ret)
 {
-	char final[6];
 	int i;
-	i = 0;
+	char *tim_ct;
 	
+	ret = lf_month_day(ret, time_to_add, &tim_ct);
+	ret[7] = ' ';
 	if (tmp - 6 > current || tmp + 6 < current)
 	{
-		i = 20;
-		while (ctime(time_to_add)[i])
+		i = 18;
+		while (tim_ct[i])
 		{
-			final[i - 20] = ctime(time_to_add)[i];
+			ret[i - 10] = tim_ct[i];
 			i++;
 		}
 	}
@@ -86,25 +86,24 @@ char	date_aux(long long tmp, time_t time_to_add, long long current)[6]
 		i = 11;
 		while (i <= 15)
 		{
-			final[i - 11] = ctime(time_to_add)[i];
+			ret[i - 4] = tim_ct[i];
 			i++;
 		}
 	}
-	return (final);
+	ret[12] = '\0';
+	return (ret);
 }
 
-char	lf_date(time_t date_to_add)[13]
+char	*lf_date(time_t date_to_add)
 {
-	long long tmp;
-	long long current;
-	char ret[13];
-	char month_day[7];
-	int i;
+	long long	tmp;
+	long long	current;
+	char		*ret;
 
-	//if (!(ret = (char *)malloc(sizeof(char) * 13)))
-	//	exit(EXIT_FAILURE);
-	i = 0;
+	if (!(ret = (char *)malloc(sizeof(char) * 13)))
+		exit(EXIT_FAILURE);
 	tmp = (long long)date_to_add * 10 / 60 / 60 / 24 / 305;
 	current = time(NULL) * 10 / 60 / 60 / 24 / 305;
-
+	ret = date_aux(tmp, date_to_add, current, ret);
+	return (ret);
 }
