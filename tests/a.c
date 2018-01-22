@@ -11,11 +11,15 @@
 int main(int argc, char **argv)
 {
 	struct stat buf;
+	struct stat buf2;
 	char c;
 	ssize_t tst;
 	ssize_t tst2;
+	time_t tmp = time(NULL);
 
 	if(stat(argv[1],&buf) < 0)    
+		        return 1;
+	if(lstat(argv[1],&buf2) < 0)    
 		        return 1;
 
 	printf("Information for %s\n",argv[1]);
@@ -42,9 +46,11 @@ int main(int argc, char **argv)
 	printf("\nlast modified = %s", ctime(&(buf.st_mtimespec.tv_sec)));
 	printf("\nUser : %s", getpwuid(buf.st_uid)->pw_name);
 	printf("\ngroup : %s", getgrgid(buf.st_gid)->gr_name);
+	printf("\nopti : %d %d", buf.st_blocks, buf2.st_blocks);
 	tst = listxattr(argv[1], NULL, 0, XATTR_NOFOLLOW);
 	tst2 = getxattr(argv[1], NULL, NULL, 0, 0, XATTR_NOFOLLOW);
 	printf("\ntst : %lld > %lld", tst, tst2);
+	printf("\ntime %lld\n", tmp);
 	printf("\n\n");
 
 	printf("The file %s a symbolic link\n", (S_ISLNK(buf.st_mode)) ? "is" : "is not");
