@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:08:40 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/19 17:36:23 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/22 16:06:55 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void			ft_debug_params(t_params *params)
 	while (params->files)
 	{
 		ft_prints("\t%d. |%s|\n",i, params->files->name);
+		lf_total(params->options, params->files->name, 0);
 		params->files = params->files->next;
 		i++;
 	}

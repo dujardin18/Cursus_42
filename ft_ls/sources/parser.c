@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:13:14 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/19 17:34:36 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/22 14:18:35 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,44 +37,17 @@ static int	ft_flags_checker(int argc, char **argv)
 	return (1);
 }
 
-static t_path	*ft_add_path(char *new_content, t_path *current)
+static t_params *put_all_params(int argc, char **argv, t_params *params, int i)
 {
-	t_path		*tmp;
-	t_path		*new;
-
-	if (current)
+	while (i < argc)
 	{
-		tmp = current;
-		while (tmp->next)
-			tmp = tmp->next;
-		if (!(new = (t_path *)malloc(sizeof(t_path))))
-			exit(EXIT_FAILURE);
-		new->name = ft_strdup(new_content);
-		new->next = NULL;
-		tmp->next = new;
+		if (ft_strchr(params->options, 'r') && !(ft_strchr(params->options, 't')))
+			params->files = ft_add_path_rev(argv[i], params->files);
+		else
+			params->files = ft_add_path(argv[i], params->files);
+		i++;
 	}
-	else
-	{
-		if (!(new = (t_path *)malloc(sizeof(t_path))))
-			exit(EXIT_FAILURE);
-		new->name = ft_strdup(new_content);
-		new->next = NULL;
-		current = new;
-	}
-	//free new ?
-	return (current);
-}
-
-static t_path	*current_dir()
-{
-	t_path		*ret;
-
-	if (!(ret = (t_path *)malloc(sizeof(t_path))))
-		exit(EXIT_FAILURE);
-	if (!(ret->name = ft_strdup(".")))
-		exit(EXIT_FAILURE);
-	ret->next = NULL;
-	return (ret);
+	return (params);
 }
 
 static t_params	*put_params(int argc, char **argv, t_params *params)
@@ -94,11 +67,7 @@ static t_params	*put_params(int argc, char **argv, t_params *params)
 			params->options[i - 1] = '\0';
 			i = 2;
 		}
-		while (i < argc)
-		{
-			params->files = ft_add_path(argv[i], params->files);
-			i++;
-		}
+		params = put_all_params(argc, argv, params, i);
 	}
 	if (!(params->files))
 		params->files = current_dir();

@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/19 19:42:15 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/22 20:12:18 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,9 @@
 # include <time.h>
 # define DEBUG 1
 
-typedef struct			s_ldisplay
-{
-	char				*elem_to_display;
-	char				mode[12];
-	int					hard_links;
-	char				*user_name;
-	char				*group_name;
-	int					size;
-	char				date[13];
-	struct s_ldisplay	*next;
-}						t_ldisplay;
-
 typedef struct 			s_path
 {
 	char 				*name;
-	t_ldisplay			*diplay;
 	struct s_path		*next;
 }						t_path;
 
@@ -49,6 +36,7 @@ typedef struct			s_params
 	t_path				*files;
 	int					long_format;
 	int					all_files;
+
 }						t_params;
 
 void					ft_not_found(char *elem);
@@ -56,4 +44,10 @@ void					ft_illegal_optn(char i_optn);
 
 t_params				*ft_parser(int argc, char **argv);
 
+t_path					*ft_add_path(char *new_content, t_path *current);
+t_path					*ft_add_path_rev(char *new_content, t_path *current);
+t_path					*current_dir();
+
+void					lf_total(char options[5], char *file, long long ret);
+char					[13]lf_date(time_t date_to_add);
 #endif

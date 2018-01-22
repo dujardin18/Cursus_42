@@ -6,15 +6,15 @@
 #    By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/16 17:04:06 by fherbine          #+#    #+#              #
-#    Updated: 2018/01/19 17:47:30 by fherbine         ###   ########.fr        #
+#    Updated: 2018/01/22 16:05:34 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 INCLUDES = includes
 SRC_PATH = sources
-OBJ_PATH = $(SRC_PATH)
-SRC_NAME = main.c ls_errors.c parser.c
+OBJ_PATH = $(SRC_PATH)/debug
+SRC_NAME = main.c ls_errors.c parser.c list.c operations.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
@@ -29,6 +29,7 @@ all: begin $(NAME)
 begin:
 	@clear
 	@figlet -c -f roman "ft_ls" | lolcat
+	@mkdir $(OBJ_PATH)
 	@echo "\t\t\t>>> \033[1mCOMPILING FT_LS\033[0m <<<\n"
 	@echo ">>> Making Libft : \033[0;33;40m[\c"
 	@make -C $(LPATH)
@@ -43,7 +44,7 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@$(CC) $(CFLAGS) $(IFLAGS) -c $? -o $@
 
 clean:
-	@rm -rf $(OBJ)
+	@rm -rf $(OBJ_PATH)
 	@make -C $(LPATH) fclean
 
 fclean: clean
