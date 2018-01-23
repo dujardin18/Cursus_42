@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:08:40 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/22 16:06:55 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/23 15:36:44 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void ft_debug_date(char *path)
 	char 	*date;
 	struct stat buf;
 
-	stat(path, &buf);
+	lstat(path, &buf);
 	date = lf_date(buf.st_mtimespec.tv_sec); // date test >> 42
 	ft_prints("(%s) - date : |%s|\n", path, date);
 }
@@ -55,6 +55,7 @@ int				main(int argc, char **argv)
 	{
 		ft_debug_params(params);
 		ft_debug_date("/Applications");
+		ft_debug_date("/tmp");
 	}
 	return (0);
 }
