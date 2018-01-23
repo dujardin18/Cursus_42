@@ -49,6 +49,5 @@ t_path					*ft_add_path_rev(char *new_content, t_path *current);
 t_path					*current_dir();
 
 void					lf_total(char options[5], char *file, long long ret);
-char					*lf_date(time_t date_to_add);
-
+char					[13]lf_date(time_t date_to_add);
 #endif
