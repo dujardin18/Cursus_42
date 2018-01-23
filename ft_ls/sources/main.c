@@ -36,25 +36,12 @@ void			ft_debug_params(t_params *params)
 	ft_prints("\n");
 }
 
-void ft_debug_date(char *path)
-{
-	char 	*date;
-	struct stat buf;
-
-	stat(path, &buf);
-	date = lf_date(buf.st_mtimespec.tv_sec); // date test >> 42
-	ft_prints("(%s) - date : |%s|\n", path, date);
-}
-
 int				main(int argc, char **argv)
 {
 	t_params	*params;
 
 	params = ft_parser(argc, argv);
 	if (DEBUG)
-	{
 		ft_debug_params(params);
-		ft_debug_date("/Applications");
-	}
 	return (0);
 }
