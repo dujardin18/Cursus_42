@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:36:46 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/22 20:14:25 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/24 18:25:40 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ char	*date_aux(long long tmp, time_t time_to_add, long long current, char *ret)
 	ret[7] = ' ';
 	if (tmp - 6 > current || tmp + 6 < current)
 	{
-		i = 18;
+		i = 20;
 		while (tim_ct[i])
 		{
-			ret[i - 10] = tim_ct[i];
+			ret[i - 12] = tim_ct[i];
 			i++;
 		}
 	}

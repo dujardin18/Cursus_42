@@ -6,7 +6,7 @@
 #    By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/16 17:04:06 by fherbine          #+#    #+#              #
-#    Updated: 2018/01/22 16:05:34 by fherbine         ###   ########.fr        #
+#    Updated: 2018/01/24 18:38:27 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ft_ls
 INCLUDES = includes
 SRC_PATH = sources
 OBJ_PATH = $(SRC_PATH)/debug
-SRC_NAME = main.c ls_errors.c parser.c list.c operations.c
+SRC_NAME = main.c ls_errors.c parser.c list.c operations.c perms.c ft_ls.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
@@ -24,12 +24,12 @@ IFLAGS = -I$(INCLUDES)
 CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 
-all: begin $(NAME)
+all: $(OBJ_PATH) $(NAME)
 
-begin:
+$(OBJ_PATH):
 	@clear
 	@figlet -c -f roman "ft_ls" | lolcat
-	@mkdir $(OBJ_PATH)
+	@mkdir $@
 	@echo "\t\t\t>>> \033[1mCOMPILING FT_LS\033[0m <<<\n"
 	@echo ">>> Making Libft : \033[0;33;40m[\c"
 	@make -C $(LPATH)
@@ -54,4 +54,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all begin clean fclean re
+.PHONY: all clean fclean re
