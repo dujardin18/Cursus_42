@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:45:17 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/24 18:17:59 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/25 15:31:54 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*perms(char *path)
 	ret[8] = (buffer.st_mode & S_IWOTH) ? 'w' : '-';
 	ret[9] = (buffer.st_mode & S_IXOTH) ? 'x' : '-';
 	ret[10] = prm_attr(path, buffer);
-	ret[11] = ' ';
+	ret[11] = '\0';
 	ret[12] = '\0';
 	return (ret);
 }

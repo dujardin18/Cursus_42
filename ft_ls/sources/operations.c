@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:36:46 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/24 18:25:40 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/25 10:46:48 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static long long	tt_aux(char options[5], struct stat buf, char *name)
 		return (buf.st_blocks);
 }
 
-void		lf_total(char options[5], char *file, long long ret)
+int			lf_total(char options[5], char *file, long long ret)
 {
 	DIR				*rep;
 	struct dirent	*tmp;
@@ -28,12 +28,11 @@ void		lf_total(char options[5], char *file, long long ret)
 	char 			*path;
 	char			*tmp_path;
 
-	rep = NULL;
 	path = ft_strdup(file);
 	path = ft_strjoin(path, "/");
 	tmp_path = ft_strdup(path);
 	if (!(rep = opendir(file)))
-		exit(EXIT_FAILURE);
+		return (0);
 	tmp = readdir(rep);
 	while (tmp)
 	{
@@ -47,6 +46,7 @@ void		lf_total(char options[5], char *file, long long ret)
 	free(tmp_path);
 	free(path);
 	ft_prints("total %d\n", (intmax_t)ret);
+	return (1);
 }
 
 static char *lf_month_day(char *ret, time_t date_to_add, char **tmp)

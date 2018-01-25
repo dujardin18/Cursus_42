@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:13:14 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/24 19:32:47 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/25 12:40:57 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ static char		**sort_argvs(int argc, char **argv)
 	{
 		while (i2 < argc)
 		{
-			if (ft_strcmp(argv[i], argv[i2]) > 0)
+			if (ft_strcmp(argv[i], argv[i2]) > 0 && i != i2)
 			{
 				free(tmp);
 				tmp = ft_strdup(argv[i]);
-				argv[i] = ft_strcpy(argv[i], argv[i2]);
-				argv[i2] = ft_strcpy(argv[i2], tmp);
+				argv[i] = ft_strdup(argv[i2]);
+				argv[i2] = ft_strdup(tmp);
 			}
 			i2++;
 		}
@@ -107,8 +107,10 @@ t_params		*ft_parser(int argc, char **argv)
 {
 	t_params	*params = NULL;
 
-	argv = sort_argvs(argc, argv);
-	ft_check_path(argc, argv);
+	if ((argc > 1 && argv[1][0] != '-') || argc > 2)
+		argv = sort_argvs(argc, argv); // free argvs ?
+	if ((argc > 1 && argv[1][0] != '-') || argc > 2)
+		ft_check_path(argc, argv);
 	if (!(params = (t_params *)malloc(sizeof(t_params))))
 		exit(EXIT_FAILURE);
 	params->files = NULL;

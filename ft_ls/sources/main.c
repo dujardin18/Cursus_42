@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:08:40 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/24 18:39:01 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/25 12:41:11 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 void			ft_debug_params(t_params *params)
 {
 	int i = 1;
+	t_path *cp;
 
-	if (params->files)
+	cp = params->files;
+	if (cp)
 		ft_prints("liste chainee de fichier a analyser :\n");
-	while (params->files)
+	while (cp)
 	{
-		ft_prints("\t%d. |%s|\n",i, params->files->name);
-		lf_total(params->options, params->files->name, 0);
-		params->files = params->files->next;
+		ft_prints("\t%d. |%s|\n",i, cp->name);
+		lf_total(params->options, cp->name, 0);
+		cp = cp->next;
 		i++;
 	}
 	if (params->options[0])
