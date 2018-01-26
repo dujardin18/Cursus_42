@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:08:40 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/25 12:41:11 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/26 15:12:06 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ void ft_debug_date_perms(char *path)
 	ft_prints("(%s) - perms : |%s|\n", path, perms(path));
 }
 
+void ft_debug_in_dir(t_rfile *frst)
+{
+	t_rfile *cp;
+
+	cp = frst;
+	while (cp)
+	{
+		ft_prints("name : |%s| \tPath : |%s|\n", cp->name, cp->path);
+		cp = cp->next;
+	}
+}
+
 int				main(int argc, char **argv)
 {
 	t_params	*params;
@@ -60,7 +72,8 @@ int				main(int argc, char **argv)
 		ft_debug_date_perms("/Applications");
 		ft_debug_date_perms("/tmp");
 		ft_debug_date_perms("/installer.failurerequests");
+		ft_debug_in_dir(new_rfile(".", params));
 	}
-	ft_ls(params);
+	//ft_ls(params);
 	return (0);
 }

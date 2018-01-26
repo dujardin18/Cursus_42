@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/25 18:55:15 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/26 16:31:48 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,14 @@
 # include <grp.h>
 # include <sys/xattr.h>
 # include <time.h>
-# define DEBUG 0
+# define DEBUG 1
+
+typedef struct			s_rfile
+{
+	char				*name;
+	char				*path;
+	struct s_rfile		*next;
+}						t_rfile;
 
 typedef struct 			s_path
 {
@@ -55,9 +62,13 @@ char					*lf_date(time_t date_to_add);
 
 char					*perms(char *path);
 
-void					ft_ls(t_params *params);
 
-int						max_u_g(DIR *dire, char *path, int user_grp);
-char					*lf_usr_grp(char *path, t_params *p);
-char					*lf_size(off_t size, t_params *p);
+char					**sort_pdir(char **tab, t_params *params, char *path);
+char					**new_pdir(char *path);
+
+t_rfile					*new_rfile(char *path, t_params *params);
+
+void					close_tab(char **tab);
+char					**sort_argvs(int argc, char **argv, char options[5]);
+void					swap_tab(char **s1, char **s2);
 #endif
