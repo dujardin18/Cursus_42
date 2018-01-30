@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:43:06 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/26 16:36:01 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:30:49 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,26 @@ char	**sort_argvs(int argc, char **argv, char options[5])
 	int i2;
 
 	i = 0;
-	while (i < argc)
+	while (i < argc && (argv[i][0] == '-' || i == 0))
 	{
 		argv[i] = ft_strdup(argv[i]);
 		i++;
 	}
-	argv[i] = 0;
-	i = (argv[1][0] == '-') ? 2 : 1;
-	if (argc > 2 || (argc > 1 && argv[1][0] != '-'))
+	i2 = i;
+	while (i2 < argc)
 	{
-		i2 = i;
-		while (argv[i])
+		argv[i2] = ft_strdup(argv[i2]);
+		i2++;
+	}
+	i2 = i;
+	while (i < argc)
+	{
+		while (i2 < argc)
 		{
-			while (argv[i2])
-			{
-				sort_tab(&(argv[i]), &(argv[i2]), options);
-				i2++;
-			}
-			i++;
+			sort_tab(&(argv[i]), &(argv[i2]), options);
+			i2++;
 		}
+		i++;
 	}
 	return (argv);
 }

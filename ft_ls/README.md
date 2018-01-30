@@ -1,0 +1,1 @@
+tester ls -Rr /tmp

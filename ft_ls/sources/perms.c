@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:45:17 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/25 15:31:54 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/29 19:52:36 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static char prm_attr(char *path, struct stat b)
 	return (ret);
 }
 
-char	*perms(char *path)
+char	*lf_perms(char *path)
 {
 	struct stat	buffer;
 	char		*ret;

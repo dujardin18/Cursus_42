@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:36:46 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/25 10:46:48 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/29 16:17:58 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,14 @@ char	*date_aux(long long tmp, time_t time_to_add, long long current, char *ret)
 	return (ret);
 }
 
-char	*lf_date(time_t date_to_add)
+char	*lf_date(struct stat buf)
 {
 	long long	tmp;
 	long long	current;
 	char		*ret;
+	time_t		date_to_add;
 
+	date_to_add = buf.st_mtimespec.tv_sec;
 	if (!(ret = (char *)malloc(sizeof(char) * 13)))
 		exit(EXIT_FAILURE);
 	tmp = (long long)date_to_add * 10 / 60 / 60 / 24 / 305;

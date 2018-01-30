@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:08:40 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/26 15:12:06 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/29 16:54:45 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void ft_debug_date_perms(char *path)
 	struct stat buf;
 
 	lstat(path, &buf);
-	date = lf_date(buf.st_mtimespec.tv_sec); // date test >> 42
+	date = lf_date(buf); // date test >> 42
 	ft_prints("(%s) - date : |%s|\n", path, date);
-	ft_prints("(%s) - perms : |%s|\n", path, perms(path));
+	ft_prints("(%s) - perms : |%s|\n", path, lf_perms(path));
 }
 
 void ft_debug_in_dir(t_rfile *frst)
@@ -74,6 +74,6 @@ int				main(int argc, char **argv)
 		ft_debug_date_perms("/installer.failurerequests");
 		ft_debug_in_dir(new_rfile(".", params));
 	}
-	//ft_ls(params);
+	ft_ls(params);
 	return (0);
 }

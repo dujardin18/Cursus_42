@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 16:33:07 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/25 10:36:29 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:01:51 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void	ft_check_path(int argc, char **argv)
 	int	i;
 	DIR	*dire;
 
-	i = (argv[1][0] != '-') ? 1 : 2;
+	i = 1;
+	while (argv[i] && argv[i][0] == '-')
+	{
+		i++;
+	}
 	while (i < argc)
 	{
 		if ((dire = opendir(argv[i])))

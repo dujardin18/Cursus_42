@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 11:25:57 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/26 16:34:05 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/29 19:29:27 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	**sort_pdir(char **tab, t_params *params, char *path)
 	int i2;
 
 	i = 0;
+	if (!tab)
+		return (NULL);
 	while (tab[i])
 	{
 		i2 = i;

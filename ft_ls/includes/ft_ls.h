@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/26 16:31:48 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/29 16:55:48 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ t_path					*ft_add_path_rev(char *new_content, t_path *current);
 t_path					*current_dir();
 
 int						lf_total(char options[5], char *file, long long ret);
-char					*lf_date(time_t date_to_add);
+char					*lf_date(struct stat buf);
 
-char					*perms(char *path);
+char					*lf_perms(char *path);
 
 
 char					**sort_pdir(char **tab, t_params *params, char *path);
@@ -71,4 +71,9 @@ t_rfile					*new_rfile(char *path, t_params *params);
 void					close_tab(char **tab);
 char					**sort_argvs(int argc, char **argv, char options[5]);
 void					swap_tab(char **s1, char **s2);
+
+void					ft_display_lf_aux(char *path, char *name, t_params *p);
+t_params				*max_disp(t_params *params, t_rfile *rfile);
+
+void					ft_ls(t_params *params);
 #endif
