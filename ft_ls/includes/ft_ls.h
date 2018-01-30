@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/29 16:55:48 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/30 13:23:10 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void					close_tab(char **tab);
 char					**sort_argvs(int argc, char **argv, char options[5]);
 void					swap_tab(char **s1, char **s2);
 
-void					ft_display_lf_aux(char *path, char *name, t_params *p);
+void					display_lf_aux(char *path, char *name, t_params *p);
 t_params				*max_disp(t_params *params, t_rfile *rfile);
 
 void					ft_ls(t_params *params);

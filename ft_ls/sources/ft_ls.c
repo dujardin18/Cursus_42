@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:27:49 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/29 20:03:30 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/30 13:27:22 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ void ft_display_dir(t_rfile *rfile, t_params *params)
 	cp = rfile;
 	while (cp)
 	{
-		if ((ft_strchr(params->options, 'a') && cp->name[0] == '.') || cp->name[0] != '.')
-			ft_putendl(cp->name);
+		display_lf_aux(cp->path, cp->name, params);
+	//	if (ft_strchr(params->options, 'l') && (ft_strchr(params->options, 'a') && cp->name[0] == '.') || cp->name[0] != '.')
+	//	else if ((ft_strchr(params->options, 'a') && cp->name[0] == '.') || cp->name[0] != '.')
+	//		ft_putendl(cp->name);
 		cp = cp->next;
 	}
 }
@@ -51,6 +53,8 @@ void	ls_r(t_params *params, char *path, t_rfile *rfile, char *first)
 		return ;
 	if (ft_strcmp(path, first) != 0)
 		ft_prints("\n%s:\n", path);
+	if (ft_strchr(params->options, 'l'))
+		params = max_disp(params, rfile);
 	ft_display_dir(rfile, params);
 	while (rfile)
 	{
