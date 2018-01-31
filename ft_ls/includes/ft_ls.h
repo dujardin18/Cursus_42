@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/30 13:23:10 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/31 19:41:37 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <grp.h>
 # include <sys/xattr.h>
 # include <time.h>
-# define DEBUG 1
+# define DEBUG 0
 
 typedef struct			s_rfile
 {

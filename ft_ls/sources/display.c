@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:41:50 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/30 14:33:50 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/31 16:09:27 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static char	*make_n_blanks(int n, char *ret)
 {
 	char *tmp;
 
-	tmp = make_nb(n);
 	if (n > 0)
 	{
+	tmp = make_nb(n);
 		ret = ft_strjoin(ret, tmp);
 		free(tmp);
 	}

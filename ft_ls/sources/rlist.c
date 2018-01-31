@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 11:25:57 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/29 19:29:27 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/31 19:38:34 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char	**new_pdir(char *path)
 
 	i = 0;
 	pdir = NULL;
+	dire = NULL;
 	if ((dire = opendir(path)))
 	{
 		if (!(pdir = (char **)malloc(sizeof(char *) * (pdir_len(path) + 1))))
@@ -102,6 +103,7 @@ char	**new_pdir(char *path)
 			new = readdir(dire);
 		}
 		pdir[i] = 0;
+		closedir(dire);
 	}
 	return (pdir);
 }

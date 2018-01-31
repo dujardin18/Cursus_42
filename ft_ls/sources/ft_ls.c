@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:27:49 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/30 13:27:22 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/01/31 19:58:04 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void ft_display_dir(t_rfile *rfile, t_params *params)
 	while (cp)
 	{
 		display_lf_aux(cp->path, cp->name, params);
-	//	if (ft_strchr(params->options, 'l') && (ft_strchr(params->options, 'a') && cp->name[0] == '.') || cp->name[0] != '.')
-	//	else if ((ft_strchr(params->options, 'a') && cp->name[0] == '.') || cp->name[0] != '.')
-	//		ft_putendl(cp->name);
+		//	if (ft_strchr(params->options, 'l') && (ft_strchr(params->options, 'a') && cp->name[0] == '.') || cp->name[0] != '.')
+		//	else if ((ft_strchr(params->options, 'a') && cp->name[0] == '.') || cp->name[0] != '.')
+		//		ft_putendl(cp->name);
 		cp = cp->next;
 	}
 }
@@ -47,37 +47,58 @@ int		file_is_dir(char *path) ///// opti ?
 	return (0);
 }
 
-void	ls_r(t_params *params, char *path, t_rfile *rfile, char *first)
+void	ls_r(t_params *params, char *path, char *first)
 {
-	if (rfile == NULL)
+	t_rfile *new;
+	new = new_rfile(path, params);
+
+	if (new == NULL)
 		return ;
 	if (ft_strcmp(path, first) != 0)
-		ft_prints("\n%s:\n", ft_strdup(path));
+		ft_prints("\n%s:\n", path);
 	if (ft_strchr(params->options, 'l'))
-		params = max_disp(params, rfile);
-	ft_display_dir(rfile, params);
-	while (rfile)
 	{
-		if (ft_strcmp(rfile->name, ".") != 0 && ft_strcmp(rfile->name, "..") != 0)
-		{
-			if ((ft_strchr(params->options, 'a') && rfile->name[0] == '.') || rfile->name[0] != '.')
-				ls_r(params, rfile->path, new_rfile(rfile->path, params), first);
-		}
-		rfile = rfile->next;
+		lf_total(params->options, path, 0);
+		params = max_disp(params, new);
 	}
+	ft_display_dir(new, params);
+	while (new)
+	{
+		if (ft_strcmp(new->name, ".") != 0 && ft_strcmp(new->name, "..") != 0)
+		{
+			if ((ft_strchr(params->options, 'a') && new->name[0] == '.') || new->name[0] != '.')
+				ls_r(params, new->path, first);
+		}
+		new = new->next;
+	}
+	return ;
 }
 
 void	ft_ls(t_params *params)
 {
 	t_rfile *rfile;
 	t_path *cp;
+	int disp;
+	struct stat buf;
 
+	disp = (params->files->next != NULL) ? 1 : 0;
 	cp = params->files;
 	while (cp)
 	{
-		rfile = new_rfile(cp->name, params);
 		if (ft_strchr(params->options, 'R'))
-			ls_r(params, cp->name, rfile, cp->name);
+			ls_r(params, cp->name, cp->name);
+		else
+		{
+			rfile = new_rfile(cp->name, params);
+			if (disp)
+				ft_prints("\n%s:\n", cp->name);
+			if (ft_strchr(params->options, 'l'))
+			{
+				lf_total(params->options, cp->name, 0);
+				params = max_disp(params, rfile);
+			}
+			ft_display_dir(rfile, params);
+		}
 		cp = cp->next;
 	}
 }
