@@ -26,8 +26,6 @@ static char	*make_nb(int n)
 		i++;
 	}
 	tmp[i] = '\0';
-	if (tmp[0] == '\0')
-		return (NULL);
 	return (tmp);
 }
 
@@ -36,12 +34,26 @@ static char	*make_n_blanks(int n, char *ret)
 	char *tmp;
 
 	tmp = make_nb(n);
-	if (0)
+	if (n > 0)
 	{
 		ret = ft_strjoin(ret, tmp);
-		ft_prints(".%s.\n", ret);
 		free(tmp);
 	}
+	return (ret);
+}
+
+char *lf_middle2(t_params *p, struct stat buf)
+{
+	char *ret;
+	char *n;
+
+	n = ft_itoa(buf.st_size);
+	ret = ft_strdup(getgrgid(buf.st_gid)->gr_name);
+	ret = make_n_blanks(p->max_g - ft_strlen(getgrgid(buf.st_gid)->gr_name), ret);
+	ret = ft_strjoin(ret, "  ");
+	ret = make_n_blanks(p->max_s - ft_nlen_10(buf.st_size), ret);
+	ret = ft_strjoin(ret, n);
+	free(n);
 	return (ret);
 }
 
@@ -58,12 +70,6 @@ static char	*lf_middle(t_params *p, char *path)
 	ret = ft_strjoin(ret, " ");
 	ret = ft_strjoin(ret, getpwuid(buf.st_uid)->pw_name);
 	ret = make_n_blanks(p->max_u - ft_strlen(getpwuid(buf.st_uid)->pw_name), ret);
-	ft_putendl(getgrgid(buf.st_gid)->gr_name);
-	ft_strjoin(ret, getgrgid(buf.st_gid)->gr_name);
-	ft_putendl(ret);
-	ret = make_n_blanks(p->max_g - ft_strlen(getgrgid(buf.st_gid)->gr_name), ret);
-	ret = make_n_blanks(p->max_s - ft_nlen_10(buf.st_size), ret);
-	ret = ft_strjoin(ret, ft_itoa(buf.st_size));
 	return (ret);
 }
 
@@ -119,20 +125,21 @@ void	display_lf_aux(char *path, char *name, t_params *p)
 	char 	*date;
 	char	*perms;
 	char	*middle;
-	char	*middle_cp;
+	char	*middle_2;
 	struct stat buf;
 
-	lstat(path, &buf);
 	if (ft_strchr(p->options, 'l'))
 	{
+		lstat(path, &buf);
 		date = lf_date(buf);
-		perms = lf_perms(path);
-	//	middle = lf_middle(p, path);
-	//	middle_cp = ft_strdup(middle);
+		perms = lf_perms(path, buf);
+		middle = lf_middle(p, path);
+		middle_2 = lf_middle2(p, buf);
 	}
 	if (ft_strchr(p->options, 'l') && (name[0] != '.' || ft_strchr(p->options, 'a')))
 	{
-		ft_prints("%s %s %s %s\n", perms, "<middle>", date, name);
+		lstat(path, &buf);
+		ft_prints("%s %s  %s %s %s\n", perms, middle, middle_2, date, name);
 	}
 	else if (name[0] != '.' || ft_strchr(p->options, 'a'))
 		ft_putendl(name);
@@ -140,7 +147,7 @@ void	display_lf_aux(char *path, char *name, t_params *p)
 	{
 		free(date);
 		free(perms);
-		//free(middle);
-		free(middle_cp);
+		free(middle);
+		free(middle_2);
 	}
 }

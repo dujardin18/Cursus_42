@@ -19,7 +19,7 @@ static void ls_usage(void)
 
 void	ft_not_found(char *elem)
 {
-	ft_prints_fd(2, "./ft_ls: %s: No such file or directory\n", elem);
+	ft_prints_fd(2,"./ft_ls: %s: No such file or directory\n", elem);
 }
 
 void	ft_check_path(int argc, char **argv)

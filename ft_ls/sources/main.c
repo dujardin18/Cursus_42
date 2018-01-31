@@ -46,7 +46,7 @@ void ft_debug_date_perms(char *path)
 	lstat(path, &buf);
 	date = lf_date(buf); // date test >> 42
 	ft_prints("(%s) - date : |%s|\n", path, date);
-	ft_prints("(%s) - perms : |%s|\n", path, lf_perms(path));
+	ft_prints("(%s) - perms : |%s|\n", path, lf_perms(path, buf));
 }
 
 void ft_debug_in_dir(t_rfile *frst)

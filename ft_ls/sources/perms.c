@@ -73,14 +73,12 @@ static char prm_attr(char *path, struct stat b)
 	return (ret);
 }
 
-char	*lf_perms(char *path)
+char	*lf_perms(char *path, struct stat buffer)
 {
-	struct stat	buffer;
 	char		*ret;
 
 	if (!(ret = (char *)malloc(sizeof(char) * 13)))
 		exit(EXIT_FAILURE);
-	lstat(path, &buffer);
 	ret[0] = prm_type(buffer);
 	ret[1] = (buffer.st_mode & S_IRUSR) ? 'r' : '-';
 	ret[2] = (buffer.st_mode & S_IWUSR) ? 'w' : '-';

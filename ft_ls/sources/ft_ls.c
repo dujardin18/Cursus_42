@@ -52,7 +52,7 @@ void	ls_r(t_params *params, char *path, t_rfile *rfile, char *first)
 	if (rfile == NULL)
 		return ;
 	if (ft_strcmp(path, first) != 0)
-		ft_prints("\n%s:\n", path);
+		ft_prints("\n%s:\n", ft_strdup(path));
 	if (ft_strchr(params->options, 'l'))
 		params = max_disp(params, rfile);
 	ft_display_dir(rfile, params);

@@ -60,7 +60,7 @@ t_path					*current_dir();
 int						lf_total(char options[5], char *file, long long ret);
 char					*lf_date(struct stat buf);
 
-char					*lf_perms(char *path);
+char					*lf_perms(char *path, struct stat buffer);
 
 
 char					**sort_pdir(char **tab, t_params *params, char *path);

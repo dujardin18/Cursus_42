@@ -62,6 +62,8 @@ int main(int argc, char **argv)
 	{
 		printf("ouverture du directory : |%s|\n", argv[1]);
 		new = readdir(rep);
+		if (!new)
+			printf("echec lecture...");
 		while (new)
 		{
 			printf("Name : |%s|, type : |%jd|\n", new->d_name, (intmax_t)new->d_type);
@@ -70,6 +72,8 @@ int main(int argc, char **argv)
 			tt2 += (long long)(buf2.st_blocks);
 			printf("total here: %lld |%s|\n", tt2, path);
 			new = readdir(rep);
+			if (!new)
+				printf("echec lecture");
 			free(path);
 		}
 		printf("\ntotal = %d, %lld", tt, tt2);
