@@ -33,19 +33,23 @@ int			lf_total(char options[5], char *file, long long ret)
 	tmp_path = ft_strdup(path);
 	if (!(rep = opendir(file)))
 		return (0);
-	tmp = readdir(rep);
-	while (tmp)
+	if (rep)
 	{
-		path = ft_strjoin(path, tmp->d_name);
-		lstat(path, &buf);
-		ret += tt_aux(options, buf, tmp->d_name);
 		tmp = readdir(rep);
+		while (tmp)
+		{
+			path = ft_strjoin(path, tmp->d_name);
+			lstat(path, &buf);
+			ret += tt_aux(options, buf, tmp->d_name);
+			tmp = readdir(rep);
+			free(path);
+			path = ft_strdup(tmp_path);
+		}
+		free(tmp_path);
 		free(path);
-		path = ft_strdup(tmp_path);
+		ft_prints("total %d\n", (intmax_t)ret);
+		closedir(rep);
 	}
-	free(tmp_path);
-	free(path);
-	ft_prints("total %d\n", (intmax_t)ret);
 	return (1);
 }
 

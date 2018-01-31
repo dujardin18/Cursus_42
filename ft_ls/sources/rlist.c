@@ -90,9 +90,10 @@ char	**new_pdir(char *path)
 
 	i = 0;
 	pdir = NULL;
-	dire = NULL;
+//	dire = NULL;
 	if ((dire = opendir(path)))
 	{
+		ft_putendl("tst");
 		if (!(pdir = (char **)malloc(sizeof(char *) * (pdir_len(path) + 1))))
 			exit(EXIT_FAILURE);
 		new = readdir(dire);

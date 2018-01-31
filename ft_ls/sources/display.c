@@ -57,14 +57,12 @@ char *lf_middle2(t_params *p, struct stat buf)
 	return (ret);
 }
 
-static char	*lf_middle(t_params *p, char *path)
+static char	*lf_middle(t_params *p, struct stat buf)
 {
-	struct stat	buf;
 	char		*ret;
 	char		*grp;
 
 	ret = ft_strdup("");
-	lstat(path, &buf);
 	ret = make_n_blanks((p->max_l - ft_nlen_10(buf.st_nlink)), ret);
 	ret = ft_strjoin(ret, ft_itoa(buf.st_nlink));
 	ret = ft_strjoin(ret, " ");
@@ -133,7 +131,7 @@ void	display_lf_aux(char *path, char *name, t_params *p)
 		lstat(path, &buf);
 		date = lf_date(buf);
 		perms = lf_perms(path, buf);
-		middle = lf_middle(p, path);
+		middle = lf_middle(p, buf);
 		middle_2 = lf_middle2(p, buf);
 	}
 	if (ft_strchr(p->options, 'l') && (name[0] != '.' || ft_strchr(p->options, 'a')))

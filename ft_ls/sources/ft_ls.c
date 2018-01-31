@@ -51,6 +51,7 @@ void	ls_r(t_params *params, char *path, char *first)
 {
 	t_rfile *new;
 	new = new_rfile(path, params);
+	ft_putendl(path);
 
 	if (new == NULL)
 		return ;
