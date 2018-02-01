@@ -35,7 +35,7 @@ static char	*make_n_blanks(int n, char *ret)
 
 	if (n > 0)
 	{
-	tmp = make_nb(n);
+		tmp = make_nb(n);
 		ret = ft_strjoin(ret, tmp);
 		free(tmp);
 	}
@@ -73,7 +73,7 @@ static char	*lf_middle(t_params *p, char *path)
 	return (ret);
 }
 
-int		looking_for_max(t_rfile *rfile, int param)
+int		looking_for_max(t_rfile *rfile, int param, t_params *p)
 {
 	t_rfile *cp;
 	int		tmp;
@@ -85,17 +85,20 @@ int		looking_for_max(t_rfile *rfile, int param)
 	max = 0;
 	while (cp)
 	{
-		lstat(cp->path, &buf);
-		if (param == 0)
-			tmp = ft_strlen(getpwuid(buf.st_uid)->pw_name);
-		else if (param == 1)
-			tmp = ft_strlen(getgrgid(buf.st_gid)->gr_name);
-		else if (param == 2)
-			tmp = ft_nlen_10(buf.st_nlink);
-		else
-			tmp = ft_nlen_10(buf.st_size);
-		if (tmp > max)
-			max = tmp;
+		if ((cp->name[0] == '.' && ft_strchr(p->options, 'a')) || cp->name[0] != '.')
+		{
+			lstat(cp->path, &buf);
+			if (param == 0)
+				tmp = ft_strlen(getpwuid(buf.st_uid)->pw_name);
+			else if (param == 1)
+				tmp = ft_strlen(getgrgid(buf.st_gid)->gr_name);
+			else if (param == 2)
+				tmp = ft_nlen_10(buf.st_nlink);
+			else
+				tmp = ft_nlen_10(buf.st_size);
+			if (tmp > max)
+				max = tmp;
+		}
 		cp = cp->next;
 	}
 	return (max);
@@ -106,16 +109,16 @@ t_params *max_disp(t_params *params, t_rfile *rfile)
 	t_rfile *cp;
 
 	cp = rfile;
-		params->max_u = 0;
-		params->max_g = 0;
-		params->max_l = 0;
-		params->max_s = 0;
+	params->max_u = 0;
+	params->max_g = 0;
+	params->max_l = 0;
+	params->max_s = 0;
 	if (ft_strchr(params->options, 'l'))
 	{
-		params->max_u = looking_for_max(cp, 0);
-		params->max_g = looking_for_max(cp, 1);
-		params->max_l = looking_for_max(cp, 2);
-		params->max_s = looking_for_max(cp, 3);
+		params->max_u = looking_for_max(cp, 0, params);
+		params->max_g = looking_for_max(cp, 1, params);
+		params->max_l = looking_for_max(cp, 2, params);
+		params->max_s = looking_for_max(cp, 3, params);
 	}
 	return (params);
 }
