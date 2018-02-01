@@ -71,10 +71,8 @@ t_rfile		*new_rfile(char *path, t_params *params)
 
 	first = NULL;
 	i = 0;
-	ft_prints(">>%sNULL : p - |%s|, %s\n", YELLOW, path, DEFAULT);
 	if (!(pdir = sort_pdir(new_pdir(path), params, path)))
 		return (NULL);
-	ft_prints(">>%snot NULL%s\n", YELLOW, DEFAULT);
 	while (pdir[i])
 	{
 		tmp = ft_strdup(path);

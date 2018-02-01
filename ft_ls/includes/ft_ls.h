@@ -83,4 +83,5 @@ t_params				*max_disp(t_params *params, t_rfile *rfile);
 void					ft_ls(t_params *params);
 
 void					free_rfile(t_rfile *rfile);
+void					free_tpath(t_path *tpath);
 #endif

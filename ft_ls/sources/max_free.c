@@ -27,3 +27,18 @@ void free_rfile(t_rfile *rfile)
 		tmp = NULL;
 	}
 }
+
+void	free_tpath(t_path *tpath)
+{
+	t_path	*tmp;
+
+	tmp = NULL;
+	while (tpath)
+	{
+		free(tpath->name);
+		tmp = tpath->next;
+		free(tpath);
+		tpath = tmp;
+		tmp = NULL;
+	}
+}

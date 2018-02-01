@@ -50,10 +50,12 @@ int		file_is_dir(char *path) ///// opti ?
 void	ls_r(t_params *params, char *path, char *first)
 {
 	t_rfile *new;
+	t_rfile *tmp;
 	new = new_rfile(path, params);
+	tmp = new;
 
-	//if (new == NULL)
-	//	return ;
+	if (new == NULL)
+		return ;
 	if (ft_strcmp(path, first) != 0)
 		ft_prints("\n%s:\n", path);
 	if (ft_strchr(params->options, 'l'))
@@ -71,7 +73,7 @@ void	ls_r(t_params *params, char *path, char *first)
 		}
 		new = new->next;
 	}
-	free_rfile(new);
+	free_rfile(tmp);
 	return ;
 }
 
@@ -79,11 +81,13 @@ void	ft_ls(t_params *params)
 {
 	t_rfile *rfile;
 	t_path *cp;
+	t_path *tmp;
 	int disp;
 	struct stat buf;
 
 	disp = (params->files->next != NULL) ? 1 : 0;
 	cp = params->files;
+	tmp = cp;
 	while (cp)
 	{
 		if (ft_strchr(params->options, 'R'))
@@ -103,4 +107,5 @@ void	ft_ls(t_params *params)
 		}
 		cp = cp->next;
 	}
+	free_tpath(tmp);
 }
