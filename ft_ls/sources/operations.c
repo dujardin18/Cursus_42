@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:36:46 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/29 16:17:58 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/01 17:29:43 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int			lf_total(char options[5], char *file, long long ret)
 	path = ft_strdup(file);
 	path = ft_strjoin(path, "/");
 	tmp_path = ft_strdup(path);
+	rep = NULL;
 	if (!(rep = opendir(file)))
 		return (0);
 	if (rep)
@@ -73,7 +74,7 @@ char	*date_aux(long long tmp, time_t time_to_add, long long current, char *ret)
 {
 	int i;
 	char *tim_ct;
-	
+
 	ret = lf_month_day(ret, time_to_add, &tim_ct);
 	ret[7] = ' ';
 	if (tmp - 6 > current || tmp + 6 < current)

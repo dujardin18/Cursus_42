@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 11:25:57 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/31 19:38:34 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/01 17:41:38 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,11 @@ char	**new_pdir(char *path)
 
 	i = 0;
 	pdir = NULL;
-//	dire = NULL;
+	dire = NULL;
+	ft_putendl(path);
 	if ((dire = opendir(path)))
 	{
-		ft_putendl("tst");
+	ft_putendl("tst");
 		if (!(pdir = (char **)malloc(sizeof(char *) * (pdir_len(path) + 1))))
 			exit(EXIT_FAILURE);
 		new = readdir(dire);

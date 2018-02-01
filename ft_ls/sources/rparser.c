@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 11:14:41 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/29 19:30:14 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/01 17:34:43 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static t_rfile		*add_rf_elem(t_rfile *first, char *path, char *name)
 	{
 		if (!(new = (t_rfile *)malloc(sizeof(t_rfile))))
 			exit(EXIT_FAILURE);
-		ft_prints("\033[0;33;40m%s\033[0m\n", path);
 		new->path = ft_strdup(path);
 		new->name = ft_strdup(name);
 		new->next = first;
@@ -63,29 +62,6 @@ static t_rfile		*add_rf_elem_rev(t_rfile *first, char *path, char *name)
 	return (first);
 }
 
-void		ft_debug_rfile(t_rfile *rfile, char *path)
-{
-	t_rfile *cp;
-		ft_prints("\033[0;32;40mP:%s\033[0m\n",path);
-	while (cp)
-	{
-		ft_prints("\033[0;32;40mP:%s %s\033[0m\n",path , cp->path);
-	}
-}
-
-void		ft_debug_pdir(char **pdir, char *path)
-{
-	int i = 0;
-	ft_putendl("\033[0;35;40m");
-	ft_prints("%s\n", path);
-	while (pdir[i])
-	{
-		ft_prints("%s\t", pdir[i]);
-		i++;
-	}
-	ft_putendl("\033[0m");
-}
-
 t_rfile		*new_rfile(char *path, t_params *params)
 {
 	char **pdir;
@@ -95,11 +71,10 @@ t_rfile		*new_rfile(char *path, t_params *params)
 
 	first = NULL;
 	i = 0;
-	//ft_prints("\033[0;31;40m%s\033[0m\n", ft_strdup(path));
+	ft_prints(">>%sNULL : p - |%s|, %s\n", YELLOW, path, DEFAULT);
 	if (!(pdir = sort_pdir(new_pdir(path), params, path)))
 		return (NULL);
-	ft_putendl("not NULL");
-	ft_debug_pdir(pdir, path);
+	ft_prints(">>%snot NULL%s\n", YELLOW, DEFAULT);
 	while (pdir[i])
 	{
 		tmp = ft_strdup(path);
@@ -114,6 +89,5 @@ t_rfile		*new_rfile(char *path, t_params *params)
 	}
 	close_tab(pdir);
 	free(pdir);
-	ft_debug_rfile(first, path);
 	return (first);
 }

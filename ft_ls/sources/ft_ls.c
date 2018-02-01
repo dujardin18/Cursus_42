@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:27:49 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/31 19:58:04 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/01 18:06:48 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,9 @@ void	ls_r(t_params *params, char *path, char *first)
 {
 	t_rfile *new;
 	new = new_rfile(path, params);
-	ft_putendl(path);
 
-	if (new == NULL)
-		return ;
+	//if (new == NULL)
+	//	return ;
 	if (ft_strcmp(path, first) != 0)
 		ft_prints("\n%s:\n", path);
 	if (ft_strchr(params->options, 'l'))
@@ -72,6 +71,7 @@ void	ls_r(t_params *params, char *path, char *first)
 		}
 		new = new->next;
 	}
+	free_rfile(new);
 	return ;
 }
 
@@ -99,6 +99,7 @@ void	ft_ls(t_params *params)
 				params = max_disp(params, rfile);
 			}
 			ft_display_dir(rfile, params);
+			free_rfile(rfile);
 		}
 		cp = cp->next;
 	}

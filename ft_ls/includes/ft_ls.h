@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/31 19:41:37 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/01 17:51:15 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@
 # include <grp.h>
 # include <sys/xattr.h>
 # include <time.h>
+
 # define DEBUG 0
+
+# define DEFAULT "\033[0m"
+# define YELLOW "\033[0;33;40m"
+# define GREEN "\033[0;32;40m"
 
 typedef struct			s_rfile
 {
@@ -76,4 +81,6 @@ void					display_lf_aux(char *path, char *name, t_params *p);
 t_params				*max_disp(t_params *params, t_rfile *rfile);
 
 void					ft_ls(t_params *params);
+
+void					free_rfile(t_rfile *rfile);
 #endif

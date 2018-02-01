@@ -66,8 +66,8 @@ static char prm_attr(char *path, struct stat b)
 
 	if (listxattr(path, NULL, 0, XATTR_NOFOLLOW) > 0)
 		ret = '@';
-//	else if (((b.st_mode & S_IFDIR) || (b.st_mode & S_IFLNK)) && at_srch(path))
-//		ret = '+';
+	else if (((b.st_mode & S_IFDIR) || (b.st_mode & S_IFLNK)) && at_srch(path))
+		ret = '+';
 	else
 		ret = ' ';
 	return (ret);

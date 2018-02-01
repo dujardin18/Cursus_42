@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:41:50 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/31 16:09:27 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/01 17:26:35 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ char *lf_middle2(t_params *p, struct stat buf)
 	return (ret);
 }
 
-static char	*lf_middle(t_params *p, struct stat buf)
+static char	*lf_middle(t_params *p, char *path)
 {
+	struct stat	buf;
 	char		*ret;
 	char		*grp;
 
 	ret = ft_strdup("");
+	lstat(path, &buf);
 	ret = make_n_blanks((p->max_l - ft_nlen_10(buf.st_nlink)), ret);
 	ret = ft_strjoin(ret, ft_itoa(buf.st_nlink));
 	ret = ft_strjoin(ret, " ");
@@ -131,14 +133,11 @@ void	display_lf_aux(char *path, char *name, t_params *p)
 		lstat(path, &buf);
 		date = lf_date(buf);
 		perms = lf_perms(path, buf);
-		middle = lf_middle(p, buf);
+		middle = lf_middle(p, path);
 		middle_2 = lf_middle2(p, buf);
 	}
 	if (ft_strchr(p->options, 'l') && (name[0] != '.' || ft_strchr(p->options, 'a')))
-	{
-		lstat(path, &buf);
 		ft_prints("%s %s  %s %s %s\n", perms, middle, middle_2, date, name);
-	}
 	else if (name[0] != '.' || ft_strchr(p->options, 'a'))
 		ft_putendl(name);
 	if (ft_strchr(p->options, 'l'))
