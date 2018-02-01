@@ -73,6 +73,7 @@ char	**sort_argvs(int argc, char **argv, char options[5])
 			i2++;
 		}
 		i++;
+		i2 = i;
 	}
 	return (argv);
 }

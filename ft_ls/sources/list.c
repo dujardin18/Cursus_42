@@ -48,7 +48,7 @@ t_path	*ft_add_path_rev(char *new_content, t_path *current)
 	{
 		if (!(new = (t_path *)malloc(sizeof(t_path))))
 			exit(EXIT_FAILURE);
-		new->name = new_content;
+		new->name = ft_strdup(new_content);
 		new->next = current;
 		current = new;
 	}
@@ -57,7 +57,7 @@ t_path	*ft_add_path_rev(char *new_content, t_path *current)
 		if (!(new = (t_path	*)malloc(sizeof(t_path))))
 			exit(EXIT_FAILURE);
 		new->next = NULL;
-		new->name = new_content;
+		new->name = ft_strdup(new_content);
 		current = new;
 	}
 	return (current);
