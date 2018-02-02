@@ -22,10 +22,19 @@ void	ft_not_found(char *elem)
 	ft_prints_fd(2,"./ft_ls: %s: No such file or directory\n", elem);
 }
 
+void	ft_permission_denied(char *path, char *name)
+{
+	struct stat buf;
+
+	if (lstat(path, &buf) == 0)
+		ft_prints_fd(2, "ls: %s: Permission denied\n");
+}
+
 void	ft_check_path(int argc, char **argv)
 {
-	int	i;
-	DIR	*dire;
+	int		i;
+	DIR		*dire;
+	struct	stat buf;
 
 	i = 1;
 	while (argv[i] && argv[i][0] == '-')
@@ -37,7 +46,10 @@ void	ft_check_path(int argc, char **argv)
 		if ((dire = opendir(argv[i])))
 			closedir(dire);
 		else
+		{
+		if (lstat(argv[i], &buf) == -1)
 			ft_not_found(argv[i]);
+		}
 		i++;
 	}
 }

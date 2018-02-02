@@ -55,9 +55,12 @@ int main(int argc, char **argv)
 	struct dirent *new;
 	struct stat buf;
 	struct stat buf2;
+	struct stat buf3;
 	char *path;
 
 	rep = opendir(argv[1]);
+	if (lstat(argv[1], &buf))
+		printf("echec lstat\n");
 	if (rep)
 	{
 		printf("ouverture du directory : |%s|\n", argv[1]);
