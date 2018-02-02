@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:45:17 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/29 19:52:36 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/02 15:03:35 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,17 @@ static int	at_srch(char *path)
 			tmp2 = ft_strdup(tmp);
 			tmp2 = ft_strjoin(tmp2, to_check->d_name);
 			if (listxattr(tmp2, NULL, 0, XATTR_NOFOLLOW) > 0)
+			{
+				free(tmp);
+				free(tmp2);
 				return (1);
+			}
 			to_check = readdir(rep);
 			free(tmp2);
 		}
 		closedir(rep);
 	}
+	free(tmp);
 	return (0);
 }
 
@@ -66,8 +71,8 @@ static char prm_attr(char *path, struct stat b)
 
 	if (listxattr(path, NULL, 0, XATTR_NOFOLLOW) > 0)
 		ret = '@';
-	else if (((b.st_mode & S_IFDIR) || (b.st_mode & S_IFLNK)) && at_srch(path))
-		ret = '+';
+	//else if (((b.st_mode & S_IFDIR) || (b.st_mode & S_IFLNK)) && at_srch(path))
+	//	ret = '+';
 	else
 		ret = ' ';
 	return (ret);

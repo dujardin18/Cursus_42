@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/01 17:51:15 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/02 16:10:44 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct 			s_path
 
 typedef struct			s_params
 {
-	char				options[5];
+	char				options[6];
 	t_path				*files;
 	int					max_u;
 	int					max_g;
@@ -78,10 +78,14 @@ char					**sort_argvs(int argc, char **argv, char options[5]);
 void					swap_tab(char **s1, char **s2);
 
 void					display_lf_aux(char *path, char *name, t_params *p);
+char					*lf_middle(t_params *p, struct stat buf);
+char					*lf_middle2(t_params *p, struct stat buf);
 t_params				*max_disp(t_params *params, t_rfile *rfile);
 
 void					ft_ls(t_params *params);
 
 void					free_rfile(t_rfile *rfile);
 void					free_tpath(t_path *tpath);
+
+void					display_lf(t_params *p, struct stat buf,char *name, char *perms);
 #endif

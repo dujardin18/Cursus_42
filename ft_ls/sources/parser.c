@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:13:14 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/29 15:31:33 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/02 16:09:05 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_flags_checker(int argc, char **argv)
 		{
 			while (argv[i][i2])
 			{
-				if (!ft_strchr("alrRt", argv[i][i2]))
+				if (!ft_strchr("alrRtG", argv[i][i2]))
 					ft_illegal_optn(argv[i][i2]);
 				i2++;
 			}

@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:41:50 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/01 17:26:35 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/02 16:08:01 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ char *lf_middle2(t_params *p, struct stat buf)
 	return (ret);
 }
 
-static char	*lf_middle(t_params *p, char *path)
+char	*lf_middle(t_params *p, struct stat buf)
 {
-	struct stat	buf;
 	char		*ret;
-	char		*grp;
+	char		*lnk;
 
 	ret = ft_strdup("");
-	lstat(path, &buf);
 	ret = make_n_blanks((p->max_l - ft_nlen_10(buf.st_nlink)), ret);
-	ret = ft_strjoin(ret, ft_itoa(buf.st_nlink));
+	lnk = ft_itoa(buf.st_nlink);
+	ret = ft_strjoin(ret, lnk);
+	free(lnk);
 	ret = ft_strjoin(ret, " ");
 	ret = ft_strjoin(ret, getpwuid(buf.st_uid)->pw_name);
 	ret = make_n_blanks(p->max_u - ft_strlen(getpwuid(buf.st_uid)->pw_name), ret);
@@ -125,29 +125,15 @@ t_params *max_disp(t_params *params, t_rfile *rfile)
 
 void	display_lf_aux(char *path, char *name, t_params *p)
 {
-	char 	*date;
 	char	*perms;
-	char	*middle;
-	char	*middle_2;
 	struct stat buf;
 
+	lstat(path, &buf);
+	perms = NULL;
 	if (ft_strchr(p->options, 'l'))
-	{
-		lstat(path, &buf);
-		date = lf_date(buf);
 		perms = lf_perms(path, buf);
-		middle = lf_middle(p, path);
-		middle_2 = lf_middle2(p, buf);
-	}
-	if (ft_strchr(p->options, 'l') && (name[0] != '.' || ft_strchr(p->options, 'a')))
-		ft_prints("%s %s  %s %s %s\n", perms, middle, middle_2, date, name);
-	else if (name[0] != '.' || ft_strchr(p->options, 'a'))
-		ft_putendl(name);
+	if (name[0] != '.' || ft_strchr(p->options, 'a'))
+		display_lf(p, buf, name, perms);
 	if (ft_strchr(p->options, 'l'))
-	{
-		free(date);
 		free(perms);
-		free(middle);
-		free(middle_2);
-	}
 }
