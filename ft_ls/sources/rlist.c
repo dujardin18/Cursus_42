@@ -105,5 +105,7 @@ char	**new_pdir(char *path)
 		pdir[i] = 0;
 		closedir(dire);
 	}
+	else
+		ft_permission_denied(path);
 	return (pdir);
 }

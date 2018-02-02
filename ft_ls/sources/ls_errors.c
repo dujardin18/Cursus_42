@@ -22,12 +22,47 @@ void	ft_not_found(char *elem)
 	ft_prints_fd(2,"./ft_ls: %s: No such file or directory\n", elem);
 }
 
-void	ft_permission_denied(char *path, char *name)
+static char *get_name_from_path(char *path, char *name)
+{
+	int last;
+	int first;
+	int i;
+
+	i = 0;
+	last = ft_strlen(path) - 1;
+//	while (path[last] == '/' && last > 0)
+//		last--;
+	first = last;
+	while (path[first] != '/' && first > 0)
+		first--;
+	if (!(name = (char *)malloc(sizeof(char) * (last - first + 1))))
+		exit(EXIT_FAILURE);
+	first += (first == 0) ? 0 : 1;
+	while (first <= last)
+	{
+		name[i] = path[first];
+		i++;
+		first++;
+	}
+	name[i] = '\0';
+	return (name);
+}
+
+void	ft_permission_denied(char *path)
 {
 	struct stat buf;
+	char *name;
 
+	name = NULL;
 	if (lstat(path, &buf) == 0)
-		ft_prints_fd(2, "ls: %s: Permission denied\n");
+	{
+		if ((buf.st_mode & S_IFMT) == S_IFDIR)
+		{
+			name = get_name_from_path(path, name);
+			ft_prints_fd(2, "./ft_ls: %s: Permission denied\n", name);
+			free(name);
+		}
+	}
 }
 
 void	ft_check_path(int argc, char **argv)
