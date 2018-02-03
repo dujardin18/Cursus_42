@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:13:14 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/02 16:09:05 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/03 17:48:25 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ static int	ft_flags_checker(int argc, char **argv)
 		i2 = 1;
 		if (argv[i][0] == '-')
 		{
+			if (argv[i][1] == '-' && !argv[i][2])
+				return (1);
 			while (argv[i][i2])
 			{
-				if (!ft_strchr("alrRtG", argv[i][i2]))
+				if (!ft_strchr("1alrRtG", argv[i][i2]))
 					ft_illegal_optn(argv[i][i2]);
 				i2++;
 			}
@@ -63,6 +65,11 @@ static t_params	*put_params(int argc, char **argv, t_params *params)
 	{
 		while (i < argc && argv[i][0] == '-')
 		{
+			if ((argv[i][1] == '-' && !argv[i][2]) || !argv[i][1] || !ft_strchr("alrRtG1", argv[i][1])) //pas sure
+			{
+				i += (argv[i][1] == '-') ? 1 : 0;
+				break ;
+			}
 			while (argv[i][i2])
 			{
 				params->options[tmp] = argv[i][i2];
@@ -74,7 +81,7 @@ static t_params	*put_params(int argc, char **argv, t_params *params)
 		}
 		params->options[tmp] = '\0';
 	}
-	argv = sort_argvs(argc, argv, params->options);
+	argv = sort_argvs(argc, argv, params);
 	ft_check_path(argc, argv);
 	if (argc > 1)
 		params = put_all_params(argc, argv, params, i);
@@ -90,6 +97,7 @@ t_params		*ft_parser(int argc, char **argv)
 	if (!(params = (t_params *)malloc(sizeof(t_params))))
 		exit(EXIT_FAILURE);
 	params->files = NULL;
+	params->multi = 0;
 	params->options[0] = '\0';
 	if (ft_flags_checker(argc, argv))
 		params = put_params(argc, argv, params);

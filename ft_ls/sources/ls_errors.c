@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 16:33:07 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/29 15:01:51 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/03 18:43:51 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void ls_usage(void)
 {
-	ft_prints_fd(2, "usage: ./ft_ls [-alrRt] [file ...]\n");
+	ft_prints_fd(2, "usage: ./ft_ls [-1alrRtG] [file ...]\n");
 }
 
 void	ft_not_found(char *elem)
@@ -30,14 +30,14 @@ static char *get_name_from_path(char *path, char *name)
 
 	i = 0;
 	last = ft_strlen(path) - 1;
-//	while (path[last] == '/' && last > 0)
-//		last--;
+	//	while (path[last] == '/' && last > 0)
+	//		last--;
 	first = last;
 	while (path[first] != '/' && first > 0)
 		first--;
 	if (!(name = (char *)malloc(sizeof(char) * (last - first + 1))))
 		exit(EXIT_FAILURE);
-	first += (first == 0) ? 0 : 1;
+	first += (path[first] == '/') ? 1 : 0;
 	while (first <= last)
 	{
 		name[i] = path[first];
@@ -72,18 +72,25 @@ void	ft_check_path(int argc, char **argv)
 	struct	stat buf;
 
 	i = 1;
-	while (argv[i] && argv[i][0] == '-')
-	{
+	while (argv[i] && argv[i][0] == '-' && argv[i][1] && ft_strchr("-alrRt1G", argv[i][1]))
 		i++;
-	}
 	while (i < argc)
 	{
+		if (ft_strcmp(argv[i], "") == 0)
+		{
+			ft_not_found("fts_open");
+			exit(EXIT_FAILURE);
+		}
 		if ((dire = opendir(argv[i])))
 			closedir(dire);
 		else
 		{
-		if (lstat(argv[i], &buf) == -1)
-			ft_not_found(argv[i]);
+			if (lstat(argv[i], &buf) == -1)
+			{
+				ft_not_found(argv[i]);
+				free(argv[i]);
+				argv[i] = NULL;
+			}
 		}
 		i++;
 	}

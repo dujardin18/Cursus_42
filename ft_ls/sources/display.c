@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:41:50 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/02 16:08:01 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/03 16:47:47 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,16 @@ char *lf_middle2(t_params *p, struct stat buf)
 {
 	char *ret;
 	char *n;
+	char *t;
 
+	t = get_grp(buf);
 	n = ft_itoa(buf.st_size);
-	ret = ft_strdup(getgrgid(buf.st_gid)->gr_name);
-	ret = make_n_blanks(p->max_g - ft_strlen(getgrgid(buf.st_gid)->gr_name), ret);
+	ret = get_grp(buf);
+	ret = make_n_blanks(p->max_g - ft_strlen(t), ret);
 	ret = ft_strjoin(ret, "  ");
 	ret = make_n_blanks(p->max_s - ft_nlen_10(buf.st_size), ret);
 	ret = ft_strjoin(ret, n);
+	free(t);
 	free(n);
 	return (ret);
 }
@@ -61,15 +64,18 @@ char	*lf_middle(t_params *p, struct stat buf)
 {
 	char		*ret;
 	char		*lnk;
+	char		*t;
 
 	ret = ft_strdup("");
+	t = get_user(buf);
 	ret = make_n_blanks((p->max_l - ft_nlen_10(buf.st_nlink)), ret);
 	lnk = ft_itoa(buf.st_nlink);
 	ret = ft_strjoin(ret, lnk);
 	free(lnk);
 	ret = ft_strjoin(ret, " ");
-	ret = ft_strjoin(ret, getpwuid(buf.st_uid)->pw_name);
-	ret = make_n_blanks(p->max_u - ft_strlen(getpwuid(buf.st_uid)->pw_name), ret);
+	ret = ft_strjoin(ret, t);
+	ret = make_n_blanks(p->max_u - ft_strlen(t), ret);
+	free(t);
 	return (ret);
 }
 
@@ -77,6 +83,7 @@ int		looking_for_max(t_rfile *rfile, int param, t_params *p)
 {
 	t_rfile *cp;
 	int		tmp;
+	char	*t;
 	int		max;
 	struct stat buf;
 
@@ -89,9 +96,17 @@ int		looking_for_max(t_rfile *rfile, int param, t_params *p)
 		{
 			lstat(cp->path, &buf);
 			if (param == 0)
-				tmp = ft_strlen(getpwuid(buf.st_uid)->pw_name);
+			{
+				t = get_user(buf);
+				tmp = ft_strlen(t);
+				free(t);
+			}
 			else if (param == 1)
-				tmp = ft_strlen(getgrgid(buf.st_gid)->gr_name);
+			{
+				t = get_grp(buf);
+				tmp = ft_strlen(t);
+				free(t);
+			}
 			else if (param == 2)
 				tmp = ft_nlen_10(buf.st_nlink);
 			else
@@ -125,15 +140,9 @@ t_params *max_disp(t_params *params, t_rfile *rfile)
 
 void	display_lf_aux(char *path, char *name, t_params *p)
 {
-	char	*perms;
 	struct stat buf;
 
 	lstat(path, &buf);
-	perms = NULL;
-	if (ft_strchr(p->options, 'l'))
-		perms = lf_perms(path, buf);
 	if (name[0] != '.' || ft_strchr(p->options, 'a'))
-		display_lf(p, buf, name, perms);
-	if (ft_strchr(p->options, 'l'))
-		free(perms);
+		display_lf(p, buf, name, path);
 }

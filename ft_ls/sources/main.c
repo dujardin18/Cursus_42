@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:08:40 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/29 16:54:45 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/03 14:34:32 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int				main(int argc, char **argv)
 		ft_debug_date_perms("/installer.failurerequests");
 		ft_debug_in_dir(new_rfile(".", params));
 	}
-	ft_ls(params);
+	else
+		ft_ls(params);
+	free(params);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:45:17 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/02 15:03:35 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/03 14:59:08 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	prm_type(struct stat buf)
 		ret = '-';
 	return (ret);
 }
-
+/*
 static int	at_srch(char *path)
 {
 	DIR *rep;
@@ -64,8 +64,8 @@ static int	at_srch(char *path)
 	free(tmp);
 	return (0);
 }
-
-static char prm_attr(char *path, struct stat b)
+*/
+static char prm_attr(char *path) // + struct stat b
 {
 	char		ret;
 
@@ -94,7 +94,7 @@ char	*lf_perms(char *path, struct stat buffer)
 	ret[7] = (buffer.st_mode & S_IROTH) ? 'r' : '-';
 	ret[8] = (buffer.st_mode & S_IWOTH) ? 'w' : '-';
 	ret[9] = (buffer.st_mode & S_IXOTH) ? 'x' : '-';
-	ret[10] = prm_attr(path, buffer);
+	ret[10] = prm_attr(path);
 	ret[11] = '\0';
 	ret[12] = '\0';
 	return (ret);

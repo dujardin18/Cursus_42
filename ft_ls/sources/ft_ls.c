@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:27:49 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/01 18:06:48 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/03 17:46:44 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ void ft_display_dir(t_rfile *rfile, t_params *params)
 	while (cp)
 	{
 		display_lf_aux(cp->path, cp->name, params);
-		//	if (ft_strchr(params->options, 'l') && (ft_strchr(params->options, 'a') && cp->name[0] == '.') || cp->name[0] != '.')
-		//	else if ((ft_strchr(params->options, 'a') && cp->name[0] == '.') || cp->name[0] != '.')
-		//		ft_putendl(cp->name);
 		cp = cp->next;
 	}
 }
@@ -54,10 +51,10 @@ void	ls_r(t_params *params, char *path, char *first)
 	new = new_rfile(path, params);
 	tmp = new;
 
+	if (ft_strcmp(path, first) != 0 && file_is_dir(path))
+		ft_prints("\n%s:\n", path);
 	if (new == NULL)
 		return ;
-	if (ft_strcmp(path, first) != 0)
-		ft_prints("\n%s:\n", path);
 	if (ft_strchr(params->options, 'l'))
 	{
 		lf_total(params->options, path, 0);
@@ -83,20 +80,45 @@ void	ft_ls(t_params *params)
 	t_path *cp;
 	t_path *tmp;
 	int disp;
+	int ev;
+	int c;
 	struct stat buf;
 
 	disp = (params->files->next != NULL) ? 1 : 0;
 	cp = params->files;
+	ev = 0;
+	c = 0;
 	tmp = cp;
 	while (cp)
 	{
+		if (!file_is_dir(cp->name) )
+		{
+			params->max_u = 0;
+			params->max_g = 0;
+			params->max_l = 0;
+			params->max_s = 0;
+			display_lf_aux(cp->name, cp->name, params);
+			ev++;
+			tmp = tmp->next;
+		}
+		c++;
+		cp = cp->next;
+	}
+	if (c != ev && ev > 0)
+		ft_putendl("");
+	cp = params->files;
+	tmp = cp;
+	while (cp)
+	{
+		if (params->multi && cp != params->files && file_is_dir(cp->name))
+			ft_prints("\n%s:\n", cp->name);
+		else if (params->multi && file_is_dir(cp->name))
+			ft_prints("%s:\n", cp->name);
 		if (ft_strchr(params->options, 'R'))
 			ls_r(params, cp->name, cp->name);
 		else
 		{
 			rfile = new_rfile(cp->name, params);
-			if (disp)
-				ft_prints("\n%s:\n", cp->name);
 			if (ft_strchr(params->options, 'l'))
 			{
 				lf_total(params->options, cp->name, 0);

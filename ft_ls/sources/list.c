@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 13:51:36 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/25 12:32:19 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/03 17:40:05 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,27 @@ t_path	*ft_add_path(char *new_content, t_path *current)
 	t_path		*tmp;
 	t_path		*new;
 
-	if (current)
+	if (new_content)
 	{
-		tmp = current;
-		while (tmp->next)
-			tmp = tmp->next;
-		if (!(new = (t_path *)malloc(sizeof(t_path))))
-			exit(EXIT_FAILURE);
-		new->name = ft_strdup(new_content);
-		new->next = NULL;
-		tmp->next = new;
-	}
-	else
-	{
-		if (!(new = (t_path *)malloc(sizeof(t_path))))
-			exit(EXIT_FAILURE);
-		new->name = ft_strdup(new_content);
-		new->next = NULL;
-		current = new;
+		if (current)
+		{
+			tmp = current;
+			while (tmp->next)
+				tmp = tmp->next;
+			if (!(new = (t_path *)malloc(sizeof(t_path))))
+				exit(EXIT_FAILURE);
+			new->name = ft_strdup(new_content);
+			new->next = NULL;
+			tmp->next = new;
+		}
+		else
+		{
+			if (!(new = (t_path *)malloc(sizeof(t_path))))
+				exit(EXIT_FAILURE);
+			new->name = ft_strdup(new_content);
+			new->next = NULL;
+			current = new;
+		}
 	}
 	//free new ?
 	return (current);
@@ -44,21 +47,24 @@ t_path	*ft_add_path_rev(char *new_content, t_path *current)
 {
 	t_path	*new;
 
-	if (current)
+	if (new_content)
 	{
-		if (!(new = (t_path *)malloc(sizeof(t_path))))
-			exit(EXIT_FAILURE);
-		new->name = ft_strdup(new_content);
-		new->next = current;
-		current = new;
-	}
-	else
-	{
-		if (!(new = (t_path	*)malloc(sizeof(t_path))))
-			exit(EXIT_FAILURE);
-		new->next = NULL;
-		new->name = ft_strdup(new_content);
-		current = new;
+		if (current)
+		{
+			if (!(new = (t_path *)malloc(sizeof(t_path))))
+				exit(EXIT_FAILURE);
+			new->name = ft_strdup(new_content);
+			new->next = current;
+			current = new;
+		}
+		else
+		{
+			if (!(new = (t_path	*)malloc(sizeof(t_path))))
+				exit(EXIT_FAILURE);
+			new->next = NULL;
+			new->name = ft_strdup(new_content);
+			current = new;
+		}
 	}
 	return (current);
 }

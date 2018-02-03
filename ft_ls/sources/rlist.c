@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 11:25:57 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/01 17:41:38 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/03 16:21:06 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,23 @@ static int		ft_strcmpt(char *s1, char *s2, char *path)
 	return (ret);
 }
 
+void ft_debug_tab(char **tab)
+{
+	int i = 0, i2 = 0;
+	while (tab[i])
+	{
+		ft_prints("%s ", tab[i]);
+		i++;
+	}
+	ft_putendl("");
+}
 void	get_swap(char **s1, char **s2, char options[5], char *path)
 {
-	if ((ft_strchr(options, 't') && ft_strcmpt(*s1, *s2, path) < 0) || \
-			(!ft_strchr(options, 't') && ft_strcmp(*s1, *s2) > 0))
+	if ((ft_strchr(options, 't') && ft_strcmpt(*s1, *s2, path) > 0) || \
+			(!ft_strchr(options, 't') && ft_strcmp(*s1, *s2) < 0))
 		swap_tab(s1, s2);
-	else if (ft_strchr(options, 't') && ft_strcmpt(*s1, *s2, path) && \
-			ft_strcmp(*s1, *s2) == 0)
+	else if (ft_strchr(options, 't') && !ft_strcmpt(*s1, *s2, path) && \
+			ft_strcmp(*s1, *s2) < 0)
 		swap_tab(s1, s2);
 }
 
@@ -70,8 +80,8 @@ char	**sort_pdir(char **tab, t_params *params, char *path)
 		return (NULL);
 	while (tab[i])
 	{
-		i2 = i;
-		while (tab[i2])
+		i2 = 0;
+		while (tab[i2] && i != i2)
 		{
 			get_swap(&(tab[i]), &(tab[i2]), params->options, path);
 			i2++;

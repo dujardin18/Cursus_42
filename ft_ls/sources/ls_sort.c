@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:43:06 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/29 15:30:49 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/03 18:52:24 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,25 @@ void	sort_tab(char **s1, char **s2, char options[5])
 	if ((ft_strchr(options, 't') && ft_strcmp_t(*s1, *s2) < 0) || \
 			(!ft_strchr(options, 't') && ft_strcmp(*s1, *s2) > 0))
 		swap_tab(s1, s2);
-	else if (ft_strchr(options, 't') && ft_strcmp_t(*s1, *s2) && \
-			ft_strcmp(*s1, *s2) == 0)
+	else if (ft_strchr(options, 't') && !ft_strcmp_t(*s1, *s2) && \
+			ft_strcmp(*s1, *s2) > 0)
 		swap_tab(s1, s2);
 }
 
-char	**sort_argvs(int argc, char **argv, char options[5])
+char	**sort_argvs(int argc, char **argv, t_params *p)
 {
 	int i;
 	int i2;
 
 	i = 0;
-	while (i < argc && (argv[i][0] == '-' || i == 0))
+	while (i < argc && ((argv[i][0] == '-' && argv[i][1] && ft_strchr("alrRtG1-", argv[i][1])) || i == 0))
 	{
 		argv[i] = ft_strdup(argv[i]);
+		if (i < argc && argv[i][1] && argv[i][1] == '-')
+		{
+			i++;
+			break ;
+		}
 		i++;
 	}
 	i2 = i;
@@ -69,10 +74,12 @@ char	**sort_argvs(int argc, char **argv, char options[5])
 	{
 		while (i2 < argc)
 		{
-			sort_tab(&(argv[i]), &(argv[i2]), options);
+			sort_tab(&(argv[i]), &(argv[i2]), p->options);
 			i2++;
 		}
 		i++;
+		if (i2 > i && !p->multi)
+			p->multi = 1;
 		i2 = i;
 	}
 	return (argv);

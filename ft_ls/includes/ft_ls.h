@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/02 16:10:44 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/03 17:48:42 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define DEFAULT "\033[0m"
 # define YELLOW "\033[0;33;40m"
 # define GREEN "\033[0;32;40m"
+# define CYAN "\033[0;36;40m"
+# define UNDEF "\033[3;30;43m"
 
 typedef struct			s_rfile
 {
@@ -44,17 +46,19 @@ typedef struct 			s_path
 
 typedef struct			s_params
 {
-	char				options[6];
+	char				options[8];
 	t_path				*files;
 	int					max_u;
 	int					max_g;
 	int					max_l;
 	int					max_s;
+	int					multi;
 }						t_params;
 
 void					ft_not_found(char *elem);
 void					ft_illegal_optn(char i_optn);
 void					ft_check_path(int argc, char **argv);
+void					ft_permission_denied(char *path);
 
 t_params				*ft_parser(int argc, char **argv);
 
@@ -74,7 +78,7 @@ char					**new_pdir(char *path);
 t_rfile					*new_rfile(char *path, t_params *params);
 
 void					close_tab(char **tab);
-char					**sort_argvs(int argc, char **argv, char options[5]);
+char					**sort_argvs(int argc, char **argv, t_params *p);
 void					swap_tab(char **s1, char **s2);
 
 void					display_lf_aux(char *path, char *name, t_params *p);
@@ -88,4 +92,7 @@ void					free_rfile(t_rfile *rfile);
 void					free_tpath(t_path *tpath);
 
 void					display_lf(t_params *p, struct stat buf,char *name, char *perms);
+
+char					*get_user(struct stat buf);
+char					*get_grp(struct stat buf);
 #endif
