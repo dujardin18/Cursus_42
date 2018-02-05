@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/03 17:48:42 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/05 16:47:33 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct			s_params
 	int					max_l;
 	int					max_s;
 	int					multi;
+	int					first;
 }						t_params;
 
 void					ft_not_found(char *elem);
@@ -66,7 +67,7 @@ t_path					*ft_add_path(char *new_content, t_path *current);
 t_path					*ft_add_path_rev(char *new_content, t_path *current);
 t_path					*current_dir();
 
-int						lf_total(char options[5], char *file, long long ret);
+int						lf_total(char options[5], char *file, long long ret, int a);
 char					*lf_date(struct stat buf);
 
 char					*lf_perms(char *path, struct stat buffer);

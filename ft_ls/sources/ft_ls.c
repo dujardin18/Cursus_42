@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:27:49 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/03 17:46:44 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/05 16:48:28 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,34 @@ int		file_is_dir(char *path) ///// opti ?
 	return (0);
 }
 
+int		file_is_lnk(char *path, t_params *params) ///// opti ?
+{
+	struct stat buf;
+	t_rfile *t;
+
+	lstat(path, &buf);
+	if ((buf.st_mode & S_IFMT) == S_IFLNK)
+	{
+		t = new_rfile(path, params);
+		if (!t)
+			return (1);
+		free(t);
+	}
+	return (0);
+}
+
+int		file_is_dir2(char *path, t_rfile *rfile) ///// opti ?
+{
+	struct stat buf;
+
+	lstat(path, &buf);
+	if ((buf.st_mode & S_IFMT) == S_IFDIR)
+		return (1);
+	else if ((buf.st_mode & S_IFMT) == S_IFLNK && rfile)
+		return (1);
+	return (0);
+}
+
 void	ls_r(t_params *params, char *path, char *first)
 {
 	t_rfile *new;
@@ -51,13 +79,13 @@ void	ls_r(t_params *params, char *path, char *first)
 	new = new_rfile(path, params);
 	tmp = new;
 
-	if (ft_strcmp(path, first) != 0 && file_is_dir(path))
+	if (ft_strcmp(path, first) != 0 && file_is_dir2(path, new))
 		ft_prints("\n%s:\n", path);
 	if (new == NULL)
 		return ;
 	if (ft_strchr(params->options, 'l'))
 	{
-		lf_total(params->options, path, 0);
+		lf_total(params->options, path, 0, 0);
 		params = max_disp(params, new);
 	}
 	ft_display_dir(new, params);
@@ -91,7 +119,7 @@ void	ft_ls(t_params *params)
 	tmp = cp;
 	while (cp)
 	{
-		if (!file_is_dir(cp->name) )
+		if (!file_is_dir(cp->name) || file_is_lnk(cp->name, params))
 		{
 			params->max_u = 0;
 			params->max_g = 0;
@@ -110,10 +138,13 @@ void	ft_ls(t_params *params)
 	tmp = cp;
 	while (cp)
 	{
-		if (params->multi && cp != params->files && file_is_dir(cp->name))
+		if (params->multi && params->first && file_is_dir2(cp->name, new_rfile(cp->name, params)))
 			ft_prints("\n%s:\n", cp->name);
-		else if (params->multi && file_is_dir(cp->name))
+		else if (params->multi && file_is_dir2(cp->name, new_rfile(cp->name, params)))
+		{
 			ft_prints("%s:\n", cp->name);
+			params->first = 1;
+		}
 		if (ft_strchr(params->options, 'R'))
 			ls_r(params, cp->name, cp->name);
 		else
@@ -121,7 +152,7 @@ void	ft_ls(t_params *params)
 			rfile = new_rfile(cp->name, params);
 			if (ft_strchr(params->options, 'l'))
 			{
-				lf_total(params->options, cp->name, 0);
+				lf_total(params->options, cp->name, 0, 0);
 				params = max_disp(params, rfile);
 			}
 			ft_display_dir(rfile, params);

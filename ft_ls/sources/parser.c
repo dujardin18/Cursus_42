@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:13:14 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/03 17:48:25 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/05 16:47:57 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ static t_params	*put_params(int argc, char **argv, t_params *params)
 	if (argc > 1)
 		params = put_all_params(argc, argv, params, i);
 	if (!(params->files))
+	{
+		params->multi = 0;
 		params->files = current_dir();
+	}
 	return (params);
 }
 
@@ -98,6 +101,7 @@ t_params		*ft_parser(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	params->files = NULL;
 	params->multi = 0;
+	params->first = 0;
 	params->options[0] = '\0';
 	if (ft_flags_checker(argc, argv))
 		params = put_params(argc, argv, params);

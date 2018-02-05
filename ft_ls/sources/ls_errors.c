@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 16:33:07 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/03 18:43:51 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/05 16:41:52 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void ls_usage(void)
 {
-	ft_prints_fd(2, "usage: ./ft_ls [-1alrRtG] [file ...]\n");
+	ft_prints_fd(2, "usage: ft_ls [-GRalrt1] [file ...]\n");
 }
 
 void	ft_not_found(char *elem)

@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:08:40 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/03 14:34:32 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/05 15:33:53 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			ft_debug_params(t_params *params)
 	while (cp)
 	{
 		ft_prints("\t%d. |%s|\n",i, cp->name);
-		lf_total(params->options, cp->name, 0);
+		lf_total(params->options, cp->name, 0, 0);
 		cp = cp->next;
 		i++;
 	}
@@ -71,7 +71,6 @@ int				main(int argc, char **argv)
 		ft_debug_params(params);
 		ft_debug_date_perms("/Applications");
 		ft_debug_date_perms("/tmp");
-		ft_debug_date_perms("/installer.failurerequests");
 		ft_debug_in_dir(new_rfile(".", params));
 	}
 	else
