@@ -6,15 +6,15 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 17:45:43 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/01 18:02:16 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/05 20:15:54 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-void free_rfile(t_rfile *rfile)
+void		free_rfile(t_rfile *rfile)
 {
-	t_rfile *tmp;
+	t_rfile	*tmp;
 
 	tmp = NULL;
 	while (rfile)
@@ -28,7 +28,7 @@ void free_rfile(t_rfile *rfile)
 	}
 }
 
-void	free_tpath(t_path *tpath)
+void		free_tpath(t_path *tpath)
 {
 	t_path	*tmp;
 
@@ -40,5 +40,17 @@ void	free_tpath(t_path *tpath)
 		free(tpath);
 		tpath = tmp;
 		tmp = NULL;
+	}
+}
+
+void		close_tab(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
 	}
 }

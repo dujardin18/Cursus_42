@@ -6,32 +6,25 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 16:33:07 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/05 16:41:52 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/05 20:01:34 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static void ls_usage(void)
+void			ft_not_found(char *elem)
 {
-	ft_prints_fd(2, "usage: ft_ls [-GRalrt1] [file ...]\n");
+	ft_prints_fd(2, "./ft_ls: %s: No such file or directory\n", elem);
 }
 
-void	ft_not_found(char *elem)
+static char		*get_name_from_path(char *path, char *name)
 {
-	ft_prints_fd(2,"./ft_ls: %s: No such file or directory\n", elem);
-}
-
-static char *get_name_from_path(char *path, char *name)
-{
-	int last;
-	int first;
-	int i;
+	int			last;
+	int			first;
+	int			i;
 
 	i = 0;
 	last = ft_strlen(path) - 1;
-	//	while (path[last] == '/' && last > 0)
-	//		last--;
 	first = last;
 	while (path[first] != '/' && first > 0)
 		first--;
@@ -48,10 +41,10 @@ static char *get_name_from_path(char *path, char *name)
 	return (name);
 }
 
-void	ft_permission_denied(char *path)
+void			ft_permission_denied(char *path)
 {
-	struct stat buf;
-	char *name;
+	struct stat	buf;
+	char		*name;
 
 	name = NULL;
 	if (lstat(path, &buf) == 0)
@@ -65,11 +58,11 @@ void	ft_permission_denied(char *path)
 	}
 }
 
-void	ft_check_path(int argc, char **argv)
+void			ft_check_path(int argc, char **argv)
 {
-	int		i;
-	DIR		*dire;
-	struct	stat buf;
+	int			i;
+	DIR			*dire;
+	struct stat	buf;
 
 	i = 1;
 	while (argv[i] && argv[i][0] == '-' && argv[i][1] && ft_strchr("-alrRt1G", argv[i][1]))
@@ -96,9 +89,9 @@ void	ft_check_path(int argc, char **argv)
 	}
 }
 
-void	ft_illegal_optn(char i_optn)
+void			ft_illegal_optn(char i_optn)
 {
 	ft_prints_fd(2, "./ft_ls: illegal option -- %c\n", i_optn);
-	ls_usage();
+	ft_prints_fd(2, "usage: ft_ls [-GRalrt1] [file ...]\n");
 	exit(EXIT_FAILURE);
 }

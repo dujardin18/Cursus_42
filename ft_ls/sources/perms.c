@@ -6,79 +6,45 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:45:17 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/03 14:59:08 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/05 20:07:16 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static char	prm_type(struct stat buf)
+static char		prm_type(struct stat buf)
 {
 	char		ret;
 
-	if ((buf.st_mode & S_IFMT) ==  S_IFDIR)
+	if ((buf.st_mode & S_IFMT) == S_IFDIR)
 		ret = 'd';
-	else if ((buf.st_mode & S_IFMT) ==  S_IFBLK)
+	else if ((buf.st_mode & S_IFMT) == S_IFBLK)
 		ret = 'b';
-	else if ((buf.st_mode & S_IFMT) ==  S_IFCHR)
+	else if ((buf.st_mode & S_IFMT) == S_IFCHR)
 		ret = 'c';
-	else if ((buf.st_mode & S_IFMT) ==  S_IFLNK)
+	else if ((buf.st_mode & S_IFMT) == S_IFLNK)
 		ret = 'l';
-	else if ((buf.st_mode & S_IFMT) ==  S_IFSOCK)
+	else if ((buf.st_mode & S_IFMT) == S_IFSOCK)
 		ret = 's';
-	else if ((buf.st_mode & S_IFMT) ==  S_IFIFO)
+	else if ((buf.st_mode & S_IFMT) == S_IFIFO)
 		ret = 'p';
 	else
 		ret = '-';
 	return (ret);
 }
-/*
-static int	at_srch(char *path)
-{
-	DIR *rep;
-	struct dirent *to_check;
-	char *tmp;
-	char *tmp2;
 
-	rep = NULL;
-	tmp = ft_strdup(path);
-	tmp = ft_strjoin(tmp, "/");
-	if ((rep = opendir(path)))
-	{
-		to_check = readdir(rep);
-		while (to_check)
-		{
-			tmp2 = ft_strdup(tmp);
-			tmp2 = ft_strjoin(tmp2, to_check->d_name);
-			if (listxattr(tmp2, NULL, 0, XATTR_NOFOLLOW) > 0)
-			{
-				free(tmp);
-				free(tmp2);
-				return (1);
-			}
-			to_check = readdir(rep);
-			free(tmp2);
-		}
-		closedir(rep);
-	}
-	free(tmp);
-	return (0);
-}
-*/
-static char prm_attr(char *path) // + struct stat b
+static char		prm_attr(char *path)
 {
 	char		ret;
 
 	if (listxattr(path, NULL, 0, XATTR_NOFOLLOW) > 0)
 		ret = '@';
-	//else if (((b.st_mode & S_IFDIR) || (b.st_mode & S_IFLNK)) && at_srch(path))
-	//	ret = '+';
 	else
 		ret = ' ';
 	return (ret);
 }
 
-char	*lf_perms(char *path, struct stat buffer)
+char			*lf_perms(char *path, struct stat buffer)
 {
 	char		*ret;
 

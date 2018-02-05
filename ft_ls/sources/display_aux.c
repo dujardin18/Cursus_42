@@ -6,16 +6,16 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 15:13:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/03 15:53:44 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/05 19:36:48 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-char	*get_color(char *name, t_params *p, struct stat buf)
+static char	*get_color(char *name, t_params *p, struct stat buf)
 {
-	char *tmp;
-	char *xname;
+	char	*tmp;
+	char	*xname;
 
 	if (ft_strchr(p->options, 'G'))
 	{
@@ -36,10 +36,10 @@ char	*get_color(char *name, t_params *p, struct stat buf)
 	return (ft_strdup(name));
 }
 
-char	*get_lnk(char *xname, struct stat buf, char *path, t_params *p)
+static char	*get_lnk(char *xname, struct stat buf, char *path, t_params *p)
 {
-	char *buf_str;
-	int r;
+	char	*buf_str;
+	int		r;
 
 	if (ft_strchr(p->options, 'l'))
 	{
@@ -58,13 +58,13 @@ char	*get_lnk(char *xname, struct stat buf, char *path, t_params *p)
 	return (xname);
 }
 
-void	display_lf(t_params *p, struct stat buf, char *name, char *path)
+void		display_lf(t_params *p, struct stat buf, char *name, char *path)
 {
-	char *date;
-	char *middle;
-	char *middle_2;
-	char *xname;
-	char *perms;
+	char	*date;
+	char	*middle;
+	char	*middle_2;
+	char	*xname;
+	char	*perms;
 
 	xname = NULL;
 	xname = get_color(name, p, buf);

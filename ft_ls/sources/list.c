@@ -6,13 +6,24 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 13:51:36 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/03 17:40:05 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/05 19:33:14 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-t_path	*ft_add_path(char *new_content, t_path *current)
+static t_path	*first_elem(char *new_content)
+{
+	t_path		*new;
+
+	if (!(new = (t_path *)malloc(sizeof(t_path))))
+		exit(EXIT_FAILURE);
+	new->name = ft_strdup(new_content);
+	new->next = NULL;
+	return (new);
+}
+
+t_path			*ft_add_path(char *new_content, t_path *current)
 {
 	t_path		*tmp;
 	t_path		*new;
@@ -31,21 +42,14 @@ t_path	*ft_add_path(char *new_content, t_path *current)
 			tmp->next = new;
 		}
 		else
-		{
-			if (!(new = (t_path *)malloc(sizeof(t_path))))
-				exit(EXIT_FAILURE);
-			new->name = ft_strdup(new_content);
-			new->next = NULL;
-			current = new;
-		}
+			current = first_elem(new_content);
 	}
-	//free new ?
 	return (current);
 }
 
-t_path	*ft_add_path_rev(char *new_content, t_path *current)
+t_path			*ft_add_path_rev(char *new_content, t_path *current)
 {
-	t_path	*new;
+	t_path		*new;
 
 	if (new_content)
 	{
@@ -58,18 +62,12 @@ t_path	*ft_add_path_rev(char *new_content, t_path *current)
 			current = new;
 		}
 		else
-		{
-			if (!(new = (t_path	*)malloc(sizeof(t_path))))
-				exit(EXIT_FAILURE);
-			new->next = NULL;
-			new->name = ft_strdup(new_content);
-			current = new;
-		}
+			current = first_elem(new_content);
 	}
 	return (current);
 }
 
-t_path	*current_dir()
+t_path			*current_dir(void)
 {
 	t_path		*ret;
 

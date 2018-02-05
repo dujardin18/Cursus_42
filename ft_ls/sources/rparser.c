@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 11:14:41 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/01 17:34:43 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/05 20:16:57 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_rfile		*new_rf_lst(t_rfile *first, char *path, char *name)
 
 static t_rfile		*add_rf_elem(t_rfile *first, char *path, char *name)
 {
-	t_rfile *new;
+	t_rfile			*new;
 
 	if (first)
 	{
@@ -42,8 +42,8 @@ static t_rfile		*add_rf_elem(t_rfile *first, char *path, char *name)
 
 static t_rfile		*add_rf_elem_rev(t_rfile *first, char *path, char *name)
 {
-	t_rfile *new;
-	t_rfile *tmp;
+	t_rfile			*new;
+	t_rfile			*tmp;
 
 	tmp = first;
 	if (first)
@@ -62,12 +62,12 @@ static t_rfile		*add_rf_elem_rev(t_rfile *first, char *path, char *name)
 	return (first);
 }
 
-t_rfile		*new_rfile(char *path, t_params *params)
+t_rfile				*new_rfile(char *path, t_params *params)
 {
-	char **pdir;
-	char *tmp;
-	int i;
-	t_rfile *first;
+	char			**pdir;
+	char			*tmp;
+	int				i;
+	t_rfile			*first;
 
 	first = NULL;
 	i = 0;
