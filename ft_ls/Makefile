@@ -6,7 +6,7 @@
 #    By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/16 17:04:06 by fherbine          #+#    #+#              #
-#    Updated: 2018/02/05 19:53:15 by fherbine         ###   ########.fr        #
+#    Updated: 2018/02/06 16:18:43 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ft_ls
 INCLUDES = includes
 SRC_PATH = sources
 OBJ_PATH = $(SRC_PATH)/debug
-SRC_NAME = main.c ls_errors.c parser.c list.c operations.c perms.c rparser.c rlist.c ls_sort.c display.c ft_ls.c max_free.c display_aux.c get_inf.c max.c
+SRC_NAME = main.c ls_errors.c parser.c list.c operations.c perms.c rparser.c rlist.c ls_sort.c display.c ft_ls.c max_free.c display_aux.c get_inf.c max.c op_aux.c ls_aux.c file_verif.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))

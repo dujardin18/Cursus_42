@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/05 20:15:14 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/06 17:24:37 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ typedef struct			s_rfile
 	struct s_rfile		*next;
 }						t_rfile;
 
-typedef struct 			s_path
+typedef struct			s_path
 {
-	char 				*name;
+	char				*name;
 	struct s_path		*next;
 }						t_path;
 
 typedef struct			s_params
 {
-	char				options[8];
+	char				options[10];
 	t_path				*files;
 	int					max_u;
 	int					max_g;
@@ -67,11 +67,11 @@ t_path					*ft_add_path(char *new_content, t_path *current);
 t_path					*ft_add_path_rev(char *new_content, t_path *current);
 t_path					*current_dir();
 
-int						lf_total(char options[5], char *file, long long ret, int a);
+int						lf_total(char options[10], char *file, \
+		long long ret, int a);
 char					*lf_date(struct stat buf);
 
 char					*lf_perms(char *path, struct stat buffer);
-
 
 char					**sort_pdir(char **tab, t_params *params, char *path);
 char					**new_pdir(char *path);
@@ -87,14 +87,30 @@ char					*lf_middle2(t_params *p, struct stat buf);
 
 t_params				*max_disp(t_params *params, t_rfile *rfile);
 
+void					ft_display_dir(t_rfile *rfile, t_params *params);
+void					ls_r(t_params *params, char *path, char *first);
 void					ft_ls(t_params *params);
 
 void					free_rfile(t_rfile *rfile);
 void					free_tpath(t_path *tpath);
 void					close_tab(char **tab);
+char					*nf_free(char *str);
 
-void					display_lf(t_params *p, struct stat buf,char *name, char *perms);
+void					display_lf(t_params *p, struct stat buf, \
+		char *name, char *perms);
 
 char					*get_user(struct stat buf);
 char					*get_grp(struct stat buf);
+
+long long				tt_aux(struct stat buf, char *name, int *a, int param);
+int						lf_tt_aux(char *path, long long ret, DIR *rep, int *a);
+int						lf_tt_aux2(char *path, long long ret, DIR *rep, int *a);
+
+void					ft_ls_aux(t_params *params, t_path *cp);
+void					ft_ls_aux2(t_path *cp, t_rfile *rfile, t_path *tmp, \
+		t_params *params);
+
+int						file_is_dir(char *path);
+int						file_is_dir2(char *path, t_rfile *rfile);
+int						file_is_lnk(char *path, t_params *params);
 #endif

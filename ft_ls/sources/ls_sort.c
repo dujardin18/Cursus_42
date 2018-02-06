@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:43:06 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/05 20:14:52 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/06 16:53:51 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int		ft_strcmp_t(char *s1, char *s2)
 	return (ret);
 }
 
-void			sort_tab(char **s1, char **s2, char options[5])
+void			sort_tab(char **s1, char **s2, char options[9])
 {
 	if ((ft_strchr(options, 't') && ft_strcmp_t(*s1, *s2) < 0) || \
 			(!ft_strchr(options, 't') && ft_strcmp(*s1, *s2) > 0))
@@ -73,7 +73,7 @@ char			**sort_argvs(int argc, char **argv, t_params *p)
 
 	i = 0;
 	while (i < argc && ((argv[i][0] == '-' && argv[i][1] && \
-					ft_strchr("alrRtG1-", argv[i][1])) || i == 0))
+					ft_strchr("alrRtoG1-", argv[i][1])) || i == 0))
 	{
 		argv[i] = ft_strdup(argv[i]);
 		if (i < argc && argv[i][1] && argv[i][1] == '-')

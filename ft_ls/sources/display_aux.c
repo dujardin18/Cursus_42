@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 15:13:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/05 19:36:48 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/06 17:24:10 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,19 @@ static char	*get_color(char *name, t_params *p, struct stat buf)
 	return (ft_strdup(name));
 }
 
+static char	*get_dir_slsh(t_params *p, char *xname, struct stat buf)
+{
+	if (ft_strchr(p->options, 'p') && (buf.st_mode & S_IFMT) == S_IFDIR)
+		xname = ft_strjoin(xname, "/");
+	return (xname);
+}
+
 static char	*get_lnk(char *xname, struct stat buf, char *path, t_params *p)
 {
 	char	*buf_str;
 	int		r;
 
-	if (ft_strchr(p->options, 'l'))
+	if (ft_strchr(p->options, 'l') || ft_strchr(p->options, 'o'))
 	{
 		buf_str = NULL;
 		if (!(buf_str = malloc(buf.st_size + 1)))
@@ -69,7 +76,8 @@ void		display_lf(t_params *p, struct stat buf, char *name, char *path)
 	xname = NULL;
 	xname = get_color(name, p, buf);
 	xname = get_lnk(xname, buf, path, p);
-	if (ft_strchr(p->options, 'l'))
+	xname = get_dir_slsh(p, xname, buf);
+	if (ft_strchr(p->options, 'l') || ft_strchr(p->options, 'o'))
 	{
 		date = lf_date(buf);
 		middle = lf_middle(p, buf);

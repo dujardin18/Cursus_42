@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 17:45:43 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/05 20:15:54 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/06 16:36:11 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,11 @@ void		close_tab(char **tab)
 		free(tab[i]);
 		i++;
 	}
+}
+
+char		*nf_free(char *str)
+{
+	ft_not_found(str);
+	free(str);
+	return (NULL);
 }

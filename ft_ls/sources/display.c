@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:41:50 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/05 19:55:35 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/06 17:38:50 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ char				*lf_middle2(t_params *p, struct stat buf)
 
 	t = get_grp(buf);
 	n = ft_itoa(buf.st_size);
-	ret = get_grp(buf);
-	ret = make_n_blanks(p->max_g - ft_strlen(t), ret);
-	ret = ft_strjoin(ret, "  ");
+	ret = (!ft_strchr(p->options, 'o')) ? get_grp(buf) : ft_strdup("");
+	ret = (!ft_strchr(p->options, 'o')) ? make_n_blanks(p->max_g - \
+			ft_strlen(t), ret) : ret;
+	ret = (!ft_strchr(p->options, 'o')) ? ft_strjoin(ret, "  ") : ret;
 	ret = make_n_blanks(p->max_s - ft_nlen_10(buf.st_size), ret);
 	ret = ft_strjoin(ret, n);
 	free(t);

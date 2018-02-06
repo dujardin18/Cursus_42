@@ -6,16 +6,16 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 11:25:57 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/03 16:21:06 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/06 16:30:36 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static size_t	pdir_len(char *path)
+static size_t		pdir_len(char *path)
 {
-	DIR *dire;
-	size_t i;
+	DIR				*dire;
+	size_t			i;
 
 	i = 0;
 	if ((dire = opendir(path)))
@@ -27,12 +27,12 @@ static size_t	pdir_len(char *path)
 	return (i);
 }
 
-static int		ft_strcmpt(char *s1, char *s2, char *path)
+static int			ft_strcmpt(char *s1, char *s2, char *path)
 {
-	struct stat buf;
-	char *p1;
-	char *p2;
-	int ret;
+	struct stat		buf;
+	char			*p1;
+	char			*p2;
+	int				ret;
 
 	ret = 0;
 	p1 = ft_strdup(path);
@@ -50,17 +50,7 @@ static int		ft_strcmpt(char *s1, char *s2, char *path)
 	return (ret);
 }
 
-void ft_debug_tab(char **tab)
-{
-	int i = 0, i2 = 0;
-	while (tab[i])
-	{
-		ft_prints("%s ", tab[i]);
-		i++;
-	}
-	ft_putendl("");
-}
-void	get_swap(char **s1, char **s2, char options[5], char *path)
+void				get_swap(char **s1, char **s2, char options[5], char *path)
 {
 	if ((ft_strchr(options, 't') && ft_strcmpt(*s1, *s2, path) > 0) || \
 			(!ft_strchr(options, 't') && ft_strcmp(*s1, *s2) < 0))
@@ -70,10 +60,10 @@ void	get_swap(char **s1, char **s2, char options[5], char *path)
 		swap_tab(s1, s2);
 }
 
-char	**sort_pdir(char **tab, t_params *params, char *path)
+char				**sort_pdir(char **tab, t_params *params, char *path)
 {
-	int i;
-	int i2;
+	int				i;
+	int				i2;
 
 	i = 0;
 	if (!tab)
@@ -91,12 +81,12 @@ char	**sort_pdir(char **tab, t_params *params, char *path)
 	return (tab);
 }
 
-char	**new_pdir(char *path)
+char				**new_pdir(char *path)
 {
-	char **pdir;
-	DIR *dire;
-	struct dirent *new;
-	int i;
+	char			**pdir;
+	DIR				*dire;
+	struct dirent	*new;
+	int				i;
 
 	i = 0;
 	pdir = NULL;

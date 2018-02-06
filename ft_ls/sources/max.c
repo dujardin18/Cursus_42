@@ -6,16 +6,17 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 19:46:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/05 20:05:18 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/06 17:04:40 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static void			lfm_aux(t_rfile *cp, int param, struct stat buf, int *max)
+static void			lfm_aux(t_rfile *cp, int param, int *max)
 {
 	char			*t;
 	int				tmp;
+	struct stat		buf;
 
 	lstat(cp->path, &buf);
 	if (param == 0)
@@ -42,7 +43,6 @@ static int			looking_for_max(t_rfile *rfile, int param, t_params *p)
 {
 	t_rfile			*cp;
 	int				max;
-	struct stat		buf;
 
 	cp = rfile;
 	max = 0;
@@ -50,7 +50,7 @@ static int			looking_for_max(t_rfile *rfile, int param, t_params *p)
 	{
 		if ((cp->name[0] == '.' && ft_strchr(p->options, 'a')) || \
 				cp->name[0] != '.')
-			lfm_aux(cp, param, buf, &max);
+			lfm_aux(cp, param, &max);
 		cp = cp->next;
 	}
 	return (max);
@@ -65,7 +65,7 @@ t_params			*max_disp(t_params *params, t_rfile *rfile)
 	params->max_g = 0;
 	params->max_l = 0;
 	params->max_s = 0;
-	if (ft_strchr(params->options, 'l'))
+	if (ft_strchr(params->options, 'l') || ft_strchr(params->options, 'o'))
 	{
 		params->max_u = looking_for_max(cp, 0, params);
 		params->max_g = looking_for_max(cp, 1, params);
