@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:27:49 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/06 17:33:45 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/08 12:43:58 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ void		ls_r(t_params *p, char *path, char *first)
 	while (new)
 	{
 		if (ft_strcmp(new->name, ".") != 0 && ft_strcmp(new->name, "..") != 0)
-		{
-			if (ft_strchr(p->options, 'a') || new->name[0] != '.')
+			if (ft_strchr(p->options, 'a') || ft_strchr(p->options, 'A') || \
+					new->name[0] != '.' || ft_strchr(p->options, 'f'))
 				ls_r(p, new->path, first);
-		}
 		new = new->next;
 	}
 	free_rfile(tmp);

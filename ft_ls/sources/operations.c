@@ -6,22 +6,25 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:36:46 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/06 17:24:57 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/08 12:10:00 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-int				lf_total(char options[10], char *file, long long ret, int a)
+int				lf_total(char options[12], char *file, long long ret, int a)
 {
 	DIR			*rep;
 	char		*path;
 
 	path = ft_strdup(file);
-	path = ft_strjoin(path, "/");
 	rep = NULL;
 	if (!(rep = opendir(file)))
+	{
+		free(path);
 		return (0);
+	}
+	path = ft_strjoin(path, "/");
 	if (rep)
 	{
 		if (ft_strchr(options, 'a'))

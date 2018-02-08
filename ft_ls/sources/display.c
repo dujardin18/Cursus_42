@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 16:41:50 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/06 17:38:50 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/08 12:43:40 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void				display_lf_aux(char *path, char *name, t_params *p)
 	struct stat		buf;
 
 	lstat(path, &buf);
-	if (name[0] != '.' || ft_strchr(p->options, 'a'))
+	if (name[0] != '.' || (ft_strchr(p->options, 'A') && \
+				ft_strcmp(name, ".") && ft_strcmp(name, "..")) || \
+			ft_strchr(p->options, 'a') || ft_strchr(p->options, 'f'))
 		display_lf(p, buf, name, path);
 }

@@ -16,11 +16,14 @@ int main(int argc, char **argv)
 	ssize_t tst;
 	ssize_t tst2;
 	time_t tmp = time(NULL);
+	char *ln;
 
 	if(stat(argv[1],&buf) < 0)    
 		        return 1;
 	if(lstat(argv[1],&buf2) < 0)    
 		        return 1;
+	if (!(ln = (char *)malloc(buf2.st_size + 1)))
+		return (0);
 
 	printf("Information for %s\n",argv[1]);
 	printf("---------------------------\n");
@@ -46,6 +49,7 @@ int main(int argc, char **argv)
 	printf("\nlast modified = %s", ctime(&(buf.st_mtimespec.tv_sec)));
 	printf("\nUser : %s", getpwuid(buf.st_uid)->pw_name);
 	printf("\ngroup : %s", getgrgid(buf.st_gid)->gr_name);
+	printf("\nlink to : .%s.", ln);
 	printf("\nopti : %d %d", buf.st_blocks, buf2.st_blocks);
 	tst = listxattr(argv[1], NULL, 0, XATTR_NOFOLLOW);
 	tst2 = getxattr(argv[1], NULL, NULL, 0, 0, XATTR_NOFOLLOW);

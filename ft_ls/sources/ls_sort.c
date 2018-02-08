@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 15:43:06 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/06 16:53:51 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/07 19:04:02 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char			**sort_argvs(int argc, char **argv, t_params *p)
 
 	i = 0;
 	while (i < argc && ((argv[i][0] == '-' && argv[i][1] && \
-					ft_strchr("alrRtoG1-", argv[i][1])) || i == 0))
+					ft_strchr("ApfalrRtoG1-", argv[i][1])) || i == 0))
 	{
 		argv[i] = ft_strdup(argv[i]);
 		if (i < argc && argv[i][1] && argv[i][1] == '-')
@@ -89,6 +89,6 @@ char			**sort_argvs(int argc, char **argv, t_params *p)
 		argv[i2] = ft_strdup(argv[i2]);
 		i2++;
 	}
-	argv = sav_aux(argc, argv, p, i);
+	argv = (ft_strchr(p->options, 'f')) ? argv : sav_aux(argc, argv, p, i);
 	return (argv);
 }

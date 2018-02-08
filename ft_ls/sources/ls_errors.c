@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 16:33:07 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/06 17:25:27 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/07 19:18:39 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void			ft_not_found(char *elem)
 {
-	ft_prints_fd(2, "./ft_ls: %s: No such file or directory\n", elem);
+	ft_prints_fd(2, "ft_ls: %s: No such file or directory\n", elem);
 }
 
 static char		*get_name_from_path(char *path, char *name)
@@ -52,7 +52,7 @@ void			ft_permission_denied(char *path)
 		if ((buf.st_mode & S_IFMT) == S_IFDIR)
 		{
 			name = get_name_from_path(path, name);
-			ft_prints_fd(2, "./ft_ls: %s: Permission denied\n", name);
+			ft_prints_fd(2, "ft_ls: %s: Permission denied\n", name);
 			free(name);
 		}
 	}
@@ -66,7 +66,7 @@ void			ft_check_path(int argc, char **argv)
 
 	i = 1;
 	while (argv[i] && argv[i][0] == '-' && argv[i][1] && \
-			ft_strchr("-alrRot1Gp", argv[i][1]))
+			ft_strchr("-alrRfot1AGp", argv[i][1]))
 		i++;
 	while (i < argc)
 	{
@@ -87,7 +87,7 @@ void			ft_check_path(int argc, char **argv)
 
 void			ft_illegal_optn(char i_optn)
 {
-	ft_prints_fd(2, "./ft_ls: illegal option -- %c\n", i_optn);
-	ft_prints_fd(2, "usage: ft_ls [-GRaloprt1] [file ...]\n");
+	ft_prints_fd(2, "ft_ls: illegal option -- %c\n", i_optn);
+	ft_prints_fd(2, "usage: ft_ls [-AGRafloprt1] [file ...]\n");
 	exit(EXIT_FAILURE);
 }

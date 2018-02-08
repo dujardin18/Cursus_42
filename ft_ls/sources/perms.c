@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 15:45:17 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/05 20:07:16 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/08 12:29:50 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,36 @@ static char		prm_attr(char *path)
 	return (ret);
 }
 
+static char		ft_sticky(struct stat buf, int param)
+{
+	if (param == 0 && !(buf.st_mode & S_IXUSR) && (buf.st_mode & S_ISUID))
+		return ('S');
+	else if (param == 0 && (buf.st_mode & S_IXUSR) && (buf.st_mode & S_ISUID))
+		return ('s');
+	else if (param == 1 && (buf.st_mode & S_IXGRP) && (buf.st_mode & S_ISGID))
+		return ('s');
+	else if (param == 1 && !(buf.st_mode & S_IXGRP) && (buf.st_mode & S_ISGID))
+		return ('S');
+	else if (param == 0 && (buf.st_mode & S_IXUSR))
+		return ('x');
+	else if (param == 1 && (buf.st_mode & S_IXGRP))
+		return ('x');
+	else
+		return ('-');
+}
+
+static char		ft_sticky2(struct stat buf)
+{
+	if (!(buf.st_mode & S_IXOTH) && (buf.st_mode & S_ISVTX))
+		return ('T');
+	else if ((buf.st_mode & S_IXOTH) && (buf.st_mode & S_ISVTX))
+		return ('t');
+	else if ((buf.st_mode & S_IXOTH))
+		return ('x');
+	else
+		return ('-');
+}
+
 char			*lf_perms(char *path, struct stat buffer)
 {
 	char		*ret;
@@ -53,13 +83,13 @@ char			*lf_perms(char *path, struct stat buffer)
 	ret[0] = prm_type(buffer);
 	ret[1] = (buffer.st_mode & S_IRUSR) ? 'r' : '-';
 	ret[2] = (buffer.st_mode & S_IWUSR) ? 'w' : '-';
-	ret[3] = (buffer.st_mode & S_IXUSR) ? 'x' : '-';
+	ret[3] = ft_sticky(buffer, 0);
 	ret[4] = (buffer.st_mode & S_IRGRP) ? 'r' : '-';
 	ret[5] = (buffer.st_mode & S_IWGRP) ? 'w' : '-';
-	ret[6] = (buffer.st_mode & S_IXGRP) ? 'x' : '-';
+	ret[6] = ft_sticky(buffer, 1);
 	ret[7] = (buffer.st_mode & S_IROTH) ? 'r' : '-';
 	ret[8] = (buffer.st_mode & S_IWOTH) ? 'w' : '-';
-	ret[9] = (buffer.st_mode & S_IXOTH) ? 'x' : '-';
+	ret[9] = ft_sticky2(buffer);
 	ret[10] = prm_attr(path);
 	ret[11] = '\0';
 	ret[12] = '\0';

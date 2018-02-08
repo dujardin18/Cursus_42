@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/06 17:24:37 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/07 18:59:17 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct			s_path
 
 typedef struct			s_params
 {
-	char				options[10];
+	char				options[12];
 	t_path				*files;
 	int					max_u;
 	int					max_g;
@@ -67,7 +67,7 @@ t_path					*ft_add_path(char *new_content, t_path *current);
 t_path					*ft_add_path_rev(char *new_content, t_path *current);
 t_path					*current_dir();
 
-int						lf_total(char options[10], char *file, \
+int						lf_total(char options[12], char *file, \
 		long long ret, int a);
 char					*lf_date(struct stat buf);
 

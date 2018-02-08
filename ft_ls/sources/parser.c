@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 17:13:14 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/06 17:26:10 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/07 18:50:20 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		ft_flags_checker(int argc, char **argv)
 				return (1);
 			while (argv[i][i2])
 			{
-				if (!ft_strchr("1alrpoRtG", argv[i][i2]))
+				if (!ft_strchr("1alrAfpoRtG", argv[i][i2]))
 					ft_illegal_optn(argv[i][i2]);
 				i2++;
 			}
@@ -63,7 +63,7 @@ static t_params	*pp_aux(int *i, int argc, char **argv, t_params *params)
 	while (*i < argc && argv[*i][0] == '-')
 	{
 		if ((argv[*i][1] == '-' && !argv[*i][2]) || !argv[*i][1] || \
-				!ft_strchr("alorRptG1", argv[*i][1]))
+				!ft_strchr("alAorRfptG1", argv[*i][1]))
 		{
 			(*i) += (argv[*i][1] == '-') ? 1 : 0;
 			break ;

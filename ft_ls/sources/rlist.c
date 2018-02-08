@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 11:25:57 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/06 16:30:36 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/07 19:05:23 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,18 @@ char				**sort_pdir(char **tab, t_params *params, char *path)
 	i = 0;
 	if (!tab)
 		return (NULL);
-	while (tab[i])
+	if (!ft_strchr(params->options, 'f'))
 	{
-		i2 = 0;
-		while (tab[i2] && i != i2)
+		while (tab[i])
 		{
-			get_swap(&(tab[i]), &(tab[i2]), params->options, path);
-			i2++;
+			i2 = 0;
+			while (tab[i2] && i != i2)
+			{
+				get_swap(&(tab[i]), &(tab[i2]), params->options, path);
+				i2++;
+			}
+			i++;
 		}
-		i++;
 	}
 	return (tab);
 }
