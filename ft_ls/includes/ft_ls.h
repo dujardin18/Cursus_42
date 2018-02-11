@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 17:11:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/07 18:59:17 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/11 18:16:36 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void					ft_ls_aux2(t_path *cp, t_rfile *rfile, t_path *tmp, \
 		t_params *params);
 
 int						file_is_dir(char *path);
-int						file_is_dir2(char *path, t_rfile *rfile);
+int						file_is_dir2(char *path, t_params *p);
 int						file_is_lnk(char *path, t_params *params);
+int						file_is_olnk(char *path, t_params *p);
 #endif

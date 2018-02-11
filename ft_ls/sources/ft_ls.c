@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 18:27:49 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/08 12:43:58 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/11 18:16:32 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void		ls_r(t_params *p, char *path, char *first)
 	t_rfile	*new;
 	t_rfile	*tmp;
 
+	if (ft_strcmp(path, first) != 0 && file_is_dir2(path, p))
+		ft_prints("\n%s:\n", path);
 	new = new_rfile(path, p);
 	tmp = new;
-	if (ft_strcmp(path, first) != 0 && file_is_dir2(path, new))
-		ft_prints("\n%s:\n", path);
 	if (new == NULL)
 		return ;
 	if (ft_strchr(p->options, 'l') || ft_strchr(p->options, 'o'))

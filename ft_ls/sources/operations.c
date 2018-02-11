@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/22 15:36:46 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/08 12:10:00 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/11 18:07:41 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char			*date_aux(long long tmp, time_t time_to_add, \
 	i = 20;
 	ret = lf_month_day(ret, time_to_add, &tim_ct);
 	ret[7] = ' ';
-	if (tmp - 6 > current || tmp + 6 < current)
+	if (tmp - 5 > current || tmp + 5 < current)
 	{
 		while (tim_ct[i] > '9' || tim_ct[i] < '0')
 		{

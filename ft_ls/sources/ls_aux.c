@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 16:06:48 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/08 12:43:43 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/11 18:19:25 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void		ft_ls_aux(t_params *params, t_path *cp)
 	c = 0;
 	while (cp)
 	{
-		if (!file_is_dir(cp->name) || file_is_lnk(cp->name, params))
+		if (!file_is_dir(cp->name) || file_is_lnk(cp->name, params) || \
+				file_is_olnk(cp->name, params))
 		{
 			params->max_u = 0;
 			params->max_g = 0;
@@ -58,19 +59,21 @@ void		ft_ls_aux2(t_path *cp, t_rfile *rfile, t_path *tmp, \
 {
 	while (cp)
 	{
-		if (params->multi && params->first && file_is_dir2(cp->name, \
-					new_rfile(cp->name, params)))
-			ft_prints("\n%s:\n", cp->name);
-		else if (params->multi && file_is_dir2(cp->name, \
-					new_rfile(cp->name, params)))
+		if (!file_is_olnk(cp->name, params))
 		{
-			ft_prints("%s:\n", cp->name);
-			params->first = 1;
+			if (params->multi && params->first && file_is_dir2(cp->name, \
+						params))
+				ft_prints("\n%s:\n", cp->name);
+			else if (params->multi && file_is_dir2(cp->name, params))
+			{
+				ft_prints("%s:\n", cp->name);
+				params->first = 1;
+			}
+			if (ft_strchr(params->options, 'R'))
+				ls_r(params, cp->name, cp->name);
+			else
+				params = ft_ls_aux3(rfile, cp, params);
 		}
-		if (ft_strchr(params->options, 'R'))
-			ls_r(params, cp->name, cp->name);
-		else
-			params = ft_ls_aux3(rfile, cp, params);
 		cp = cp->next;
 	}
 	free_tpath(tmp);
