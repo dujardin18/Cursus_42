@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ftsh_getuser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/13 16:34:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/15 20:19:56 by fherbine         ###   ########.fr       */
+/*   Created: 2018/02/14 13:52:14 by fherbine          #+#    #+#             */
+/*   Updated: 2018/02/14 20:08:45 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../libft.h"
 
-int		main(int argc, char **argv, char **envp)
+char	*ftsh_getuser(char **envp)
 {
-	int	end;
-
-	end = 0;
-	if (argc == 1)
-		prompt_get_cmd_line(envp);
-	else
-		ms_too_much_params(argc, argv);
-	return (0);
+	return (ftsh_search_envar(envp, "USER"));
 }

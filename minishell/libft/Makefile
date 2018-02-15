@@ -6,10 +6,11 @@
 #    By: fherbine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 17:03:11 by fherbine          #+#    #+#              #
-#    Updated: 2018/01/19 17:39:25 by fherbine         ###   ########.fr        #
+#    Updated: 2018/02/14 15:45:48 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+LSH_PTH = shell_lib
 SRCS = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
 	   ft_strncat.c ft_strlcat.c ft_strchr.c ft_strrchr.c \
 	   ft_strstr.c ft_strnstr.c ft_strcmp.c ft_strncmp.c \
@@ -24,7 +25,9 @@ SRCS = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
 	   ft_putnbr_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c \
 	   ft_lstiter.c ft_lstmap.c ft_swap.c ft_str_is_printable.c \
 	   ft_putnbr_base.c get_next_line.c ft_absol.c ft_nlen_base.c ft_nlen.c \
-	   ft_itoa_base.c ft_prints.c ft_specifier_prints.c ft_put_n_char.c
+	   ft_itoa_base.c ft_prints.c ft_specifier_prints.c ft_put_n_char.c \
+	   $(LSH_PTH)/ftsh_getuser.c $(LSH_PTH)/ftsh_search_envar.c \
+	   $(LSH_PTH)/ftsh_cwdgit.c $(LSH_PTH)/ftsh_get_np.c
 NAME = libft.a
 INCLUDE = libft.h
 FLAGS = -Wall -Wextra -Werror

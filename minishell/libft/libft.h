@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/16 16:54:00 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/15 20:46:38 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # include <sys/uio.h>
 # include <fcntl.h>
 # include <stdarg.h>
+# include <dirent.h>
 
-# define BUFF_SIZE 1024
+# define BUFF_SIZE 32
 
 typedef	struct		s_list
 {
@@ -188,4 +189,12 @@ char				*ft_s(char *str2, char *str);
 char				*ft_c(int c, char *str);
 
 void				ft_put_n_char(int n, int c);
+
+char				*ftsh_getuser(char **envp);
+
+char				*ftsh_search_envar(char **envp, char *name);
+
+int					ftsh_cwdgit(char *p_cwd);
+
+char				*ftsh_get_np(char *path);
 #endif

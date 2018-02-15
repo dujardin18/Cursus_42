@@ -1,44 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ms_out_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/13 16:35:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/15 20:47:51 by fherbine         ###   ########.fr       */
+/*   Created: 2018/02/14 13:32:43 by fherbine          #+#    #+#             */
+/*   Updated: 2018/02/15 20:27:12 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-/*
-int			launch_cmd(int argc, char **argv, char **envp)
-{
-}
-*/
-void		exec_cmd_line(void)
-{
-	t_commands	*cmds;
-	char		*ln;
-	int			n;
 
-	n = get_next_line(0, &ln);
-	if (n > 0)
-	{
-		cmds = get_all_cmds(ln);
-		free(ln);
-	}
-}
-
-void		prompt_get_cmd_line(char **envp)
+void	ms_too_much_params(int argc, char **argv)
 {
-	char	*prompt;
-
-	while (1)
-	{
-		prompt = ms_get_prompt(envp);
-		ft_prints("%s $ ", prompt);
-		exec_cmd_line();
-		free(prompt);
-	}
+	ft_prints_fd(2, "%s: Too much params, %d params, while 0 needed.\n", \
+			argv[0], argc - 1);
+	exit(EXIT_FAILURE);
 }

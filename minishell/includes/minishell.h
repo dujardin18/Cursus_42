@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:30:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/13 19:58:48 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/15 20:24:31 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,10 @@ t_commands		*get_all_cmds(char *all_cmd);
 t_commands		*cmd_getargs(t_commands *elem);
 
 void			free_cmds(t_commands *cmds);
+
+void			ms_too_much_params(int argc, char **argv);
+
+char			*ms_get_prompt(char **envp);
+
+void			prompt_get_cmd_line(char **envp);
 #endif

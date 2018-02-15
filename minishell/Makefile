@@ -6,7 +6,7 @@
 #    By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/13 16:28:57 by fherbine          #+#    #+#              #
-#    Updated: 2018/02/13 20:00:24 by fherbine         ###   ########.fr        #
+#    Updated: 2018/02/15 20:28:09 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 INCLUDES = includes
 SRC_PATH = sources
 OBJ_PATH = $(SRC_PATH)/debug
-SRC_NAME = main.c max_free.c minishell.c cmd_utils.c cmd_list.c
+SRC_NAME = main.c max_free.c minishell.c cmd_utils.c cmd_list.c ms_out_errors.c parser.c prmpt.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 	SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 	OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
@@ -28,7 +28,7 @@ all: $(NAME)
 
 $(OBJ_PATH):
 	@clear
-	@figlet -c -f roman "Minishell" | lolcat
+	@figlet -c -f basic "Minishell" | lolcat
 	@mkdir $@
 	@echo "\t\t\t>>> \033[1mCOMPILING MINISHELL\033[0m <<<\n"
 	@echo ">>> Making minishell : \033[0;33;40m[\c"

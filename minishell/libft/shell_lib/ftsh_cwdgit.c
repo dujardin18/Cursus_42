@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ftsh_cwdgit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/13 16:34:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/15 20:19:56 by fherbine         ###   ########.fr       */
+/*   Created: 2018/02/14 15:17:06 by fherbine          #+#    #+#             */
+/*   Updated: 2018/02/14 16:39:55 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../libft.h"
 
-int		main(int argc, char **argv, char **envp)
+int			ftsh_cwdgit(char *p_cwd)
 {
-	int	end;
+	DIR				*dir;
+	struct dirent	*new;
 
-	end = 0;
-	if (argc == 1)
-		prompt_get_cmd_line(envp);
-	else
-		ms_too_much_params(argc, argv);
+	dir = NULL;
+	new = NULL;
+	if ((dir = opendir(p_cwd)))
+	{
+		if (!(new = readdir(dir)))
+			return (0);
+		while (new && new->d_name[0] == '.')
+		{
+			if (ft_strcmp(new->d_name, ".git") == 0)
+				return (1);
+			new = readdir(dir);
+		}
+	}
 	return (0);
 }
