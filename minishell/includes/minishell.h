@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:30:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/15 20:24:31 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:02:19 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 # include <sys/wait.h>
 
 # define DEBUG 0
+
+# define DEFAULT "\033[0m"
+# define RED "\033[0;31;40m"
+# define GREEN "\033[0;32;40m"
+# define YELLOW "\033[0;33;40m"
+# define BLUE "\033[0;34;40m"
+# define MAGENTA "\033[0;35;40m"
+# define CYAN "\033[0;36;40m"
+# define WHITE "\033[0;37;40m"
 
 typedef struct	s_cm
 {
