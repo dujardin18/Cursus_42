@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 18:25:05 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/15 20:26:34 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:38:28 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static size_t		cmd_len(char *cmd)
 	return (i);
 }
 
-size_t				cmd_add_cmd(char *all_cmd, t_commands *first)
+size_t				cmd_add_cmd(char *all_cmd, t_commands **first)
 {
 	size_t			i;
 	size_t			c_len;
@@ -71,7 +71,7 @@ size_t				cmd_add_cmd(char *all_cmd, t_commands *first)
 		i++;
 	}
 	tmp[i] = '\0';
-	first = cmd_add_elem(first, tmp);
+	*first = cmd_add_elem(*first, tmp);
 	free(tmp);
 	return (i);
 }

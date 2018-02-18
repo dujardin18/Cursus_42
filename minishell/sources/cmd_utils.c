@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:43:48 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/15 20:38:58 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/18 18:06:26 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_commands		*get_all_cmds(char *all_cmd)
 	{
 		while (all_cmd[i] && (all_cmd[i] == ' ' || all_cmd[i] == ';' || all_cmd[i] == '\t'))
 			i++;
-		i += cmd_add_cmd(&(all_cmd[i]), first);
+		i += cmd_add_cmd(&(all_cmd[i]), &first);
 		i += (all_cmd[i] == ';') ? 1 : 0;
 	}
 	return (first);
@@ -40,8 +40,10 @@ static int	cmd_getargc(t_commands *elem)
 	{
 		while ((elem->cmd)[i] && ((elem->cmd)[i] == ' ' || (elem->cmd)[i] == '\t'))
 			i++;
-		if (!(elem->cmd)[i])
+		if ((elem->cmd)[i])
 			argc++;
+		while ((elem->cmd)[i] && elem->cmd[i] != ' ' && elem->cmd[i] != '\t')
+			i++;
 		i++;
 	}
 	return (argc);	
@@ -68,7 +70,7 @@ static char	**cmd_getargv(t_commands *elem)
 	i2 = 0;
 	if (!(argv = (char **)malloc(sizeof(char *) * (elem->argc + 2))))
 		exit(EXIT_FAILURE);
-	while (i < elem->argc)
+	while (i2 < elem->argc)
 	{
 		i3 = 0;
 		while (elem->cmd[i] && (elem->cmd[i] == ' ' || elem->cmd[i] == '\t'))
