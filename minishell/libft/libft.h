@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/18 16:55:09 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:07:25 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,8 @@ char				*ft_s(char *str2, char *str);
 char				*ft_c(int c, char *str);
 
 void				ft_put_n_char(int n, int c);
+
+char				*ft_append_slash(char *path);
 
 char				*ftsh_getuser(char **envp);
 
