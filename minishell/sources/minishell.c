@@ -6,16 +6,43 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:35:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/18 18:56:36 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/19 15:35:22 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-/*
-int			launch_cmd(int argc, char **argv, char **envp)
+
+void		launch_cmd(int argc, char **argv, char **envp)
 {
+	if (cmd_is_builtin(argv[0]))
+	else
 }
-*/
+
+int			exec_cmd(int argc, char **argv, char **envp)
+{
+	pid_t	father;
+
+	father = fork;
+	if (fork == 0)
+		launch_cmd();
+	else
+	{
+		wait(&father);
+	}
+}
+
+void			exec_all_cmds(t_commands *cmds, char **envp)
+{
+	t_commands	*cp;
+
+	cp = cmds;
+	while (cp)
+	{
+		exec_cmd(cp->argc, cp->argv, envp);
+		cp = cp->next;
+	}
+}
+
 void		exec_cmd_line(void)
 {
 	t_commands	*cmds;
@@ -38,7 +65,7 @@ void		prompt_get_cmd_line(char **envp)
 	while (1)
 	{
 		prompt = ms_get_prompt(envp);
-		ft_prints("%s $ ", prompt);
+		ft_prints("%s $> ", prompt);
 		exec_cmd_line();
 		free(prompt);
 	}

@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:30:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/18 17:41:52 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/19 15:33:15 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ void			ms_too_much_params(int argc, char **argv);
 char			*ms_get_prompt(char **envp);
 
 void			prompt_get_cmd_line(char **envp);
+
+int				cmd_is_builtin(char *cmd);
+
+void			command_unknown(char *unknown);
 
 #endif
