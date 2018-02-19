@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 16:34:10 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/18 16:53:49 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/19 18:21:41 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_envlist			*get_envlist(char **envp, char *name)
 
 	ret = NULL;
 	i = 0;
-	value = ftsh_search_envar();
+	value = ftsh_search_envar(envp, name);
 	while (value[i])
 	{
 		tmp = take_only_value(&(value[i]));
