@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:30:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/19 15:33:15 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:56:35 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../libft/libft.h"
 # include <sys/wait.h>
 
-# define DEBUG 1
+# define DEBUG 0
 
 # define DEFAULT "\033[0m"
 # define RED "\033[0;31;40m"
@@ -55,7 +55,13 @@ char			*ms_get_prompt(char **envp);
 void			prompt_get_cmd_line(char **envp);
 
 int				cmd_is_builtin(char *cmd);
+void			launch_builtin(int argc, char **argv, char **envp);
+void			launch_other(int argc, char **argv, char **envp);
 
 void			command_unknown(char *unknown);
+
+void			bi_env(char **envp);
+
+void			bi_exit(void);
 
 #endif
