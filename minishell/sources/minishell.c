@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:35:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/19 18:27:21 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:08:15 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 void		launch_cmd(int argc, char **argv, char **envp)
 {
+	pid_t	father;
+
 	if (cmd_is_builtin(argv[0]))
 		launch_builtin(argc, argv, envp);
 	else
-		launch_other(argc, argv, envp);
+	{
+		father = fork();
+		if (father == 0)
+			launch_other(argc, argv, envp);
+		if (father > 0)
+			wait(&father);
+	}
 }
 
+/*
 void		exec_cmd(int argc, char **argv, char **envp)
 {
-	pid_t	father;
 
-	father = fork();
-	if (father == 0)
-		launch_cmd(argc, argv, envp);
-	if (father > 0)
-		wait(&father);
 }
+*/
 
 void			exec_all_cmds(t_commands *cmds, char **envp)
 {
@@ -38,7 +42,7 @@ void			exec_all_cmds(t_commands *cmds, char **envp)
 	cp = cmds;
 	while (cp)
 	{
-		exec_cmd(cp->argc, cp->argv, envp);
+		launch_cmd(cp->argc, cp->argv, envp);
 		cp = cp->next;
 	}
 }
