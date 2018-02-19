@@ -6,11 +6,22 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 16:15:47 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/15 20:35:40 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:44:25 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static char	*add_color_to_elem(char *elem, char *color)
+{
+	char	*cp;
+
+	cp = ft_strdup(color);
+	cp = ft_strjoin(cp, elem);
+	cp = ft_strjoin(cp, DEFAULT);
+	free(elem);
+	return (cp);
+}
 
 char		*ms_get_prompt(char **envp)
 {
@@ -22,8 +33,11 @@ char		*ms_get_prompt(char **envp)
 
 	getcwd(buf, 1024);
 	n_cwd = ftsh_get_np(buf);
+	n_cwd = add_color_to_elem(n_cwd, GREEN);
 	git = (ftsh_cwdgit(buf) == 1) ? ft_strdup("git") : ft_strdup("");
+//	git = add_color_to_elem(git, RED); /// err 
 	user = ftsh_getuser(envp);
+	user = add_color_to_elem(user, YELLOW);
 	prmpt = ft_strdup("$ ");
 	prmpt = ft_strjoin(prmpt, user);
 	prmpt = ft_strjoin(prmpt, " # ");

@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:43:48 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/18 18:06:26 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:33:33 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static char	**cmd_getargv(t_commands *elem)
 		i3 = 0;
 		while (elem->cmd[i] && (elem->cmd[i] == ' ' || elem->cmd[i] == '\t'))
 			i++;
-		if (!(argv[i2] = (char *)malloc(sizeof(char) * c_len_spec(&(elem->cmd[i])))))
+		if (!(argv[i2] = (char *)ft_memalloc(sizeof(char) * c_len_spec(&(elem->cmd[i])))))
 			exit(EXIT_FAILURE);
 		while (elem->cmd[i] && elem->cmd[i] != ' ' && elem->cmd[i] != '\t')
 		{
