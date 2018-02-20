@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/20 16:49:31 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/20 19:08:00 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,7 @@ t_envlist			*get_envlist(char **envp, char *name);
 void				free_envlist(t_envlist *lst);
 
 int					ft_is_in_dir(char *name, char *path);
+
+int					ftsh_ispath(char *path);
 
 #endif
