@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:30:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/20 16:02:38 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/20 18:59:22 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ void			prompt_get_cmd_line(char **envp);
 
 int				cmd_is_builtin(char *cmd);
 void			launch_builtin(int argc, char **argv, char **envp);
-void			launch_other(int argc, char **argv, char **envp);
+void			launch_other(t_envlist *paths, char **argv, char **envp);
+t_envlist		*new_envpath(char **envp);
+int				bin_path(char *name, t_envlist *path);
 
 void			command_unknown(char *unknown);
 

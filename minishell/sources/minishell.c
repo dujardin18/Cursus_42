@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:35:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/19 19:37:50 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/20 18:56:03 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,25 @@
 void		launch_cmd(int argc, char **argv, char **envp)
 {
 	pid_t	father;
+	t_envlist	*paths;
 
 	if (cmd_is_builtin(argv[0]))
 		launch_builtin(argc, argv, envp);
 	else
 	{
-		father = fork();
-		if (father == 0)
-			launch_other(argc, argv, envp);
-		if (father > 0)
-			wait(&father);
+		paths = new_envpath(envp);
+		if (bin_path(argv[0], paths))
+		{
+			father = fork();
+			if (father == 0)
+				launch_other(paths, argv, envp);
+			if (father > 0)
+				wait(&father);
+		}
+		if (paths)
+			free_envlist(paths);
 	}
 }
-
-/*
-void		exec_cmd(int argc, char **argv, char **envp)
-{
-
-}
-*/
 
 void			exec_all_cmds(t_commands *cmds, char **envp)
 {

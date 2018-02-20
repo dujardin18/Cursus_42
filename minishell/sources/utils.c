@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:25:23 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/19 16:57:01 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/20 18:56:17 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,46 @@ void	launch_builtin(int argc, char **argv, char **envp)
 		bi_exit();
 }
 
-void			launch_other(int argc, char **argv, char **envp)
+void			launch_other(t_envlist *paths, char **argv, char **envp)
 {
-	t_envlist	*paths;
 	t_envlist	*cp;
-	char		*tmp;
-	int			succeed;
 
-	paths = get_envlist(envp, "PATH");
 	cp = paths;
 	while (cp)
 	{
-		tmp = ft_strdup(cp->value);
-		tmp = ft_append_slash(tmp);
-		tmp = ft_strjoin(tmp, argv[0]);
-		succeed = execve(tmp, argv, envp); // arret >> leaks !
-		free(tmp);
+		if (ft_is_in_dir(argv[0], cp->value))
+			break ;
 		cp = cp->next;
 	}
-	free_envlist(paths);
+	cp->value = ft_strjoin(cp->value, argv[0]);
+	execve(cp->value, argv, envp);
+}
+
+t_envlist		*new_envpath(char **envp)
+{
+	t_envlist	*new;
+	t_envlist	*cp;
+
+	new = get_envlist(envp, "PATH");
+	cp = new;
+	while (cp)
+	{
+		cp->value = ft_append_slash(cp->value);
+		cp = cp->next;
+	}
+	return (new);
+}
+
+int				bin_path(char *name, t_envlist *path)
+{
+	t_envlist	*cp;
+
+	cp = path;
+	while (cp)
+	{
+		if (ft_is_in_dir(name, cp->value) == 1)
+			return (1);
+		cp = cp->next;
+	}
+	return (0);
 }
