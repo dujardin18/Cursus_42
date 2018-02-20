@@ -6,7 +6,7 @@
 #    By: fherbine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 17:03:11 by fherbine          #+#    #+#              #
-#    Updated: 2018/02/19 18:22:23 by fherbine         ###   ########.fr        #
+#    Updated: 2018/02/20 16:49:06 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRCS = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
 	   ft_itoa_base.c ft_prints.c ft_specifier_prints.c ft_put_n_char.c \
 	   $(LSH_PTH)/ftsh_getuser.c $(LSH_PTH)/ftsh_search_envar.c \
 	   $(LSH_PTH)/ftsh_cwdgit.c $(LSH_PTH)/ftsh_get_np.c ft_append_slash.c \
-	   $(LSH_PTH)/ftsh_free_envlist.c $(LSH_PTH)/ftsh_envlist.c
+	   $(LSH_PTH)/ftsh_free_envlist.c $(LSH_PTH)/ftsh_envlist.c \
+	   ft_is_in_dir.c
 NAME = libft.a
 INCLUDE = libft.h
 FLAGS = -Wall -Wextra -Werror
