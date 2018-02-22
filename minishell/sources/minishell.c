@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:35:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/20 18:56:03 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/22 19:24:55 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void		launch_cmd(int argc, char **argv, char **envp)
 			if (father > 0)
 				wait(&father);
 		}
+		else
+			exec_or_var(argv, envp);
 		if (paths)
 			free_envlist(paths);
 	}

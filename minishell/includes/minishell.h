@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:30:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/20 18:59:22 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/22 19:40:48 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,5 @@ void			bi_env(char **envp);
 
 void			bi_exit(void);
 
+void			exec_or_var(char **argv, char **envp);
 #endif
