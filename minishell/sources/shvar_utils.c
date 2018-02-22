@@ -40,7 +40,7 @@ char	*get_var_val(char *cmd)
 	return (ret);
 }
 
-t_shvar	*new_shvar(char *name, char *value)
+t_shvar	*new_shvar_lst(char *name, char *value)
 {
 	t_shvar	*new;
 

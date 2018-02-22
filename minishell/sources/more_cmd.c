@@ -49,9 +49,10 @@ t_shvar	*get_all_shvar(char **argv, char **envp, t_shvar *shvar)
 				shvar = add_shvar_elem(shvar, argv[i]);
 			else
 				free(notenv); // message
-			i++;
 		}
+		i++;
 	}
+	return (shvar);
 }
 
 void	exec_or_var(char **argv, char **envp, t_shvar *shvar)
@@ -70,5 +71,5 @@ void	exec_or_var(char **argv, char **envp, t_shvar *shvar)
 		}
 	}
 	else
-		ft_prints("Is it var ?\n");
+		shvar = get_all_shvar(argv, envp, shvar);
 }

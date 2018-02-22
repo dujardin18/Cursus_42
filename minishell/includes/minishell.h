@@ -63,7 +63,7 @@ char			*ms_get_prompt(char **envp);
 void			prompt_get_cmd_line(char **envp, t_shvar *shvar);
 
 int				cmd_is_builtin(char *cmd);
-void			launch_builtin(int argc, char **argv, char **envp);
+void			launch_builtin(int argc, char **argv, char **envp, t_shvar *shvar);
 void			launch_other(t_envlist *paths, char **argv, char **envp);
 t_envlist		*new_envpath(char **envp);
 int				bin_path(char *name, t_envlist *path);
