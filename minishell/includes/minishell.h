@@ -16,6 +16,7 @@
 
 # include "../libft/libft.h"
 # include <sys/wait.h>
+# include <signal.h>
 
 # define DEBUG 0
 
