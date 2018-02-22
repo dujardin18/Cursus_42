@@ -18,7 +18,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 
-# define DEBUG 1
+# define DEBUG 0
 
 # define DEFAULT "\033[0m"
 # define RED "\033[0;31;40m"
@@ -76,7 +76,7 @@ void			bi_env(char **envp);
 void			bi_exit(void);
 
 int				ms_isvar(char *cmd);
-void			exec_or_var(char **argv, char **envp, t_shvar *shvar);
+t_shvar			*exec_or_var(char **argv, char **envp, t_shvar *shvar);
 
 char			*get_var_name(char *cmd);
 char			*get_var_val(char *cmd);

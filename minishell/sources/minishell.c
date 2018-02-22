@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-void		launch_cmd(int argc, char **argv, char **envp, t_shvar *shvar)
+t_shvar		*launch_cmd(int argc, char **argv, char **envp, t_shvar *shvar)
 {
 	pid_t	father;
 	t_envlist	*paths;
@@ -31,25 +31,27 @@ void		launch_cmd(int argc, char **argv, char **envp, t_shvar *shvar)
 				wait(&father);
 		}
 		else
-			exec_or_var(argv, envp, shvar);
+			shvar = exec_or_var(argv, envp, shvar);
 		if (paths)
 			free_envlist(paths);
 	}
+	return (shvar);
 }
 
-void			exec_all_cmds(t_commands *cmds, char **envp, t_shvar *shvar)
+t_shvar			*exec_all_cmds(t_commands *cmds, char **envp, t_shvar *shvar)
 {
 	t_commands	*cp;
 
 	cp = cmds;
 	while (cp)
 	{
-		launch_cmd(cp->argc, cp->argv, envp, shvar);
+		shvar = launch_cmd(cp->argc, cp->argv, envp, shvar);
 		cp = cp->next;
 	}
+	return (shvar);
 }
 
-void		exec_cmd_line(char **envp, t_shvar *shvar)
+t_shvar			*exec_cmd_line(char **envp, t_shvar *shvar)
 {
 	t_commands	*cmds;
 	char		*ln;
@@ -60,9 +62,10 @@ void		exec_cmd_line(char **envp, t_shvar *shvar)
 	{
 		cmds = parse_cmds(ln);
 		ftsh_debug_t_cmd(cmds, "exec_cmd_line (minishell.c)");
-		exec_all_cmds(cmds, envp, shvar);
+		shvar = exec_all_cmds(cmds, envp, shvar);
 		free(ln);
 	}
+	return (shvar);
 }
 
 void		prompt_get_cmd_line(char **envp, t_shvar *shvar)
@@ -74,7 +77,7 @@ void		prompt_get_cmd_line(char **envp, t_shvar *shvar)
 		ftsh_debug_shvar(shvar, "Looking for shell vars");
 		prompt = ms_get_prompt(envp);
 		ft_prints("%s $> ", prompt);
-		exec_cmd_line(envp, shvar);
+		shvar = exec_cmd_line(envp, shvar);
 		free(prompt);
 	}
 }
