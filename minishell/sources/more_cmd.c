@@ -52,9 +52,13 @@ t_shvar	*get_all_shvar(char **argv, char **envp, t_shvar *shvar)
 			if (!notenv)
 				shvar = add_shvar_elem(shvar, argv[i]);
 			else
-				free(notenv); // message
-			if (tmp)
-				free(tmp);
+				env_var_used(tmp, notenv);
+			free(tmp);
+		}
+		else
+		{
+			command_unknown(argv[0]);
+			break ;
 		}
 		i++;
 	}

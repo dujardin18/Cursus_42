@@ -70,6 +70,7 @@ t_envlist		*new_envpath(char **envp);
 int				bin_path(char *name, t_envlist *path);
 
 void			command_unknown(char *unknown);
+void			env_var_used(char *name, char *to_free);
 
 void			bi_env(char **envp);
 

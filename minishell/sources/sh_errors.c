@@ -12,7 +12,13 @@
 
 #include "../includes/minishell.h"
 
-void	commmand_unknown(char *unknown)
+void	command_unknown(char *unknown)
 {
-	ft_prints_fd(2, "minishell: command not found: %s\n", unknown);
+	ft_prints_fd(2, "minishell: %s: command not found.\n", unknown);
+}
+
+void	env_var_used(char *name, char *to_free)
+{
+	ft_prints_fd(2, "minishell: %s: This is an env variable use 'setenv' to edit.\n", name);
+	free(to_free);
 }
