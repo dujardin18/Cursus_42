@@ -37,6 +37,13 @@ typedef struct	s_cm
 	struct s_cm	*next;
 }				t_commands;
 
+typedef struct	s_shvar
+{
+	char		*name;
+	char		*value;
+	struct s_shvar	*next;
+}				t_shvar;
+
 void			ftsh_debug_t_cmd(t_commands *c, char *msg);
 
 t_commands		*cmd_add_elem(t_commands *first, char *cmd);
@@ -53,7 +60,7 @@ void			ms_too_much_params(int argc, char **argv);
 
 char			*ms_get_prompt(char **envp);
 
-void			prompt_get_cmd_line(char **envp);
+void			prompt_get_cmd_line(char **envp, t_shvar *shvar);
 
 int				cmd_is_builtin(char *cmd);
 void			launch_builtin(int argc, char **argv, char **envp);
@@ -67,5 +74,11 @@ void			bi_env(char **envp);
 
 void			bi_exit(void);
 
-void			exec_or_var(char **argv, char **envp);
+int				ms_isvar(char *cmd);
+void			exec_or_var(char **argv, char **envp, t_shvar *shvar);
+
+char			*get_var_name(char *cmd);
+char			*get_var_val(char *cmd);
+t_shvar			*add_shvar_elem(t_shvar *first, char *cmd);
+void			free_shvar(t_shvar *shv_lst);
 #endif

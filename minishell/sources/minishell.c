@@ -12,13 +12,13 @@
 
 #include "../includes/minishell.h"
 
-void		launch_cmd(int argc, char **argv, char **envp)
+void		launch_cmd(int argc, char **argv, char **envp, t_shvar *shvar)
 {
 	pid_t	father;
 	t_envlist	*paths;
 
 	if (cmd_is_builtin(argv[0]))
-		launch_builtin(argc, argv, envp);
+		launch_builtin(argc, argv, envp, shvar);
 	else
 	{
 		paths = new_envpath(envp);
@@ -31,25 +31,25 @@ void		launch_cmd(int argc, char **argv, char **envp)
 				wait(&father);
 		}
 		else
-			exec_or_var(argv, envp);
+			exec_or_var(argv, envp, shvar);
 		if (paths)
 			free_envlist(paths);
 	}
 }
 
-void			exec_all_cmds(t_commands *cmds, char **envp)
+void			exec_all_cmds(t_commands *cmds, char **envp, t_shvar *shvar)
 {
 	t_commands	*cp;
 
 	cp = cmds;
 	while (cp)
 	{
-		launch_cmd(cp->argc, cp->argv, envp);
+		launch_cmd(cp->argc, cp->argv, envp, shvar);
 		cp = cp->next;
 	}
 }
 
-void		exec_cmd_line(char **envp)
+void		exec_cmd_line(char **envp, t_shvar *shvar)
 {
 	t_commands	*cmds;
 	char		*ln;
@@ -60,12 +60,12 @@ void		exec_cmd_line(char **envp)
 	{
 		cmds = parse_cmds(ln);
 		ftsh_debug_t_cmd(cmds, "exec_cmd_line (minishell.c)");
-		exec_all_cmds(cmds, envp);
+		exec_all_cmds(cmds, envp, shvar);
 		free(ln);
 	}
 }
 
-void		prompt_get_cmd_line(char **envp)
+void		prompt_get_cmd_line(char **envp, t_shvar *shvar)
 {
 	char	*prompt;
 
@@ -73,7 +73,7 @@ void		prompt_get_cmd_line(char **envp)
 	{
 		prompt = ms_get_prompt(envp);
 		ft_prints("%s $> ", prompt);
-		exec_cmd_line(envp);
+		exec_cmd_line(envp, shvar);
 		free(prompt);
 	}
 }

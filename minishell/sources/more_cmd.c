@@ -12,7 +12,49 @@
 
 #include "../includes/minishell.h"
 
-void	exec_or_var(char **argv, char **envp)
+int		ms_isvar(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i] != '=' && cmd[i])
+	{
+		if (!ft_isalpha(cmd[i]))
+			return (0);
+		i++;
+	}
+	if (!cmd[i])
+		return (0);
+	while (cmd[i])
+	{
+		if (!ft_isprint(cmd[i]) || cmd[i] <= 32)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+t_shvar	*get_all_shvar(char **argv, char **envp, t_shvar *shvar)
+{
+	char	*notenv;
+	int		i;
+
+	i = 0;
+	while (argv[i])
+	{
+		if (ms_isvar(argv[i]))
+		{
+			notenv = ftsh_search_envar(envp, argv[i]);
+			if (!notenv)
+				shvar = add_shvar_elem(shvar, argv[i]);
+			else
+				free(notenv); // message
+			i++;
+		}
+	}
+}
+
+void	exec_or_var(char **argv, char **envp, t_shvar *shvar)
 {
 	pid_t	father;
 
