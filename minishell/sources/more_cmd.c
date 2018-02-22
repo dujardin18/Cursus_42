@@ -20,11 +20,11 @@ void	exec_or_var(char **argv, char **envp)
 	{
 		if (access(argv[0], X_OK) == 0)
 		{
-			//father = fork();
-			//if (father > 0)
-			//	execve(argv[0], argv, envp);
-			//if (father == 0)
-			//	wait(&father);
+			father = fork();
+			if (father == 0)
+				execve(argv[0], argv, envp);
+			if (father > 0)
+				wait(&father);
 		}
 	}
 	else
