@@ -71,6 +71,7 @@ void		prompt_get_cmd_line(char **envp, t_shvar *shvar)
 
 	while (1)
 	{
+		ftsh_debug_shvar(shvar, "Looking for shell vars");
 		prompt = ms_get_prompt(envp);
 		ft_prints("%s $> ", prompt);
 		exec_cmd_line(envp, shvar);

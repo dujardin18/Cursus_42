@@ -18,7 +18,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 
-# define DEBUG 0
+# define DEBUG 1
 
 # define DEFAULT "\033[0m"
 # define RED "\033[0;31;40m"
@@ -45,6 +45,7 @@ typedef struct	s_shvar
 }				t_shvar;
 
 void			ftsh_debug_t_cmd(t_commands *c, char *msg);
+void			ftsh_debug_shvar(t_shvar *shvar, char *msg);
 
 t_commands		*cmd_add_elem(t_commands *first, char *cmd);
 size_t			cmd_add_cmd(char *all_cmd, t_commands **first);

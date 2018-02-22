@@ -35,3 +35,19 @@ void			ftsh_debug_t_cmd(t_commands *c, char *msg)
 		}
 	}
 }
+
+void			ftsh_debug_shvar(t_shvar *shvar, char *msg)
+{
+	t_shvar		*cp;
+
+	if (DEBUG)
+	{
+		cp = shvar;
+		ft_prints("\n%s:\n\n", msg);
+		while (cp)
+		{
+			ft_prints("|%s=%s|\n", cp->name, cp->value);
+			cp = cp->next;
+		}
+	}
+}
