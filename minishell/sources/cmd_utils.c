@@ -73,11 +73,11 @@ static char	**cmd_getargv(t_commands *elem)
 	while (i2 < elem->argc)
 	{
 		i3 = 0;
-		while (elem->cmd[i] && (elem->cmd[i] == ' ' || elem->cmd[i] == '\t'))
+		while (elem->cmd[i] && ft_strchr(" \t\"\'", elem->cmd[i]))
 			i++;
 		if (!(argv[i2] = (char *)ft_memalloc(sizeof(char) * c_len_spec(&(elem->cmd[i])))))
 			exit(EXIT_FAILURE);
-		while (elem->cmd[i] && elem->cmd[i] != ' ' && elem->cmd[i] != '\t')
+		while (elem->cmd[i] && ft_strchr(" \t\"\'", elem->cmd[i]) == NULL)
 		{
 			argv[i2][i3] = elem->cmd[i];
 			i++;
