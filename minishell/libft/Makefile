@@ -29,7 +29,7 @@ SRCS = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
 	   $(LSH_PTH)/ftsh_getuser.c $(LSH_PTH)/ftsh_search_envar.c \
 	   $(LSH_PTH)/ftsh_cwdgit.c $(LSH_PTH)/ftsh_get_np.c ft_append_slash.c \
 	   $(LSH_PTH)/ftsh_free_envlist.c $(LSH_PTH)/ftsh_envlist.c \
-	   ft_is_in_dir.c $(LSH_PTH)/ftsh_ispath.c
+	   ft_is_in_dir.c $(LSH_PTH)/ftsh_ispath.c $(LSH_PTH)/ftsh_del_envar.c
 NAME = libft.a
 INCLUDE = libft.h
 FLAGS = -Wall -Wextra -Werror

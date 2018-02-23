@@ -37,13 +37,6 @@ typedef struct	s_cm
 	struct s_cm	*next;
 }				t_commands;
 
-typedef struct	s_shvar
-{
-	char		*name;
-	char		*value;
-	struct s_shvar	*next;
-}				t_shvar;
-
 void			ftsh_debug_t_cmd(t_commands *c, char *msg);
 void			ftsh_debug_shvar(t_shvar *shvar, char *msg);
 
@@ -86,3 +79,4 @@ char			*get_var_val(char *cmd);
 t_shvar			*add_shvar_elem(t_shvar *first, char *cmd);
 void			free_shvar(t_shvar *shv_lst);
 #endif
+

@@ -209,4 +209,6 @@ int					ft_is_in_dir(char *name, char *path);
 
 int					ftsh_ispath(char *path);
 
+char				**ftsh_del_envar(t_shvar **first, char *name, char **envp);
+
 #endif

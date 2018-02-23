@@ -19,4 +19,11 @@ typedef struct			s_envlist
 	struct s_envlist	*next;
 }						t_envlist;
 
+typedef struct			s_shvar
+{
+		char			*name;
+		char			*value;
+		struct s_shvar	*next;
+}						t_shvar;
+
 #endif
