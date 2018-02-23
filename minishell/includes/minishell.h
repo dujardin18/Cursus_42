@@ -71,6 +71,8 @@ void			bi_exit(void);
 
 void			bi_echo(char **argv, t_shvar *shvar);
 
+void			bi_unsetenv(char ***envp, t_shvar **shvar, char **argv);
+
 int				ms_isvar(char *cmd);
 t_shvar			*exec_or_var(char **argv, char **envp, t_shvar *shvar);
 

@@ -71,7 +71,7 @@ t_envlist			*get_envlist(char **envp, char *name)
 	ret = NULL;
 	i = 0;
 	value = ftsh_search_envar(envp, name);
-	while (value[i])
+	while (value && value[i])
 	{
 		tmp = take_only_value(&(value[i]));
 		ret = add_envl_elem(ret, tmp);

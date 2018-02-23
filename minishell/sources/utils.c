@@ -30,6 +30,8 @@ void	launch_builtin(int argc, char **argv, char **envp, t_shvar *shvar)
 		bi_exit();
 	else if (ft_strcmp(argv[0], "echo") == 0)
 		bi_echo(argv, shvar);
+	else if (ft_strcmp(argv[0], "unsetenv") == 0)
+		bi_unsetenv(&envp, &shvar, argv);
 }
 
 void			launch_other(t_envlist *paths, char **argv, char **envp)

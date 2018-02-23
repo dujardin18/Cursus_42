@@ -19,7 +19,7 @@ void	bi_env(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		ft_prints("%s\n", envp[i]);
+		ft_prints("%s%c", envp[i], (envp[i][0] == 0) ? '\0' : '\n');
 		i++;
 	}
 }
