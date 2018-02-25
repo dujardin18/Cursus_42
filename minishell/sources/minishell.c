@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:35:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/25 19:04:59 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/25 19:50:27 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_shvar		*launch_cmd(int argc, char **argv, char ***envp, t_shvar *shvar)
 	t_envlist	*paths;
 
 	if (cmd_is_builtin(argv[0]))
-		*envp = launch_builtin(argc, argv, *envp, shvar);
+		*envp = launch_builtin(argc, argv, *envp, &shvar);
 	else
 	{
 		paths = new_envpath(*envp);

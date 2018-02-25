@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/25 18:36:35 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/25 19:28:15 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,5 +218,7 @@ void				ft_free_tab(char **tab);
 char				**ft_tab_del_elem(char **tab, char *name);
 
 char				**ft_copy_tab(char **tab);
+
+char				**ft_add_tab_elem(char **tab, char *elem);
 
 #endif

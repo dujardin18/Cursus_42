@@ -6,7 +6,7 @@
 #    By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/13 16:28:57 by fherbine          #+#    #+#              #
-#    Updated: 2018/02/22 19:39:41 by fherbine         ###   ########.fr        #
+#    Updated: 2018/02/25 19:31:14 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRC_PATH = sources
 OBJ_PATH = $(SRC_PATH)/debug
 SRC_NAME = main.c max_free.c minishell.c cmd_utils.c cmd_list.c \
 		   ms_out_errors.c parser.c prmpt.c ftsh_debug.c bi_env.c bi_exit.c \
-		   utils.c sh_errors.c more_cmd.c shvar_utils.c bi_echo.c bi_unsetenv.c
+		   utils.c sh_errors.c more_cmd.c shvar_utils.c bi_echo.c \
+		   bi_unsetenv.c bi_setenv.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
