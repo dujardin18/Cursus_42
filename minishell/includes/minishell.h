@@ -82,5 +82,7 @@ char			*get_var_name(char *cmd);
 char			*get_var_val(char *cmd);
 t_shvar			*add_shvar_elem(t_shvar *first, char *cmd);
 void			free_shvar(t_shvar *shv_lst);
+
+char			**init_env(char **envp, t_shvar **shvar);
 #endif
 
