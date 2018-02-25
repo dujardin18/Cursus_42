@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftsh_del_envar.c                                   :+:      :+:    :+:   */
+/*   ft_copy_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/25 18:30:31 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/25 18:40:23 by fherbine         ###   ########.fr       */
+/*   Created: 2018/02/25 18:32:51 by fherbine          #+#    #+#             */
+/*   Updated: 2018/02/25 18:39:20 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
-char	**ftsh_del_envar(t_shvar **first, char *name, char **envp)
+char		**ft_copy_tab(char **tab)
 {
-	t_shvar	*cp;
 	int		i;
+	char	**new;
 
-	cp = *first;
+	if (!(new = (char **)malloc(sizeof(char *) * (ft_tab_len(tab) + 1))))
+		exit(EXIT_FAILURE);
 	i = 0;
-	envp = ft_tab_del_elem(envp, name);
-	while (cp && ft_strcmp(name, cp->name) != 0)
-		cp = cp->next;
-	if (cp)
+	while (tab[i])
 	{
-		cp->name[0] = 0;
-		cp->value[0] = 0;
+		new[i] = ft_strdup(tab[i]);
+		i++;
 	}
-	return (envp);
+	new[i] = 0;
+	return (new);
 }

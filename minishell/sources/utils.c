@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:25:23 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/20 18:56:17 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/25 19:06:23 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		cmd_is_builtin(char *cmd)
 		return (0);
 }
 
-void	launch_builtin(int argc, char **argv, char **envp, t_shvar *shvar)
+char **launch_builtin(int argc, char **argv, char **envp, t_shvar *shvar)
 {
 	if (ft_strcmp(argv[0], "env") == 0)
 		bi_env(envp);
@@ -31,7 +31,8 @@ void	launch_builtin(int argc, char **argv, char **envp, t_shvar *shvar)
 	else if (ft_strcmp(argv[0], "echo") == 0)
 		bi_echo(argv, shvar);
 	else if (ft_strcmp(argv[0], "unsetenv") == 0)
-		bi_unsetenv(envp, &shvar, argv);
+		envp = bi_unsetenv(envp, &shvar, argv);
+	return (envp);
 }
 
 void			launch_other(t_envlist *paths, char **argv, char **envp)

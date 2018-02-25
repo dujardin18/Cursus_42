@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/20 19:08:00 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/25 18:36:35 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,5 +210,13 @@ int					ft_is_in_dir(char *name, char *path);
 int					ftsh_ispath(char *path);
 
 char				**ftsh_del_envar(t_shvar **first, char *name, char **envp);
+
+int					ft_tab_len(char **tab);
+
+void				ft_free_tab(char **tab);
+
+char				**ft_tab_del_elem(char **tab, char *name);
+
+char				**ft_copy_tab(char **tab);
 
 #endif

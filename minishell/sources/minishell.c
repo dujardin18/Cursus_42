@@ -6,39 +6,39 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:35:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/22 19:24:55 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/25 19:04:59 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_shvar		*launch_cmd(int argc, char **argv, char **envp, t_shvar *shvar)
+t_shvar		*launch_cmd(int argc, char **argv, char ***envp, t_shvar *shvar)
 {
 	pid_t	father;
 	t_envlist	*paths;
 
 	if (cmd_is_builtin(argv[0]))
-		launch_builtin(argc, argv, envp, shvar);
+		*envp = launch_builtin(argc, argv, *envp, shvar);
 	else
 	{
-		paths = new_envpath(envp);
+		paths = new_envpath(*envp);
 		if (bin_path(argv[0], paths))
 		{
 			father = fork();
 			if (father == 0)
-				launch_other(paths, argv, envp);
+				launch_other(paths, argv, *envp);
 			if (father > 0)
 				wait(&father);
 		}
 		else
-			shvar = exec_or_var(argv, envp, shvar);
+			shvar = exec_or_var(argv, *envp, shvar);
 		if (paths)
 			free_envlist(paths);
 	}
 	return (shvar);
 }
 
-t_shvar			*exec_all_cmds(t_commands *cmds, char **envp, t_shvar *shvar)
+t_shvar			*exec_all_cmds(t_commands *cmds, char ***envp, t_shvar *shvar)
 {
 	t_commands	*cp;
 
@@ -51,7 +51,7 @@ t_shvar			*exec_all_cmds(t_commands *cmds, char **envp, t_shvar *shvar)
 	return (shvar);
 }
 
-t_shvar			*exec_cmd_line(char **envp, t_shvar *shvar)
+t_shvar			*exec_cmd_line(char ***envp, t_shvar *shvar)
 {
 	t_commands	*cmds;
 	char		*ln;
@@ -77,7 +77,7 @@ void		prompt_get_cmd_line(char **envp, t_shvar *shvar)
 		ftsh_debug_shvar(shvar, "Looking for shell vars");
 		prompt = ms_get_prompt(envp);
 		ft_prints("%s $> ", prompt);
-		shvar = exec_cmd_line(envp, shvar);
+		shvar = exec_cmd_line(&envp, shvar);
 		free(prompt);
 	}
 }

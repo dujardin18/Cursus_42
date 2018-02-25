@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:30:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/22 19:40:48 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/25 19:05:47 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char			*ms_get_prompt(char **envp);
 void			prompt_get_cmd_line(char **envp, t_shvar *shvar);
 
 int				cmd_is_builtin(char *cmd);
-void			launch_builtin(int argc, char **argv, char **envp, t_shvar *shvar);
+char			**launch_builtin(int argc, char **argv, char **envp, t_shvar *shvar);
 void			launch_other(t_envlist *paths, char **argv, char **envp);
 t_envlist		*new_envpath(char **envp);
 int				bin_path(char *name, t_envlist *path);

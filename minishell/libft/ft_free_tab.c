@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ftsh_del_envar.c                                   :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/25 18:30:31 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/25 18:40:23 by fherbine         ###   ########.fr       */
+/*   Created: 2018/02/25 18:20:43 by fherbine          #+#    #+#             */
+/*   Updated: 2018/02/25 18:22:26 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
-char	**ftsh_del_envar(t_shvar **first, char *name, char **envp)
+void	ft_free_tab(char **tab)
 {
-	t_shvar	*cp;
-	int		i;
+	int	i;
 
-	cp = *first;
 	i = 0;
-	envp = ft_tab_del_elem(envp, name);
-	while (cp && ft_strcmp(name, cp->name) != 0)
-		cp = cp->next;
-	if (cp)
+	while (tab[i])
 	{
-		cp->name[0] = 0;
-		cp->value[0] = 0;
+		free(tab[i]);
+		i++;
 	}
-	return (envp);
+	free(tab);
 }
