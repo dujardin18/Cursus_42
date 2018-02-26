@@ -54,6 +54,7 @@ t_shvar	*get_all_shvar(char **argv, char **envp, t_shvar *shvar)
 			else
 				env_var_used(tmp, notenv);
 			free(tmp);
+			free(notenv);
 		}
 		else
 		{

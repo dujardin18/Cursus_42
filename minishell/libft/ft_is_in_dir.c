@@ -29,6 +29,7 @@ int		ft_is_in_dir(char *name, char *path)
 				return (1);
 			new = readdir(dir);
 		}
+		closedir(dir);
 	}
 	return (0);
 }

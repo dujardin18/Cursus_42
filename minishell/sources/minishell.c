@@ -16,24 +16,27 @@ t_shvar		*launch_cmd(int argc, char **argv, char ***envp, t_shvar *shvar)
 {
 	pid_t	father;
 	t_envlist	*paths;
+	t_envlist	*cp;
 
 	if (cmd_is_builtin(argv[0]))
 		*envp = launch_builtin(argc, argv, *envp, &shvar);
 	else
 	{
 		paths = new_envpath(*envp);
+		cp = paths;
 		if (bin_path(argv[0], paths))
 		{
 			father = fork();
 			if (father == 0)
-				launch_other(paths, argv, *envp);
+				launch_other(cp, argv, *envp); // leaks
 			if (father > 0)
+			{
 				wait(&father);
+				free_envlist(paths);
+			}
 		}
 		else
 			shvar = exec_or_var(argv, *envp, shvar);
-		if (paths)
-			free_envlist(paths);
 	}
 	return (shvar);
 }
@@ -63,6 +66,7 @@ t_shvar			*exec_cmd_line(char ***envp, t_shvar *shvar)
 		cmds = parse_cmds(ln);
 		ftsh_debug_t_cmd(cmds, "exec_cmd_line (minishell.c)");
 		shvar = exec_all_cmds(cmds, envp, shvar);
+		free_cmds(cmds);
 		free(ln);
 	}
 	return (shvar);
