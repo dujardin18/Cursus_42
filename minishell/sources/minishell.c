@@ -24,19 +24,22 @@ t_shvar		*launch_cmd(int argc, char **argv, char ***envp, t_shvar *shvar)
 	{
 		paths = new_envpath(*envp);
 		cp = paths;
+		paths = launch_other(cp, argv, *envp); // leaks
 		if (bin_path(argv[0], paths))
 		{
 			father = fork();
 			if (father == 0)
-				launch_other(cp, argv, *envp); // leaks
-			if (father > 0)
 			{
-				wait(&father);
-				free_envlist(paths);
+				while (access(cp->value, X_OK) != 0)
+					cp = cp->next;
+				execve(cp->value, argv, *envp);
 			}
+			if (father > 0)
+				wait(&father);
 		}
 		else
 			shvar = exec_or_var(argv, *envp, shvar);
+		free_envlist(paths);
 	}
 	return (shvar);
 }

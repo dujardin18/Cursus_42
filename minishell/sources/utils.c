@@ -37,19 +37,17 @@ char **launch_builtin(int argc, char **argv, char **envp, t_shvar **shvar)
 	return (envp);
 }
 
-void			launch_other(t_envlist *paths, char **argv, char **envp)
+t_envlist		*launch_other(t_envlist *paths, char **argv, char **envp)
 {
 	t_envlist	*cp;
 
 	cp = paths;
 	while (cp)
 	{
-		if (ft_is_in_dir(argv[0], cp->value))
-			break ;
+		cp->value = ft_strjoin(cp->value, argv[0]);
 		cp = cp->next;
 	}
-	cp->value = ft_strjoin(cp->value, argv[0]);
-	execve(cp->value, argv, envp);
+	return (paths);
 }
 
 t_envlist		*new_envpath(char **envp)
@@ -74,7 +72,7 @@ int				bin_path(char *name, t_envlist *path)
 	cp = path;
 	while (cp)
 	{
-		if (ft_is_in_dir(name, cp->value) == 1)
+		if (access(cp->value, F_OK) == 0)
 			return (1);
 		cp = cp->next;
 	}
