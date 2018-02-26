@@ -33,7 +33,7 @@ static char	*get_shl(char **envp)
 	tmp = ft_strjoin(tmp, shl);
 	tmp = ft_strjoin(tmp, "]");
 	free(shl);
-	tmp = add_color_to_elem(tmp, RED);
+	tmp = add_color_to_elem(tmp, B_CYAN);
 	return (tmp);
 }
 
