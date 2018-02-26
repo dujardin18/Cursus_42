@@ -23,29 +23,42 @@ static char	*add_color_to_elem(char *elem, char *color)
 	return (cp);
 }
 
+static char	*get_shl(char **envp)
+{
+	char	*shl;
+	char	*tmp;
+
+	tmp = ft_strdup("[");
+	shl = ftsh_search_envar(envp, "SHLVL");
+	tmp = ft_strjoin(tmp, shl);
+	tmp = ft_strjoin(tmp, "]");
+	free(shl);
+	tmp = add_color_to_elem(tmp, RED);
+	return (tmp);
+}
+
 char		*ms_get_prompt(char **envp)
 {
 	char	*prmpt;
 	char	*n_cwd;
 	char	*user;
-	char	*git;
+	char	*shl;
 	char	buf[1024];
 
 	getcwd(buf, 1024);
+	shl = get_shl(envp);
 	n_cwd = ftsh_get_np(buf);
 	n_cwd = add_color_to_elem(n_cwd, GREEN);
-	git = (ftsh_cwdgit(buf) == 1) ? ft_strdup("git") : ft_strdup("");
-//	git = add_color_to_elem(git, RED); /// err 
 	user = ftsh_getuser(envp);
 	user = add_color_to_elem(user, YELLOW);
 	prmpt = ft_strdup("$ ");
 	prmpt = ft_strjoin(prmpt, user);
 	prmpt = ft_strjoin(prmpt, " # ");
 	prmpt = ft_strjoin(prmpt, n_cwd);
-	prmpt = ft_strjoin(prmpt, (ft_strlen(git) == 0) ? "" : " > ");
-	prmpt = ft_strjoin(prmpt, git);
+	prmpt = ft_strjoin(prmpt, " ");
+	prmpt = ft_strjoin(prmpt, shl);
 	free(n_cwd);
-	free(git);
+	free(shl);
 	free(user);
 	return (prmpt);
 }

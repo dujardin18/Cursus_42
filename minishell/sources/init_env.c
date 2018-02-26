@@ -17,6 +17,7 @@ char	**init_env(char **envp, t_shvar **shvar)
 	free(tmp);
 	envp = ftsh_del_envar(shvar, "SHLVL", envp);
 	envp = ft_add_tab_elem(envp, tmp2);
+	*shvar = add_shvar_elem(*shvar, tmp2);
 	free(tmp2);
 	return (envp);
 }

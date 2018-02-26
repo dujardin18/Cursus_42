@@ -12,6 +12,14 @@
 
 #include "libft.h"
 
+static char	*null_str(void)
+{
+	char	*ret;
+
+	ret = ft_strdup("NULL");
+	return (ret);
+}
+
 char	*ft_strjoin(char *s1, const char *s2)
 {
 	char	*joined;
@@ -21,10 +29,10 @@ char	*ft_strjoin(char *s1, const char *s2)
 	i = 0;
 	i2 = 0;
 	if (!(s1) || !(s2))
-		return (NULL);
+		return (null_str());
 	if (!(joined = (char *)ft_memalloc(sizeof(char) * (ft_strlen(s1) + \
 						ft_strlen(s2) + 2))))
-		return (NULL);
+		exit(EXIT_FAILURE);
 	while (s1[i])
 	{
 		joined[i] = s1[i];
