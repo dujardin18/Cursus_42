@@ -29,6 +29,14 @@
 # define CYAN "\033[0;36;40m"
 # define WHITE "\033[0;37;40m"
 
+# define B_RED "\033[1;31;40m"
+# define B_GREEN "\033[1;32;40m"
+# define B_YELLOW "\033[1;33;40m"
+# define B_BLUE "\033[1;34;40m"
+# define B_MAGENTA "\033[1;35;40m"
+# define B_CYAN "\033[1;36;40m"
+# define B_WHITE "\033[1;37;40m"
+
 typedef struct	s_cm
 {
 	char		*cmd;
