@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:35:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 17:20:17 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 19:10:33 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ static t_shvar	*exec_cmd_line(char ***envp, t_shvar *shvar)
 	{
 		cmds = parse_cmds(ln);
 		ftsh_debug_t_cmd(cmds, "exec_cmd_line (minishell.c)");
+		add_hist_raw(cmds, *envp);
 		shvar = exec_all_cmds(cmds, envp, shvar);
+		*envp = get_ordir(*envp, &shvar);
 		free_cmds(cmds);
 		free(ln);
 	}
@@ -87,6 +89,7 @@ void			prompt_get_cmd_line(char **envp, t_shvar *shvar)
 {
 	char		*prompt;
 
+	envp = init_env(envp, &shvar);
 	while (1)
 	{
 		ftsh_debug_shvar(shvar, "Looking for shell vars");

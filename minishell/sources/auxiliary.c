@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_env.c                                         :+:      :+:    :+:   */
+/*   auxiliary.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/27 15:46:44 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 19:12:18 by fherbine         ###   ########.fr       */
+/*   Created: 2018/02/27 18:47:32 by fherbine          #+#    #+#             */
+/*   Updated: 2018/02/27 19:13:32 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char		**init_env(char **envp, t_shvar **shvar)
+char		**get_ordir(char **envp, t_shvar **shvar)
 {
-	int		lvl;
 	char	*tmp;
-	char	*tmp2;
+	char	*tst;
+	char	buf[1024];
 
-	lvl = 0;
-	tmp = ftsh_search_envar(envp, "SHLVL");
-	envp = ftsh_del_envar(shvar, "OLDPWD", envp);
-	lvl = ft_atoi(tmp) + 1;
-	free(tmp);
-	tmp = ft_itoa(lvl);
-	tmp2 = ft_strdup("SHLVL=");
-	tmp2 = ft_strjoin(tmp2, tmp);
-	free(tmp);
-	envp = ftsh_del_envar(shvar, "SHLVL", envp);
-	envp = ft_add_tab_elem(envp, tmp2);
-	*shvar = add_shvar_elem(*shvar, tmp2);
-	free(tmp2);
+	tst = ftsh_search_envar(envp, "ORDIR");
+	if (!tst)
+	{
+		tmp = ft_strdup("ORDIR=");
+		getcwd(buf, 1024);
+		tmp = ft_strjoin(tmp, buf);
+		envp = ft_add_tab_elem(envp, tmp);
+		*shvar = add_shvar_elem(*shvar, tmp);
+		free(tmp);
+	}
+	free(tst);
 	return (envp);
+}
+
+char		*get_history_path(char **envp)
+{
+	char	*ret;
+
+	ret = ftsh_search_envar(envp, "ORDIR");
+	ret = ft_strjoin(ret, "/.history");
+	return (ret);
 }

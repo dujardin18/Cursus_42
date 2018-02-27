@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:25:23 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 15:02:23 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 19:02:55 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int				cmd_is_builtin(char *cmd)
 {
 	if (ft_strcmp(cmd, "cd") == 0 || ft_strcmp(cmd, "echo") == 0 || \
 			ft_strcmp(cmd, "env") == 0 || ft_strcmp(cmd, "setenv") == 0 || \
-			ft_strcmp(cmd, "unsetenv") == 0 || ft_strcmp(cmd, "exit") == 0)
+			ft_strcmp(cmd, "unsetenv") == 0 || ft_strcmp(cmd, "exit") == 0 || \
+			ft_strcmp(cmd, "history") == 0)
 		return (1);
 	else
 		return (0);
@@ -37,6 +38,8 @@ char			**launch_builtin(int argc, char **argv, char **envp, \
 		envp = bi_setenv(envp, argv, shvar);
 	else if (ft_strcmp(argv[0], "cd") == 0)
 		envp = bi_cd(shvar, argv, envp, argc);
+	else if (ft_strcmp(argv[0], "history") == 0)
+		bi_history(envp);
 	return (envp);
 }
 

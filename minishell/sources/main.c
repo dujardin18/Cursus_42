@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:34:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 17:18:08 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 19:06:46 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int				main(int argc, char **argv, char **envp)
 	shvar = NULL;
 	envcp = ft_copy_tab(envp);
 	shvar = get_shvar_from_env(envcp, shvar);
-	envcp = init_env(envcp, &shvar);
 	if (argc == 1)
 		prompt_get_cmd_line(envcp, shvar);
 	else

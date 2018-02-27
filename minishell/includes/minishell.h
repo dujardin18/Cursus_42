@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:30:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 17:38:12 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 19:02:15 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,12 @@ char			**bi_unsetenv(char **envp, t_shvar **shvar, char **argv);
 char			**bi_setenv(char **envp, char **argv, t_shvar **shvar);
 
 char			**bi_cd(t_shvar **shvar, char **argv, char **envp, int argc);
+
+void			bi_history(char **envp);
+void			add_hist_raw(t_commands *cmds, char **envp);
+
+char			**get_ordir(char **envp, t_shvar **shvar);
+char			*get_history_path(char **envp);
 
 int				ms_isvar(char *cmd);
 t_shvar			*exec_or_var(char **argv, char **envp, t_shvar *shvar);
