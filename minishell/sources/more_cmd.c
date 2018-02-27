@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 19:27:10 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 15:12:30 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:24:37 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_shvar	*get_all_shvar(char **argv, char **envp, t_shvar *shvar)
 			tmp = get_var_name(argv[i]);
 			notenv = ftsh_search_envar(envp, tmp);
 			shvar = (!notenv) ? add_shvar_elem(shvar, argv[i]) : \
-					env_var_used(tmp, notenv, shvar);
+					env_var_used(tmp, shvar);
 			free(tmp);
 			free(notenv);
 		}

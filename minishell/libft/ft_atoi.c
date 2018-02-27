@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/09 10:27:10 by fherbine          #+#    #+#             */
-/*   Updated: 2017/11/11 19:40:04 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:07:52 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_atoi(const char *str)
 	int		sgn;
 	int		res;
 
+	if (!str)
+		return (0);
 	i = 0;
 	sgn = 1;
 	res = 0;

@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 18:05:12 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 15:58:47 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:15:28 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char		**ft_tab_del_elem(char **tab, char *name)
 
 	i = 0;
 	i2 = 0;
-	if (!(new = (char **)malloc(sizeof(char *) * (ft_tab_len(tab) + 1))))
+	if (!(new = (char **)ft_memalloc(sizeof(char *) * (ft_tab_len(tab) + 1))))
 		exit(EXIT_FAILURE);
 	while (tab[i])
 	{

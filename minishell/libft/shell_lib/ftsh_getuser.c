@@ -6,13 +6,18 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 13:52:14 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/14 20:08:45 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:43:41 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-char	*ftsh_getuser(char **envp)
+char		*ftsh_getuser(char **envp)
 {
-	return (ftsh_search_envar(envp, "USER"));
+	char	*tmp;
+
+	tmp = ftsh_search_envar(envp, "USER");
+	if (!tmp)
+		return (ft_strdup("NULL"));
+	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:30:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 16:53:40 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:38:12 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,10 @@ t_envlist		*new_envpath(char **envp);
 int				bin_path(t_envlist *path);
 
 void			command_unknown(char *unknown);
-t_shvar			*env_var_used(char *name, char *to_free, t_shvar *shvar);
+t_shvar			*env_var_used(char *name, t_shvar *shvar);
 void			no_fod(char *disp);
 void			no_opwd(void);
+void			env_exist(char *name);
 
 void			bi_env(char **envp);
 
