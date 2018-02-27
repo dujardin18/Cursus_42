@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 18:06:40 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 19:15:00 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 20:14:23 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ static int		get_n_cmd(char **envp)
 	char		*ln;
 	char		*pth;
 
-	i = 1;
+	i = 0;
 	pth = get_history_path(envp);
 	fd = open(pth, O_RDONLY);
-	n = get_next_line(fd, &ln);
+	n = 1;
 	if (fd >= 0)
 	{
 		while (n > 0)
 		{
+			n = get_next_line(fd, &ln);
 			i++;
 			free(ln);
-			n = get_next_line(fd, &ln);
 		}
 		close(fd);
 	}
@@ -108,14 +108,15 @@ void			bi_history(char **envp)
 
 	pth = get_history_path(envp);
 	fd = open(pth, O_RDONLY);
-	n = get_next_line(fd, &ln);
+	n = 1;
 	if (fd > -1)
 	{
 		while (n > 0)
 		{
-			ft_prints("%s\n", ln);
-			free(ln);
 			n = get_next_line(fd, &ln);
+			if (n > 0)
+				ft_prints("%s\n", ln);
+			free(ln);
 		}
 		close(fd);
 	}

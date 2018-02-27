@@ -6,7 +6,7 @@
 #    By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/13 16:28:57 by fherbine          #+#    #+#              #
-#    Updated: 2018/02/27 18:57:17 by fherbine         ###   ########.fr        #
+#    Updated: 2018/02/27 19:26:46 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 LPATH = libft
 LFLAGS = -L$(LPATH) -lft
 IFLAGS = -I$(INCLUDES)
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra
 CC = gcc
 
 all: $(NAME)

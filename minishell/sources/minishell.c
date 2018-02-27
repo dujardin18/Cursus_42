@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:35:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 19:10:33 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 20:09:20 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static t_shvar	*launch_cmd(int argc, char **argv, char ***envp, t_shvar *shvar)
 	t_envlist	*paths;
 
 	paths = NULL;
+	*envp = get_ordir(*envp, &shvar);
 	if (cmd_is_builtin(argv[0]))
 		*envp = launch_builtin(argc, argv, *envp, &shvar);
 	else
@@ -78,7 +79,6 @@ static t_shvar	*exec_cmd_line(char ***envp, t_shvar *shvar)
 		ftsh_debug_t_cmd(cmds, "exec_cmd_line (minishell.c)");
 		add_hist_raw(cmds, *envp);
 		shvar = exec_all_cmds(cmds, envp, shvar);
-		*envp = get_ordir(*envp, &shvar);
 		free_cmds(cmds);
 		free(ln);
 	}

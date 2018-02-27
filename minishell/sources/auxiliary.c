@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 18:47:32 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 19:13:32 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 20:01:48 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ char		**get_ordir(char **envp, t_shvar **shvar)
 	char	buf[1024];
 
 	tst = ftsh_search_envar(envp, "ORDIR");
+	tmp = ft_strdup("ORDIR=");
+	getcwd(buf, 1024);
+	tmp = ft_strjoin(tmp, buf);
 	if (!tst)
 	{
-		tmp = ft_strdup("ORDIR=");
-		getcwd(buf, 1024);
-		tmp = ft_strjoin(tmp, buf);
 		envp = ft_add_tab_elem(envp, tmp);
 		*shvar = add_shvar_elem(*shvar, tmp);
-		free(tmp);
 	}
+	free(tmp);
 	free(tst);
 	return (envp);
 }
