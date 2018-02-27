@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_env.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/27 15:46:44 by fherbine          #+#    #+#             */
+/*   Updated: 2018/02/27 15:47:00 by fherbine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-char	**init_env(char **envp, t_shvar **shvar)
+char		**init_env(char **envp, t_shvar **shvar)
 {
-	int	lvl;
+	int		lvl;
 	char	*tmp;
 	char	*tmp2;
 

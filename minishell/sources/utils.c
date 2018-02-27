@@ -6,13 +6,13 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:25:23 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 14:53:14 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:02:23 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		cmd_is_builtin(char *cmd)
+int				cmd_is_builtin(char *cmd)
 {
 	if (ft_strcmp(cmd, "cd") == 0 || ft_strcmp(cmd, "echo") == 0 || \
 			ft_strcmp(cmd, "env") == 0 || ft_strcmp(cmd, "setenv") == 0 || \
@@ -22,7 +22,8 @@ int		cmd_is_builtin(char *cmd)
 		return (0);
 }
 
-char **launch_builtin(int argc, char **argv, char **envp, t_shvar **shvar)
+char			**launch_builtin(int argc, char **argv, char **envp, \
+		t_shvar **shvar)
 {
 	if (ft_strcmp(argv[0], "env") == 0)
 		bi_env(envp);
@@ -39,7 +40,7 @@ char **launch_builtin(int argc, char **argv, char **envp, t_shvar **shvar)
 	return (envp);
 }
 
-t_envlist		*launch_other(t_envlist *paths, char **argv, char **envp)
+t_envlist		*launch_other(t_envlist *paths, char **argv)
 {
 	t_envlist	*cp;
 

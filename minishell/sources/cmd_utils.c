@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:43:48 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/19 19:33:33 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 16:23:32 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_commands		*get_all_cmds(char *all_cmd)
 	first = NULL;
 	while (all_cmd[i])
 	{
-		while (all_cmd[i] && (all_cmd[i] == ' ' || all_cmd[i] == ';' || all_cmd[i] == '\t'))
+		while (all_cmd[i] && \
+				(all_cmd[i] == ' ' || all_cmd[i] == ';' || all_cmd[i] == '\t'))
 			i++;
 		i += cmd_add_cmd(&(all_cmd[i]), &first);
 		i += (all_cmd[i] == ';') ? 1 : 0;
@@ -29,29 +30,30 @@ t_commands		*get_all_cmds(char *all_cmd)
 	return (first);
 }
 
-static int	cmd_getargc(t_commands *elem)
+static int		cmd_getargc(t_commands *elem)
 {
-	int		i;
-	int		argc;
+	int			i;
+	int			argc;
 
 	i = 0;
 	argc = 0;
 	while ((elem->cmd)[i])
 	{
-		while ((elem->cmd)[i] && ((elem->cmd)[i] == ' ' || (elem->cmd)[i] == '\t'))
+		while ((elem->cmd)[i] && ((elem->cmd)[i] == ' ' || \
+					(elem->cmd)[i] == '\t'))
 			i++;
 		if ((elem->cmd)[i])
 			argc++;
 		while ((elem->cmd)[i] && elem->cmd[i] != ' ' && elem->cmd[i] != '\t')
 			i++;
-		i++;
+		i += ((elem->cmd)[i]) ? 1 : 0;
 	}
-	return (argc);	
+	return (argc);
 }
 
-static int	c_len_spec(char *str)
+static int		c_len_spec(char *str)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (str[i] && str[i] != ' ' && str[i] != '\t')
@@ -59,15 +61,11 @@ static int	c_len_spec(char *str)
 	return (i);
 }
 
-static char	**cmd_getargv(t_commands *elem)
+static char		**cmd_getargv(t_commands *elem, int i, int i2)
 {
-	int		i;
-	int		i2;
-	int		i3;
-	char	**argv;
+	int			i3;
+	char		**argv;
 
-	i = 0;
-	i2 = 0;
 	if (!(argv = (char **)malloc(sizeof(char *) * (elem->argc + 2))))
 		exit(EXIT_FAILURE);
 	while (i2 < elem->argc)
@@ -75,7 +73,8 @@ static char	**cmd_getargv(t_commands *elem)
 		i3 = 0;
 		while (elem->cmd[i] && ft_strchr(" \t\"\'", elem->cmd[i]))
 			i++;
-		if (!(argv[i2] = (char *)ft_memalloc(sizeof(char) * c_len_spec(&(elem->cmd[i])))))
+		if (!(argv[i2] = (char *)ft_memalloc(sizeof(char) * \
+						c_len_spec(&(elem->cmd[i])))))
 			exit(EXIT_FAILURE);
 		while (elem->cmd[i] && ft_strchr(" \t\"\'", elem->cmd[i]) == NULL)
 		{
@@ -90,9 +89,9 @@ static char	**cmd_getargv(t_commands *elem)
 	return (argv);
 }
 
-t_commands	*cmd_getargs(t_commands *elem)
+t_commands		*cmd_getargs(t_commands *elem)
 {
 	elem->argc = cmd_getargc(elem);
-	elem->argv = cmd_getargv(elem);
+	elem->argv = cmd_getargv(elem, 0, 0);
 	return (elem);
 }

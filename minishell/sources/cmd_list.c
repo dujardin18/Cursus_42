@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 18:25:05 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/18 17:38:28 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:46:23 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ t_commands			*cmd_add_elem(t_commands *first, char *cmd)
 {
 	t_commands		*new;
 	t_commands		*tmp;
-
 
 	tmp = first;
 	if (first)

@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 11:27:59 by fherbine          #+#    #+#             */
-/*   Updated: 2018/01/16 16:39:10 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:59:14 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*null_str(void)
 	return (ret);
 }
 
-char	*ft_strjoin(char *s1, const char *s2)
+char		*ft_strjoin(char *s1, const char *s2)
 {
 	char	*joined;
 	size_t	i;

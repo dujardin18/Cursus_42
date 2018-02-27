@@ -6,13 +6,13 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/27 14:23:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 14:51:18 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:52:43 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*get_path_f_shvar(t_shvar *shvar, char *name)
+static char	*get_path_f_shvar(t_shvar *shvar, char *name)
 {
 	t_shvar	*cp;
 
@@ -26,7 +26,7 @@ char	*get_path_f_shvar(t_shvar *shvar, char *name)
 	return (NULL);
 }
 
-char	**only_repl_pwd(char **envp, t_shvar **shvar, char *name)
+static char	**only_repl_pwd(char **envp, t_shvar **shvar, char *name)
 {
 	char	*tmp;
 	char	new_opwd[1024];
@@ -43,16 +43,6 @@ char	**only_repl_pwd(char **envp, t_shvar **shvar, char *name)
 	free(tmp);
 	free(tmp2);
 	return (envp);
-}
-
-void	no_fod(char *disp)
-{
-	ft_prints_fd(2, "minishell: cd: %s: No such file or directory\n", disp);
-}
-
-void	no_opwd(void)
-{
-	ft_prints_fd(2, "minishell: cd: OLDPWD not set\n");
 }
 
 static char	*get_varp(char **argv, int argc, char **envp, t_shvar **shvar)
@@ -74,7 +64,7 @@ static char	*get_varp(char **argv, int argc, char **envp, t_shvar **shvar)
 	return (var_p);
 }
 
-char	**bi_cd(t_shvar **shvar, char **argv, char **envp, int argc)
+char		**bi_cd(t_shvar **shvar, char **argv, char **envp, int argc)
 {
 	char	*var_p;
 

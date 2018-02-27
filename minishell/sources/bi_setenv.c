@@ -6,16 +6,16 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 19:19:18 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/25 19:32:26 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:53:27 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int		cmd_is_compatible(char *arg)
+static int	cmd_is_compatible(char *arg)
 {
-	int i;
-	int ret;
+	int		i;
+	int		ret;
 
 	i = 0;
 	ret = 0;
@@ -32,9 +32,9 @@ static int		cmd_is_compatible(char *arg)
 	return (ret);
 }
 
-char	**bi_setenv(char **envp, char **argv, t_shvar **shvar)
+char		**bi_setenv(char **envp, char **argv, t_shvar **shvar)
 {
-	int	i;
+	int		i;
 
 	i = 1;
 	while (argv[i])

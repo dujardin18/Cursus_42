@@ -6,17 +6,17 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 13:53:57 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/25 18:57:43 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:58:01 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static int	get_name_in_line(char *line, char *name)
+static int		get_name_in_line(char *line, char *name)
 {
-	char	*tmp;
-	int		i;
-	int		ret;
+	char		*tmp;
+	int			i;
+	int			ret;
 
 	i = 0;
 	ret = 0;
@@ -34,10 +34,10 @@ static int	get_name_in_line(char *line, char *name)
 	return (ret);
 }
 
-static int	spec_len_env(char *line)
+static int		spec_len_env(char *line)
 {
-	int		tmp;
-	int		i;
+	int			tmp;
+	int			i;
 
 	tmp = ft_strlen(line);
 	i = 0;
@@ -69,9 +69,9 @@ static char		*get_value(char *line)
 	return (ret);
 }
 
-char		*ftsh_search_envar(char **envp, char *name)
+char			*ftsh_search_envar(char **envp, char *name)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (envp[i])

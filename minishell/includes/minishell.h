@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:30:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 14:53:27 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 16:24:55 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,16 @@ char			*ms_get_prompt(char **envp);
 void			prompt_get_cmd_line(char **envp, t_shvar *shvar);
 
 int				cmd_is_builtin(char *cmd);
-char			**launch_builtin(int argc, char **argv, char **envp, t_shvar **shvar);
-t_envlist		*launch_other(t_envlist *paths, char **argv, char **envp);
+char			**launch_builtin(int argc, char **argv, \
+		char **envp, t_shvar **shvar);
+t_envlist		*launch_other(t_envlist *paths, char **argv);
 t_envlist		*new_envpath(char **envp);
 int				bin_path(t_envlist *path);
 
 void			command_unknown(char *unknown);
-void			env_var_used(char *name, char *to_free);
+t_shvar			*env_var_used(char *name, char *to_free, t_shvar *shvar);
+void			no_fod(char *disp);
+void			no_opwd(void);
 
 void			bi_env(char **envp);
 
@@ -96,5 +99,5 @@ t_shvar			*add_shvar_elem(t_shvar *first, char *cmd);
 void			free_shvar(t_shvar *shv_lst);
 
 char			**init_env(char **envp, t_shvar **shvar);
-#endif
 
+#endif

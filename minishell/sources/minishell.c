@@ -6,45 +6,52 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:35:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 14:54:47 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:21:32 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_shvar		*launch_cmd(int argc, char **argv, char ***envp, t_shvar *shvar)
+static t_shvar	*lcmd_aux(char **argv, t_envlist *paths, \
+		char ***envp, t_shvar *shvar)
 {
-	pid_t	father;
-	t_envlist	*paths;
 	t_envlist	*cp;
+	pid_t		father;
 
-	if (cmd_is_builtin(argv[0]))
-		*envp = launch_builtin(argc, argv, *envp, &shvar);
-	else
+	paths = new_envpath(*envp);
+	cp = paths;
+	paths = launch_other(cp, argv);
+	if (bin_path(paths))
 	{
-		paths = new_envpath(*envp);
-		cp = paths;
-		paths = launch_other(cp, argv, *envp);
-		if (bin_path(paths))
+		father = fork();
+		if (father == 0)
 		{
-			father = fork();
-			if (father == 0)
-			{
-				while (access(cp->value, X_OK) != 0)
-					cp = cp->next;
-				execve(cp->value, argv, *envp);
-			}
-			if (father > 0)
-				wait(&father);
+			while (access(cp->value, X_OK) != 0)
+				cp = cp->next;
+			execve(cp->value, argv, *envp);
 		}
-		else
-			shvar = exec_or_var(argv, *envp, shvar);
-		free_envlist(paths);
+		if (father > 0)
+			wait(&father);
 	}
+	else
+		shvar = exec_or_var(argv, *envp, shvar);
+	free_envlist(paths);
 	return (shvar);
 }
 
-t_shvar			*exec_all_cmds(t_commands *cmds, char ***envp, t_shvar *shvar)
+static t_shvar	*launch_cmd(int argc, char **argv, char ***envp, t_shvar *shvar)
+{
+	t_envlist	*paths;
+
+	paths = NULL;
+	if (cmd_is_builtin(argv[0]))
+		*envp = launch_builtin(argc, argv, *envp, &shvar);
+	else
+		shvar = lcmd_aux(argv, paths, envp, shvar);
+	return (shvar);
+}
+
+static t_shvar	*exec_all_cmds(t_commands *cmds, char ***envp, t_shvar *shvar)
 {
 	t_commands	*cp;
 
@@ -57,7 +64,7 @@ t_shvar			*exec_all_cmds(t_commands *cmds, char ***envp, t_shvar *shvar)
 	return (shvar);
 }
 
-t_shvar			*exec_cmd_line(char ***envp, t_shvar *shvar)
+static t_shvar	*exec_cmd_line(char ***envp, t_shvar *shvar)
 {
 	t_commands	*cmds;
 	char		*ln;
@@ -76,9 +83,9 @@ t_shvar			*exec_cmd_line(char ***envp, t_shvar *shvar)
 	return (shvar);
 }
 
-void		prompt_get_cmd_line(char **envp, t_shvar *shvar)
+void			prompt_get_cmd_line(char **envp, t_shvar *shvar)
 {
-	char	*prompt;
+	char		*prompt;
 
 	while (1)
 	{

@@ -6,16 +6,16 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/25 18:05:12 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/25 19:07:05 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:58:47 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	char	*get_name_aux(char *value)
+static char	*get_name_aux(char *value)
 {
-	char		*ret;
-	int			i;
+	char	*ret;
+	int		i;
 
 	i = 0;
 	if (!(ret = (char *)malloc(sizeof(char) * (ft_strlen(value) + 1))))
@@ -29,7 +29,7 @@ static	char	*get_name_aux(char *value)
 	return (ret);
 }
 
-char	**ft_tab_del_elem(char **tab, char *name)
+char		**ft_tab_del_elem(char **tab, char *name)
 {
 	int		i;
 	int		i2;

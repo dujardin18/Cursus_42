@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bi_echo.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/27 15:48:17 by fherbine          #+#    #+#             */
+/*   Updated: 2018/02/27 16:21:07 by fherbine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-int		fake_var(char *arg, t_shvar *shvar)
+static int	fake_var(char *arg, t_shvar *shvar)
 {
 	t_shvar	*cp;
 
@@ -16,7 +28,7 @@ int		fake_var(char *arg, t_shvar *shvar)
 	return (1);
 }
 
-char	*looking_for_val(char *word, t_shvar *shvar)
+static char	*looking_for_val(char *word, t_shvar *shvar)
 {
 	t_shvar	*cp;
 	char	*tmp;
@@ -36,7 +48,7 @@ char	*looking_for_val(char *word, t_shvar *shvar)
 	return (ft_strdup(""));
 }
 
-void	print_var(char *word, t_shvar *shvar, int sp)
+static void	print_var(char *word, t_shvar *shvar, int sp)
 {
 	char	*tmp;
 
@@ -48,11 +60,11 @@ void	print_var(char *word, t_shvar *shvar, int sp)
 	free(tmp);
 }
 
-void	bi_echo(char **argv, t_shvar *shvar)
+void		bi_echo(char **argv, t_shvar *shvar)
 {
-	int	i;
-	int nl;
-	int	sp;
+	int		i;
+	int		nl;
+	int		sp;
 
 	i = 1;
 	nl = 1;
@@ -72,5 +84,5 @@ void	bi_echo(char **argv, t_shvar *shvar)
 		sp = 1;
 		i++;
 	}
-	ft_prints("%s", (nl == 1) ? "\n": "\033[7mX\033[0m\n");
+	ft_prints("%s", (nl == 1) ? "\n" : "\033[7mX\033[0m\n");
 }

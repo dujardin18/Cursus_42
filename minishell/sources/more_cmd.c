@@ -6,15 +6,15 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 19:27:10 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/22 19:44:17 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:12:30 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		ms_isvar(char *cmd)
+int				ms_isvar(char *cmd)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	if (cmd[0] == '=')
@@ -36,11 +36,11 @@ int		ms_isvar(char *cmd)
 	return (1);
 }
 
-t_shvar	*get_all_shvar(char **argv, char **envp, t_shvar *shvar)
+static t_shvar	*get_all_shvar(char **argv, char **envp, t_shvar *shvar)
 {
-	char	*notenv;
-	char	*tmp;
-	int		i;
+	char		*notenv;
+	char		*tmp;
+	int			i;
 
 	i = 0;
 	while (argv[i])
@@ -49,10 +49,8 @@ t_shvar	*get_all_shvar(char **argv, char **envp, t_shvar *shvar)
 		{
 			tmp = get_var_name(argv[i]);
 			notenv = ftsh_search_envar(envp, tmp);
-			if (!notenv)
-				shvar = add_shvar_elem(shvar, argv[i]);
-			else
-				env_var_used(tmp, notenv);
+			shvar = (!notenv) ? add_shvar_elem(shvar, argv[i]) : \
+					env_var_used(tmp, notenv, shvar);
 			free(tmp);
 			free(notenv);
 		}
@@ -66,9 +64,9 @@ t_shvar	*get_all_shvar(char **argv, char **envp, t_shvar *shvar)
 	return (shvar);
 }
 
-t_shvar		*exec_or_var(char **argv, char **envp, t_shvar *shvar)
+t_shvar			*exec_or_var(char **argv, char **envp, t_shvar *shvar)
 {
-	pid_t	father;
+	pid_t		father;
 
 	if (ftsh_ispath(argv[0]) && access(argv[0], F_OK) == 0)
 	{

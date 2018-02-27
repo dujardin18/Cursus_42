@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shvar_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/27 15:00:34 by fherbine          #+#    #+#             */
+/*   Updated: 2018/02/27 15:05:07 by fherbine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-char	*get_var_name(char *cmd)
+char			*get_var_name(char *cmd)
 {
-	int	i;
-	char	*ret;
+	int			i;
+	char		*ret;
 
 	i = 0;
 	if (!(ret = (char *)malloc(sizeof(char) * (ft_strlen(cmd) + 1))))
@@ -17,11 +29,11 @@ char	*get_var_name(char *cmd)
 	return (ret);
 }
 
-char	*get_var_val(char *cmd)
+char			*get_var_val(char *cmd)
 {
-	int	i;
-	int	i2;
-	char	*ret;
+	int			i;
+	int			i2;
+	char		*ret;
 
 	i = 0;
 	i2 = 0;
@@ -40,9 +52,9 @@ char	*get_var_val(char *cmd)
 	return (ret);
 }
 
-t_shvar	*new_shvar_lst(char *name, char *value)
+static	t_shvar	*new_shvar_lst(char *name, char *value)
 {
-	t_shvar	*new;
+	t_shvar		*new;
 
 	if (!(new = (t_shvar *)malloc(sizeof(t_shvar))))
 		exit(EXIT_FAILURE);
@@ -52,11 +64,11 @@ t_shvar	*new_shvar_lst(char *name, char *value)
 	return (new);
 }
 
-t_shvar	*add_shvar_elem(t_shvar *first, char *cmd)
+t_shvar			*add_shvar_elem(t_shvar *first, char *cmd)
 {
-	char	*value;
-	char	*name;
-	t_shvar	*new;
+	char		*value;
+	char		*name;
+	t_shvar		*new;
 
 	name = get_var_name(cmd);
 	value = get_var_val(cmd);
@@ -76,9 +88,9 @@ t_shvar	*add_shvar_elem(t_shvar *first, char *cmd)
 	return (first);
 }
 
-void	free_shvar(t_shvar *shv_lst)
+void			free_shvar(t_shvar *shv_lst)
 {
-	t_shvar	*cp;
+	t_shvar		*cp;
 
 	cp = shv_lst;
 	while (shv_lst)
