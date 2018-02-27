@@ -83,6 +83,8 @@ char			**bi_unsetenv(char **envp, t_shvar **shvar, char **argv);
 
 char			**bi_setenv(char **envp, char **argv, t_shvar **shvar);
 
+char			**bi_cd(t_shvar **shvar, char **argv, char **envp);
+
 int				ms_isvar(char *cmd);
 t_shvar			*exec_or_var(char **argv, char **envp, t_shvar *shvar);
 

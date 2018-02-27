@@ -63,6 +63,7 @@ t_shvar			*exec_cmd_line(char ***envp, t_shvar *shvar)
 	char		*ln;
 	int			n;
 
+	ln = NULL;
 	n = get_next_line(0, &ln);
 	if (n > 0)
 	{

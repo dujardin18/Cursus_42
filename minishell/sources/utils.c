@@ -34,6 +34,8 @@ char **launch_builtin(int argc, char **argv, char **envp, t_shvar **shvar)
 		envp = bi_unsetenv(envp, shvar, argv);
 	else if (ft_strcmp(argv[0], "setenv") == 0)
 		envp = bi_setenv(envp, argv, shvar);
+	else if (ft_strcmp(argv[0], "cd") == 0)
+		envp = bi_cd(shvar, argv, envp);
 	return (envp);
 }
 

@@ -35,7 +35,7 @@ int		main(int argc, char **argv, char **envp)
 	shvar = NULL;
 	envcp = ft_copy_tab(envp);
 	shvar = get_shvar_from_env(envcp, shvar);
-	envcp = init_env(envcp, &shvar);
+	envcp = init_env(envcp, &shvar); // error on first gnl !
 	if (argc == 1)
 		prompt_get_cmd_line(envcp, shvar);
 	else
