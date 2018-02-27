@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 16:15:47 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/25 19:06:55 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 14:37:49 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,22 @@ static char	*get_shl(char **envp)
 	return (tmp);
 }
 
+static char	*get_dir_name(char buf[1024], char **envp)
+{
+	char	*home_d;
+	char	*n_cwd;
+
+	n_cwd = (ft_strcmp(buf, SLSH_D) == 0) ? ft_strdup("/") : ftsh_get_np(buf);
+	home_d = ftsh_search_envar(envp, "HOME");
+	if (ft_strcmp(buf, home_d) == 0)
+	{
+		free(n_cwd);
+		n_cwd = ft_strdup("~");
+	}
+	free(home_d);
+	return (n_cwd);
+}
+
 char		*ms_get_prompt(char **envp)
 {
 	char	*prmpt;
@@ -47,7 +63,7 @@ char		*ms_get_prompt(char **envp)
 
 	getcwd(buf, 1024);
 	shl = get_shl(envp);
-	n_cwd = ftsh_get_np(buf);
+	n_cwd = get_dir_name(buf, envp);
 	n_cwd = add_color_to_elem(n_cwd, GREEN);
 	user = ftsh_getuser(envp);
 	user = add_color_to_elem(user, YELLOW);

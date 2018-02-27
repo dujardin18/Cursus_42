@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:30:45 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/25 19:53:01 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 14:53:27 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define B_MAGENTA "\033[1;35;40m"
 # define B_CYAN "\033[1;36;40m"
 # define B_WHITE "\033[1;37;40m"
+
+# define SLSH_D "/"
 
 typedef struct	s_cm
 {
@@ -68,7 +70,7 @@ int				cmd_is_builtin(char *cmd);
 char			**launch_builtin(int argc, char **argv, char **envp, t_shvar **shvar);
 t_envlist		*launch_other(t_envlist *paths, char **argv, char **envp);
 t_envlist		*new_envpath(char **envp);
-int				bin_path(char *name, t_envlist *path);
+int				bin_path(t_envlist *path);
 
 void			command_unknown(char *unknown);
 void			env_var_used(char *name, char *to_free);
@@ -83,7 +85,7 @@ char			**bi_unsetenv(char **envp, t_shvar **shvar, char **argv);
 
 char			**bi_setenv(char **envp, char **argv, t_shvar **shvar);
 
-char			**bi_cd(t_shvar **shvar, char **argv, char **envp);
+char			**bi_cd(t_shvar **shvar, char **argv, char **envp, int argc);
 
 int				ms_isvar(char *cmd);
 t_shvar			*exec_or_var(char **argv, char **envp, t_shvar *shvar);

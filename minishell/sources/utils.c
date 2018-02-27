@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:25:23 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/25 19:51:03 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 14:53:14 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char **launch_builtin(int argc, char **argv, char **envp, t_shvar **shvar)
 	else if (ft_strcmp(argv[0], "setenv") == 0)
 		envp = bi_setenv(envp, argv, shvar);
 	else if (ft_strcmp(argv[0], "cd") == 0)
-		envp = bi_cd(shvar, argv, envp);
+		envp = bi_cd(shvar, argv, envp, argc);
 	return (envp);
 }
 
@@ -67,7 +67,7 @@ t_envlist		*new_envpath(char **envp)
 	return (new);
 }
 
-int				bin_path(char *name, t_envlist *path)
+int				bin_path(t_envlist *path)
 {
 	t_envlist	*cp;
 

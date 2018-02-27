@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 16:35:00 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/25 19:50:27 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/02/27 14:54:47 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_shvar		*launch_cmd(int argc, char **argv, char ***envp, t_shvar *shvar)
 	{
 		paths = new_envpath(*envp);
 		cp = paths;
-		paths = launch_other(cp, argv, *envp); // leaks
-		if (bin_path(argv[0], paths))
+		paths = launch_other(cp, argv, *envp);
+		if (bin_path(paths))
 		{
 			father = fork();
 			if (father == 0)
