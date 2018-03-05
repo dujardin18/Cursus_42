@@ -27,11 +27,9 @@ static t_shvar	*get_shvar_from_env(char **envp, t_shvar *shvar)
 
 int				main(int argc, char **argv, char **envp)
 {
-	int			end;
 	t_shvar		*shvar;
 	char		**envcp;
 
-	end = 0;
 	shvar = NULL;
 	envcp = ft_copy_tab(envp);
 	shvar = get_shvar_from_env(envcp, shvar);

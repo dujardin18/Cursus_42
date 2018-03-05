@@ -33,7 +33,7 @@ SRCS = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
 	   ft_tab_len.c ft_free_tab.c ft_tab_del_elem.c ft_copy_tab.c \
 	   ft_add_tab_elem.c
 NAME = libft.a
-INCLUDE = libft.h
+INCLUDE = ./
 FLAGS = -Wall -Wextra -Werror
 OBJ = $(SRCS:.c=.o)
 
