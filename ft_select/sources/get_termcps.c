@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:12:56 by fherbine          #+#    #+#             */
-/*   Updated: 2018/03/14 15:44:58 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/03/14 16:05:49 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,7 @@ struct termios	init_trmcps(char **envp)
 	if (tcgetattr(0, &term_c) == -1)
 		other_err();
 	free(term_name);
+	return (term_c);
 }
+
+
