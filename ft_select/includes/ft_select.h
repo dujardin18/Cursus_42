@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:13:59 by fherbine          #+#    #+#             */
-/*   Updated: 2018/03/13 17:27:26 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/03/14 15:26:03 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <termios.h>
 
 void			term_name_not_found(void);
+void			cannot_get_termcaps(void);
 
 struct termios	init_trmcps(char **envp);
 
