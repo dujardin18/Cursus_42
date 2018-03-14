@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:23:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/03/14 15:25:14 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/03/14 15:44:50 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,13 @@ void	term_name_not_found(void)
 
 void	cannot_get_termcaps(void)
 {
-	ft_prints_fd(2, "ft_select: An error occures when the program tried to get \
+	ft_prints_fd(2, "ft_select: An error occured when the program tried to get \
 			terminal capacities\n");
+	exit(EXIT_FAILURE);
+}
+
+void	other_err(void)
+{
+	ft_prints_fd(2, "ft_select: An error occured\n");
 	exit(EXIT_FAILURE);
 }
