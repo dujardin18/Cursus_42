@@ -6,7 +6,7 @@
 #    By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/13 17:03:43 by fherbine          #+#    #+#              #
-#    Updated: 2018/03/13 17:04:56 by fherbine         ###   ########.fr        #
+#    Updated: 2018/03/14 15:30:04 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = ft_select
 INCLUDES = includes
 SRC_PATH = sources
 OBJ_PATH = $(SRC_PATH)/debug
-SRC_NAME = 
+SRC_NAME = main.c ftsl_errors.c get_termcps.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
