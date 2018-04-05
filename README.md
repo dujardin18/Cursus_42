@@ -7,10 +7,11 @@ school 42.
 
 ======================== WHAT YOU CAN FIND HERE : ==============================
 
-1.	Projects already done:
+1. Projects already done:
 
-	- [piscine_reloaded](piscine_reloaded) : First project of our cursus:
+   - [piscine_reloaded](piscine_reloaded) : First project of our cursus:
 >	Learning C programming with basics exercises. Final grade: **100/100**
 
-	- [Libft](libft) : 
+
+   - [Libft](libft) : 
 >	Consisted in coding our own Standard C Library. Final grade: **124/100**
