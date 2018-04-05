@@ -5,9 +5,9 @@ This is my personal reposiotory for what I've done and what I'm doing at the
 school 42.
 
 
-## ======================== WHAT YOU CAN FIND HERE : ==============================
+###### ======================== WHAT YOU CAN FIND HERE : ==============================
 
-### 1. Projects already done:
+1. Projects already done:
 
    - [piscine_reloaded](piscine_reloaded) : First project of our cursus:
      > Learning C programming with basics exercises. Final grade: **100/100**
