@@ -30,7 +30,7 @@ school 42 in C programming language.
      to draw it with a 3D effect. Using MLX - API, wich use AppKit & OpenGL.
      Final grade: **125/100**
 
-   - [ft_printf](ft_printf)
+   - [ft_printf](printf)
      > In this project, I had to code Standard C Library function `printf()`
      Final grade: **86/100**
 
