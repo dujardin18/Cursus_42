@@ -5,7 +5,7 @@ This is my personal reposiotory for what I've done and what I'm doing at the
 school 42.
 
 
-###### ======================== WHAT YOU CAN FIND HERE : ==============================
+##### ======================== WHAT YOU CAN FIND HERE : ==============================
 
 1. Projects already done:
 
