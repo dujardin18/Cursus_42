@@ -12,7 +12,6 @@ school 42.
 	- [piscine_reloaded](piscine_reloaded) : First project of our cursus:
 >	Learning C programming with basics exercises
 >	Final grade: **100/100**
-
 	- [Libft](libft) : 
 >	Consisted in coding our own Standard C Library
 >	Final grade: **124/100**
