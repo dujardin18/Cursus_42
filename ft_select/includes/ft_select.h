@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:13:59 by fherbine          #+#    #+#             */
-/*   Updated: 2018/04/09 15:11:19 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/04/09 15:41:40 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void			modif_trm(void);
 void			default_trm(void);
 
 void			init_cursor(void);
+t_slp			init_slp(void);
 
 void			goto_cursor(int x, int y);
 

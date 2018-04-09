@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 11:28:09 by fherbine          #+#    #+#             */
-/*   Updated: 2018/04/09 14:51:33 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/04/09 15:53:08 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,13 @@ int     voir_touche()
 
 int		main(int argc, char **argv)
 {
+	t_slp	sl_params;
 
+	sl_params = init_slp();
 	modif_trm();
 	voir_touche();
+	ft_prints("l: %d\n", sl_params.sz.ws_row);
+	ft_prints("c: %d\n", sl_params.sz.ws_col);
 	default_trm();
 	return (0);
 }
