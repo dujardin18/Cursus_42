@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sl_key.h                                           :+:      :+:    :+:   */
+/*   term_actions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/09 13:07:41 by fherbine          #+#    #+#             */
-/*   Updated: 2018/04/09 14:50:15 by fherbine         ###   ########.fr       */
+/*   Created: 2018/04/09 15:10:10 by fherbine          #+#    #+#             */
+/*   Updated: 2018/04/09 15:10:48 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SL_KEY_H
+#include "../includes/ft_select.h"
 
-# define SL_KEY_H
-
-# define A_LEFT "\033[D"
-# define A_RIGHT "\033[C"
-# define A_UP "\033[A"
-# define A_DOWN "\033[B"
-
-# define K_ESC "\033"
-
-#endif
+void	goto_cursor(int x, int y)
+{
+	ft_prints("%s[%d;%dH", K_ESC, x, y);
+}

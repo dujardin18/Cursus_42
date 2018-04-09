@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sl_key.h                                           :+:      :+:    :+:   */
+/*   sl_term.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/09 13:07:41 by fherbine          #+#    #+#             */
-/*   Updated: 2018/04/09 14:50:15 by fherbine         ###   ########.fr       */
+/*   Created: 2018/04/09 14:26:21 by fherbine          #+#    #+#             */
+/*   Updated: 2018/04/09 14:44:04 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SL_KEY_H
+#ifndef SL_TERM_H
 
-# define SL_KEY_H
+# define SL_TERM_H
 
-# define A_LEFT "\033[D"
-# define A_RIGHT "\033[C"
-# define A_UP "\033[A"
-# define A_DOWN "\033[B"
+# define ORIGIN_POS "\033[H"
+# define SAVE_POS "\033[s"
+# define RESET_POS "\033[u"
 
-# define K_ESC "\033"
+# define ERASE_DISP "\033[2J"
 
 #endif
