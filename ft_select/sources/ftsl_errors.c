@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:23:02 by fherbine          #+#    #+#             */
-/*   Updated: 2018/03/14 15:44:50 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/04/09 11:22:49 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,11 @@ void	cannot_get_termcaps(void)
 void	other_err(void)
 {
 	ft_prints_fd(2, "ft_select: An error occured\n");
+	exit(EXIT_FAILURE);
+}
+
+void	def_err(void)
+{
+	ft_prints_fd(2, "ft_select: Cannot reset default termcaps\n");
 	exit(EXIT_FAILURE);
 }
