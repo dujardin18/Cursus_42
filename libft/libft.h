@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/02 22:27:47 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/02 22:41:06 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include <dirent.h>
-# include "shell_lib/shell_lib.h"
 
 # define BUFF_SIZE 32
 
@@ -205,24 +204,13 @@ void					ft_put_n_char(int n, int c);
 
 char					*ft_append_slash(char *path);
 
-char					*ftsh_getuser(char **envp);
-
-char					*ftsh_search_envar(char **envp, char *name);
-
 int						ftsh_cwdgit(char *p_cwd);
 
 char					*ftsh_get_np(char *path);
 
-t_envlist				*get_envlist(char **envp, char *name);
-
-void					free_envlist(t_envlist *lst);
-
 int						ft_is_in_dir(char *name, char *path);
 
 int						ftsh_ispath(char *path);
-
-char					**ftsh_del_envar(t_shvar **first, char *name, char \
-		**envp);
 
 int						ft_tab_len(char **tab);
 

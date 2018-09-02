@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 17:11:44 by fherbine          #+#    #+#             */
-/*   Updated: 2017/11/14 12:27:47 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/02 22:39:04 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ void	ft_putendl_fd(char const *s, int fd)
 	i = 0;
 	if (!(s))
 		return ;
-	while (s[i] != '\0')
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
+	ft_putstr_fd(s, fd);
 	ft_putchar_fd('\n', fd);
 }
