@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_copy_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/08 16:00:42 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/27 17:02:09 by fherbine         ###   ########.fr       */
+/*   Created: 2018/02/25 18:32:51 by fherbine          #+#    #+#             */
+/*   Updated: 2018/02/25 18:39:20 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+char		**ft_copy_tab(char **tab)
 {
-	size_t i;
+	int		i;
+	char	**new;
 
+	if (!(new = (char **)malloc(sizeof(char *) * (ft_tab_len(tab) + 1))))
+		exit(EXIT_FAILURE);
 	i = 0;
-	if (!s1 && !s2)
-		return (0);
-	else if (!s1 || !s2)
-		return (-1);
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+	while (tab[i])
+	{
+		new[i] = ft_strdup(tab[i]);
 		i++;
-	return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
+	}
+	new[i] = 0;
+	return (new);
 }

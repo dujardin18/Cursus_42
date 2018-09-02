@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_add_tab_elem.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 11:05:48 by fherbine          #+#    #+#             */
-/*   Updated: 2018/02/13 18:37:10 by fherbine         ###   ########.fr       */
+/*   Created: 2018/02/25 19:12:52 by fherbine          #+#    #+#             */
+/*   Updated: 2018/02/25 19:17:01 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memalloc(size_t size)
+char		**ft_add_tab_elem(char **tab, char *elem)
 {
-	void *s;
+	char	**new;
+	int		i;
 
-	if ((s = (malloc(size))) == NULL)
+	if (!(new = (char **)malloc(sizeof(char *) * (ft_tab_len(tab) + 2))))
 		exit(EXIT_FAILURE);
-	ft_bzero(s, size);
-	return (s);
+	i = 0;
+	while (tab[i])
+	{
+		new[i] = ft_strdup(tab[i]);
+		i++;
+	}
+	ft_free_tab(tab);
+	new[i] = ft_strdup(elem);
+	new[i + 1] = 0;
+	return (new);
 }
