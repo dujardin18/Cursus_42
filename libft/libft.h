@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/03 04:35:38 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/03 07:45:11 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,6 @@ char					**ft_copy_tab(char **tab);
 
 char					**ft_add_tab_elem(char **tab, char *elem);
 
-s8						*ft_getenv(s8 **envp, s8 *search);
+char					*ft_getenv(char **envp, char *search);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/02 23:27:44 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/03 04:37:38 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/03 07:45:44 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static char	is_searched_var(s8 *line, s8 *search)
+static char	is_searched_var(char *line, char *search)
 {
 	short	i;
 
