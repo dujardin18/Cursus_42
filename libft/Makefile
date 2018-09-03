@@ -6,10 +6,11 @@
 #    By: fherbine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 17:03:11 by fherbine          #+#    #+#              #
-#    Updated: 2018/09/02 22:58:53 by fherbine         ###   ########.fr        #
+#    Updated: 2018/09/03 04:25:30 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+LIBSH = libsh/
 OBJ_PATH = ./debug
 SRCS = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
 	   ft_strncat.c ft_strlcat.c ft_strchr.c ft_strrchr.c \
@@ -27,7 +28,7 @@ SRCS = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
 	   ft_putnbr_base.c get_next_line.c ft_absol.c ft_nlen_base.c ft_nlen.c \
 	   ft_itoa_base.c ft_prints.c ft_specifier_prints.c ft_put_n_char.c \
 	   ft_append_slash.c ft_is_in_dir.c ft_tab_len.c ft_free_tab.c \
-	   ft_tab_del_elem.c ft_copy_tab.c ft_add_tab_elem.c
+	   ft_tab_del_elem.c ft_copy_tab.c ft_add_tab_elem.c $(LIBSH)/ft_getenv.c
 NAME = libft.a
 INCLUDES = ./
 CFLAGS = -Wall -Wextra -Werror
@@ -40,6 +41,7 @@ all: $(NAME)
 
 $(OBJ_PATH):
 	@mkdir $@
+	@mkdir $@/$(LIBSH)
 
 $(NAME): $(OBJ_PATH) $(OBJ)
 	@ar rcs $(NAME) $(OBJ)

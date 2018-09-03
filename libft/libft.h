@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/03 02:32:40 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/03 04:35:38 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,10 @@
 # include <stdarg.h>
 # include <dirent.h>
 # include "libsh/libsh.h"
+# include "defines/ansi.h"
+# include "defines/references.h"
 
 # define BUFF_SIZE 32
-
-typedef unsigned char	u8;
-typedef unsigned short	u16;
-typedef unsigned int	u32;
-
-typedef signed char		s8;
-typedef signed short	s16;
-typedef signed int		s32;
-
-#define U8_MAX 0xFF
-#define U16_MAX 0xFFFF
-#define U32_MAX 0xFFFFFFFF
 
 typedef	struct			s_list
 {

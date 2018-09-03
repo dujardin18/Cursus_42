@@ -6,15 +6,15 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/02 23:27:44 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/03 02:28:30 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/03 04:37:38 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static u8	is_searched_var(s8 *line, s8 *search)
+static char	is_searched_var(s8 *line, s8 *search)
 {
-	u16		i;
+	short	i;
 
 	i = 0;
 	if (!line || !search)
@@ -26,11 +26,11 @@ static u8	is_searched_var(s8 *line, s8 *search)
 	return (0);
 }
 
-static s8	*get_var_value(s8 *line)
+static char	*get_var_value(char *line)
 {
-	u16		i;
-	u16		i2;
-	u8		*ret;
+	short	i;
+	short	i2;
+	char	*ret;
 
 	i = 0;
 	i2 = 0;
@@ -38,7 +38,7 @@ static s8	*get_var_value(s8 *line)
 		i++;
 	if (!line[i] || line[i] != '=')
 		return (NULL);
-	ret = (s8 *)ft_memaloc(ft_strlen(line - i + 1));
+	ret = (char *)ft_memalloc(sizeof(char) * ft_strlen(line) - i + 1);
 	i++;
 	while (line[i])
 	{
@@ -49,9 +49,9 @@ static s8	*get_var_value(s8 *line)
 	return (ret);
 }
 
-s8		*ft_getenv(s8 **envp, s8 *search)
+char		*ft_getenv(char **envp, char *search)
 {
-	u32	i;
+	int		i;
 
 	i = 0;
 	while (envp[i])
