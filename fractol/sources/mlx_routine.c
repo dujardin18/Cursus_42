@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 20:50:11 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/07 00:03:25 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/07 09:04:00 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void		init_window(t_container *map)
 {
 	map->win_x = WIN_X;
 	map->win_y = WIN_Y;
+	map->wheel_x = WIN_X / 2;
+	map->wheel_y = WIN_Y / 2;
 	if (!(map->mlx = mlx_init()))
 		map->regs.err_reg |= (0x1 << 0);
 	if (!(map->win = mlx_new_window(map->mlx, map->win_x, map->win_y, WIN_TITLE)))

@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 22:23:48 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/07 00:05:09 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/07 09:53:16 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,23 @@ void	create_img(t_container *map, int win_x, int win_y)
 	map->imgs[idx].height = win_y;
 	if (!(map->imgs[idx].img = mlx_new_image(map->mlx, win_x, win_y)))
 		map->regs.err_reg |= (0x1 << 1);
-	map->imgs[idx].encode = ft_strdup(mlx_get_data_addr(map->imgs[idx].img, \
-				&(map->bpp), &(map->sl), &(map->endian)));
+	map->imgs[idx].encode = mlx_get_data_addr(map->imgs[idx].img, \
+				&(map->bpp), &(map->sl), &(map->endian));
 	if (!(map->regs.err_reg & (0x1 << 1)))
 	{
 		map->regs.st_reg |= (0x1 << 1);
 		map->regs.imgs_used += 1;
 	}
+}
+
+void	mlx_update_img(t_container *map, int im_idx)
+{
+	t_mlx_img	*img;
+
+//	ft_prints("%d\n", img->width);
+	mlx_destroy_image(map->mlx, map->imgs[im_idx].img);
+	map->imgs[im_idx].img = mlx_new_image(map->mlx, map->imgs[im_idx].width, map->imgs[im_idx].height);
+	map->imgs[im_idx].encode = mlx_get_data_addr(map->imgs[im_idx].img, &(map->bpp), &(map->sl), &(map->endian));
 }
 
 void	put_img_pix(t_container *map, int img_idx, int x, int y, int col)
@@ -50,7 +60,6 @@ void	close_imgs(t_container *map)
 	i = 0;
 	while (i < map->regs.imgs_used)
 	{
-		free(map->imgs[i].encode);
 		mlx_destroy_image(map->mlx, map->imgs[i].img);
 		i++;
 	}

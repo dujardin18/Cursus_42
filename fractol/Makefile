@@ -6,7 +6,7 @@
 #    By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/06 19:17:37 by fherbine          #+#    #+#              #
-#    Updated: 2018/09/07 00:30:15 by fherbine         ###   ########.fr        #
+#    Updated: 2018/09/07 08:04:03 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SPATH = sources
 LFTPATH = libft
 MLXPATH =  minilibx_macos
 OPATH = $(SPATH)/debug
-SNAMES = main.c mlx_routine.c errors.c getkeyboard.c mlx_imgs.c mouse.c
+SNAMES = main.c mlx_routine.c errors.c getkeyboard.c mlx_imgs.c mouse.c frac_utils.c
 ONAMES = $(SNAMES:.c=.o)
 SRCS = $(addprefix $(SPATH)/,$(SNAMES))
 OBJS = $(addprefix $(OPATH)/,$(ONAMES))
