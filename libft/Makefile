@@ -6,7 +6,7 @@
 #    By: fherbine <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/07 17:03:11 by fherbine          #+#    #+#              #
-#    Updated: 2018/09/03 04:25:30 by fherbine         ###   ########.fr        #
+#    Updated: 2018/09/08 04:12:01 by fherbine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRCS = ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
 	   ft_putnbr_base.c get_next_line.c ft_absol.c ft_nlen_base.c ft_nlen.c \
 	   ft_itoa_base.c ft_prints.c ft_specifier_prints.c ft_put_n_char.c \
 	   ft_append_slash.c ft_is_in_dir.c ft_tab_len.c ft_free_tab.c \
-	   ft_tab_del_elem.c ft_copy_tab.c ft_add_tab_elem.c $(LIBSH)/ft_getenv.c
+	   ft_tab_del_elem.c ft_copy_tab.c ft_add_tab_elem.c ft_capitalize.c \
+	   $(LIBSH)/ft_getenv.c
 NAME = libft.a
 INCLUDES = ./
 CFLAGS = -Wall -Wextra -Werror
