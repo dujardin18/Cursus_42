@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 02:38:04 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/03 04:38:17 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/08 03:53:54 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define BLUE "\033[0;34;40m"
 # define MAGENTA "\033[0;35;40m"
 # define CYAN "\033[0;36;40m"
-# define REGULAR "\033[40m"
+# define REGULAR "\033[0m"
 
 # define CURSOR_UP "\033[1A"
 # define CURSOR_DOWN "\033[1B"
