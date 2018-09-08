@@ -6,7 +6,7 @@
 /*   By: fherbine <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 17:08:20 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/03 07:45:11 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/08 04:12:38 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,5 +218,7 @@ char					**ft_copy_tab(char **tab);
 char					**ft_add_tab_elem(char **tab, char *elem);
 
 char					*ft_getenv(char **envp, char *search);
+
+void					ft_capitalize(char **p_str);
 
 #endif

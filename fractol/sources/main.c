@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 20:52:18 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/07 09:22:54 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/08 04:27:03 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,25 +107,37 @@ void			test2(t_container *map)
 void			fractol(t_container *map)
 {
 	create_img(map, WIN_X, WIN_Y);
-	map->f_typ = JULIA;
 	init_fract(map, MAIN_IMG, map->f_typ);
 	draw_fract(map, MAIN_IMG, map->f_typ);
 	//test(map);
 	//ft_prints("REG %s%x%s\n", RED, map->regs.st_reg, REGULAR);
-	mlx_put_image_to_window(map->mlx, map->win, map->imgs[MAIN_IMG].img, 0, 0);
+	//mlx_put_image_to_window(map->mlx, map->win, map->imgs[MAIN_IMG].img, 0, 0);
 	mlx_key_hook(map->win, ft_key_read, (void *)map);
 	mlx_mouse_hook(map->win, ft_mouse_read, (void *)map);
+}
+
+void			frac_init(int argc, char **argv, t_container *map)
+{
+	if (argc < 2)
+		few_param_ex();
+	ft_capitalize(&(argv[1]));
+	if (!ft_strcmp(argv[1], "JULIA"))
+		map->f_typ = JULIA;
+	else if (!ft_strcmp(argv[1], "MANDEL"))
+		map->f_typ = MANDEL;
+	else
+		inv_param_ex();
+	init_regs(map);
+	init_window(map);
+	if (map->regs.err_reg)
+		close_prgm(map, "An error occurred during initialization !", -1);
 }
 
 int				main(int argc, char **argv)
 {
 	t_container	map;
 
-
-	init_regs(&map);
-	init_window(&map);
-	if (map.regs.err_reg)
-		close_prgm(&map, "An error occurred during initialization !", -1);
+	frac_init(argc, argv, &map);
 	fractol(&map);
 	mlx_loop(map.mlx);
 	return (0);

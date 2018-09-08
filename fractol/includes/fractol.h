@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 22:18:27 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/07 09:23:53 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/08 04:26:47 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	close_imgs(t_container *map);
 void	put_img_pix(t_container *map, int img_idx, int xPos, int yPos, int col);
 
 void	msg_exit(char *msg);
+void	few_param_ex(void);
+void	inv_param_ex(void);
 
 int		ft_key_read(int keycode, void *param);
 
