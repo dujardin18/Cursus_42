@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 07:46:05 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/08 03:45:17 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/19 07:32:47 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	update_fract_zoom(t_container *map, int im_idx, int add)
 	map->imgs[im_idx].frac.zoom += add;
 	map->imgs[im_idx].frac.frac_x = (map->imgs[im_idx].frac.x2 - map->imgs[im_idx].frac.x1) * (map->imgs[im_idx].frac.zoom);
 	map->imgs[im_idx].frac.frac_y = (map->imgs[im_idx].frac.y2 - map->imgs[im_idx].frac.y1) * (map->imgs[im_idx].frac.zoom);
-	map->imgs[im_idx].frac.win_ofx = map->wheel_x - (int)((map->imgs[im_idx].frac.frac_x) / 2);
-	map->imgs[im_idx].frac.win_ofy = map->wheel_y - (int)((map->imgs[im_idx].frac.frac_y) / 2);
-	ft_prints("vvvv%d\n", map->imgs[im_idx].frac.win_ofy);
+	ft_prints("oor%d - %d\n",  map->wheel_x, map->wheel_y);
+	/*map->imgs[im_idx].frac.win_ofx = map->wheel_x - (int)((map->imgs[im_idx].frac.frac_x) / 2.0);
+	map->imgs[im_idx].frac.win_ofy = map->wheel_y - (int)((map->imgs[im_idx].frac.frac_y) / 2.0);
+	*/map->imgs[im_idx].frac.win_ofx = WIN_X / 2 - (int)((map->imgs[im_idx].frac.frac_x) / 2.0) + map->wheel_x;
+	map->imgs[im_idx].frac.win_ofy = WIN_Y / 2 - (int)((map->imgs[im_idx].frac.frac_y) / 2.0) - map->wheel_y;
+	ft_prints("zzzz%dvvvv%d\n",  map->imgs[im_idx].frac.zoom, map->imgs[im_idx].frac.win_ofy);
 }
 
 void	init_fract(t_container *map, int im_idx, int f_typ)

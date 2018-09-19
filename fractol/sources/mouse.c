@@ -6,7 +6,7 @@
 /*   By: fherbine <fherbine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 00:23:46 by fherbine          #+#    #+#             */
-/*   Updated: 2018/09/08 03:40:55 by fherbine         ###   ########.fr       */
+/*   Updated: 2018/09/19 07:33:02 by fherbine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ int				ft_mouse_read(int button, int x, int y, void *param)
 		if (button == B_WHEEL && map->imgs[MAIN_IMG].frac.zoom < 200)
 			zm -= 10;
 		else if (button == F_WHEEL)
-			zm += 10;
+			zm += 50;
 		else
 			return (0);
 		ft_prints(">>>>>>>>>>>>>> mouse zoom\n");
 		update_fract_zoom(map, MAIN_IMG, zm);
+		ft_prints(">>>>>>>>>>>>>> mouse zoom\n");
 		mlx_update_img(map, MAIN_IMG);
 		draw_fract(map, MAIN_IMG, map->f_typ);
 	//	mlx_put_image_to_window(map->mlx, map->win, map->imgs[MAIN_IMG].img, 0, 0);
