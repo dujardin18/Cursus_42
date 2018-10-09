@@ -13,8 +13,9 @@ school 42 in C programming language.
      > Learning C programming with basics exercises. Final grade: **100/100**
 
 
-   - [Libft](libft) : 
+   - [Libft](libft_old) : 
      > Consisted in coding our own Standard C Library. Final grade: **124/100**
+     > Currently working on a new version !
 
    - [Fillit](fillit) :
      > Algorithm, wich places tetriminos (pieces of Tetris ©) gave in file, to
