@@ -24,9 +24,6 @@ static	void	*ft_memrcpy(void *dst, const void *src, size_t n)
 
 void			*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t		i;
-
-	i = 0;
 	if (src > dst)
 		dst = (char *)ft_memcpy(dst, src, len);
 	else
