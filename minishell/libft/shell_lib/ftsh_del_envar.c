@@ -15,10 +15,8 @@
 char	**ftsh_del_envar(t_shvar **first, char *name, char **envp)
 {
 	t_shvar	*cp;
-	int		i;
 
 	cp = *first;
-	i = 0;
 	envp = ft_tab_del_elem(envp, name);
 	while (cp && ft_strcmp(name, cp->name) != 0)
 		cp = cp->next;
